@@ -76,7 +76,41 @@ def _iter_refs(node: Any, path: str = "#"):
             yield from _iter_refs(value, f"{path}/{index}")
 
 
-def validate_spec(source: str | Path | dict[str, Any]) -> ValidationReport:
+def _strict_issues(document: dict[str, Any]) -> list[ValidationIssue]:
+    """Run an optional full OpenAPI schema validation pass."""
+
+    try:
+        from openapi_spec_validator import validate as strict_validate
+    except ImportError:
+        try:
+            from openapi_spec_validator import (
+                validate_spec as strict_validate,  # type: ignore[no-redef]
+            )
+        except ImportError as exc:
+            raise SpecValidationError(
+                "Strict validation requires the optional 'openapi-spec-validator' package.",
+                hint="Install it with: pip install 'pyopenapi[strict]'",
+            ) from exc
+
+    try:
+        strict_validate(document)
+    except Exception as exc:
+        return [
+            ValidationIssue(
+                path="#",
+                message=str(exc),
+                severity="error",
+                code="strict-validation",
+            )
+        ]
+    return []
+
+
+def validate_spec(
+    source: str | Path | dict[str, Any],
+    *,
+    strict: bool = False,
+) -> ValidationReport:
     document = load_spec(source)
     issues: list[ValidationIssue] = []
 
@@ -198,6 +232,9 @@ def validate_spec(source: str | Path | dict[str, Any]) -> ValidationReport:
                                 "warning",
                                 "required-not-declared",
                             )
+
+    if strict:
+        issues.extend(_strict_issues(document))
 
     error_count = sum(1 for issue in issues if issue.severity == "error")
     warning_count = sum(1 for issue in issues if issue.severity == "warning")

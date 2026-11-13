@@ -85,6 +85,18 @@ def _generate(args: argparse.Namespace) -> int:
         refresh_repo=args.refresh_repo,
     )
     output = Path(args.output) if args.output else Path(record.summary.output_dir) / "output"
+    dashboard = None
+    if getattr(args, "dashboard", False):
+        from .core.dashboard import DashboardServer
+
+        dashboard = DashboardServer(
+            output,
+            host=args.dashboard_host,
+            port=args.dashboard_port,
+            open_browser=args.dashboard_open,
+        )
+        url = dashboard.start()
+        print(f"pyopenapi dashboard: {url}", file=sys.stderr, flush=True)
     result = generate_openapi_sync(
         record,
         output,
@@ -92,8 +104,27 @@ def _generate(args: argparse.Namespace) -> int:
         fmt=args.format,
         use_dynamic=args.dynamic,
         openapi_version=args.openapi_version,
+        spec_model=getattr(args, "spec_model", None),
+        max_concurrency=getattr(args, "max_concurrency", None),
+        allow_partial=getattr(args, "allow_partial", False),
+        progress_path=output / "agent_progress.jsonl",
     )
     _print(result.model_dump())
+    if dashboard is not None:
+        print("Dashboard live; press Ctrl-C to stop.", file=sys.stderr, flush=True)
+        dashboard.wait()
+    return 0
+
+
+def _dashboard(args: argparse.Namespace) -> int:
+    from .core.dashboard import serve_dashboard
+
+    serve_dashboard(
+        args.output,
+        host=args.host,
+        port=args.port,
+        open_browser=args.open,
+    )
     return 0
 
 
@@ -171,9 +202,9 @@ def _resolve_source(source: str) -> tuple[str | None, str | None]:
 
 
 def _markdown(args: argparse.Namespace) -> int:
+    from .core.analysis import AnalysisManager
     from .core.markdown import generate_markdown
     from .core.spec import build_openapi_from_analysis
-    from .core.analysis import AnalysisManager
 
     analysis_id, spec_path = _resolve_source(args.source)
     if analysis_id:
@@ -191,8 +222,8 @@ def _markdown(args: argparse.Namespace) -> int:
 
 
 def _validate(args: argparse.Namespace) -> int:
-    from .core.spec import build_openapi_from_analysis
     from .core.analysis import AnalysisManager
+    from .core.spec import build_openapi_from_analysis
     from .core.validation import validate_spec
 
     analysis_id, spec_path = _resolve_source(args.source)
@@ -201,10 +232,37 @@ def _validate(args: argparse.Namespace) -> int:
         record = AnalysisManager().load(analysis_id)
         source = build_openapi_from_analysis(record)
 
-    report = validate_spec(source)
+    report = validate_spec(source, strict=getattr(args, "strict", False))
     _print(report.model_dump())
     return 0 if report.valid else 1
 
+
+
+def _traces(args: argparse.Namespace) -> int:
+    import asyncio
+
+    from .server import tools
+    result = asyncio.run(tools.get_generation_trace(args.source))
+    _print(result)
+    return 0 if result.get("ok") else 1
+
+
+def _quality(args: argparse.Namespace) -> int:
+    import asyncio
+
+    from .server import tools
+    result = asyncio.run(tools.get_quality_report(args.source))
+    _print(result)
+    return 0 if result.get("ok") else 1
+
+
+def _progress(args: argparse.Namespace) -> int:
+    import asyncio
+
+    from .server import tools
+    result = asyncio.run(tools.get_generation_progress(args.source))
+    _print(result)
+    return 0 if result.get("ok") else 1
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
@@ -244,7 +302,7 @@ def build_parser() -> argparse.ArgumentParser:
     generate.add_argument(
         "--engine",
         default="auto",
-        choices=["auto", "static", "nvidia", "lmstudio", "llamacpp", "ollama", "openai-compatible", "llm"],
+        choices=["auto", "agent", "static", "nvidia", "openrouter", "lmstudio", "llamacpp", "ollama", "openai-compatible", "llm"],
     )
     generate.add_argument("--format", default="yml", choices=["yml", "yaml", "json"])
     generate.add_argument("--output")
@@ -255,7 +313,37 @@ def build_parser() -> argparse.ArgumentParser:
     generate.add_argument("--openapi-version", choices=["3.0.3", "3.1.0"])
     generate.add_argument("--force", action="store_true")
     generate.add_argument("--refresh-repo", action="store_true", help="Re-clone a GitHub URL")
+    generate.add_argument("--dashboard", action="store_true", help="Serve a live progress dashboard")
+    generate.add_argument("--dashboard-host", default="127.0.0.1")
+    generate.add_argument("--dashboard-port", type=int, default=8765)
+    generate.add_argument("--dashboard-open", action="store_true", help="Open the dashboard in a browser")
+    generate.add_argument("--spec-model", help="LLM model for agent/spec generation")
+    generate.add_argument("--max-concurrency", type=int, help="Max parallel agent reasoning tasks")
+    generate.add_argument(
+        "--allow-partial",
+        action="store_true",
+        help="Emit a partial spec when some agent items fail",
+    )
     generate.set_defaults(func=_generate)
+
+    dashboard = sub.add_parser("dashboard", help="Serve a live dashboard for an output directory")
+    dashboard.add_argument("output", help="Output directory containing agent_progress.jsonl")
+    dashboard.add_argument("--host", default="127.0.0.1")
+    dashboard.add_argument("--port", type=int, default=8765)
+    dashboard.add_argument("--open", action="store_true", help="Open the dashboard in a browser")
+    dashboard.set_defaults(func=_dashboard)
+
+    traces = sub.add_parser("traces", help="Show agent generation trace for an output/analysis")
+    traces.add_argument("source", help="Analysis id, output dir, or agent_trace.json path")
+    traces.set_defaults(func=_traces)
+
+    quality = sub.add_parser("quality", help="Show agent quality report for an output/analysis")
+    quality.add_argument("source", help="Analysis id, output dir, or agent_trace.json path")
+    quality.set_defaults(func=_quality)
+
+    progress_cmd = sub.add_parser("progress", help="Show agent progress state for an output/analysis")
+    progress_cmd.add_argument("source", help="Analysis id, output dir, or agent_progress.jsonl path")
+    progress_cmd.set_defaults(func=_progress)
 
     cache = sub.add_parser("cache", help="Show or prune the analysis cache")
     cache.add_argument("--cleanup", action="store_true", help="Prune old/large analyses")
@@ -297,6 +385,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     validate = sub.add_parser("validate", help="Validate an analysis id or OpenAPI file")
     validate.add_argument("source")
+    validate.add_argument("--strict", action="store_true", help="Run full OpenAPI schema validation")
     validate.set_defaults(func=_validate)
 
     return parser

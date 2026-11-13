@@ -1,0 +1,16 @@
+openapi: 3.0.0
+info: {title: Empty Schema Test, version: 1.0}
+paths:
+  /health:
+    get:
+      responses:
+        '204':
+          description: No Content
+  /status:
+    get:
+      responses:
+        '200':
+          description: Has content, but schema is just an empty object
+          content:
+            application/json:
+              schema: {}

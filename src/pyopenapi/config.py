@@ -21,8 +21,6 @@ class Settings(BaseSettings):
 
     model_config = SettingsConfigDict(
         env_prefix="PYOPENAPI_",
-        env_file=".env",
-        env_file_encoding="utf-8",
         extra="ignore",
         case_sensitive=False,
     )
@@ -58,6 +56,9 @@ class Settings(BaseSettings):
     cache_max_age_days: float = 30.0
     cache_max_bytes: int = 5_000_000_000  # 5 GiB; 0 disables the size cap
 
+    # --- agent ---
+    agent_preferred_provider: str = "nvidia"
+
     # --- generation ---
     spec_model: str | None = None
     context_model: str | None = None
@@ -67,10 +68,13 @@ class Settings(BaseSettings):
     generation_timeout_seconds: int = 1800
     openapi_version: str = "3.0.3"
 
-    # --- OpenAI-compatible LLM enrichment (NVIDIA, LM Studio, llama.cpp, Ollama) ---
+    # --- OpenAI-compatible LLM enrichment (NVIDIA, OpenRouter, local servers) ---
     nvidia_base_url: str = "https://integrate.api.nvidia.com/v1"
-    nvidia_spec_model: str = "nvidia/nemotron-3-ultra-550b-a55b"
-    nvidia_context_model: str = "nvidia/nemotron-3.5-lightning-30b-a3b"
+    nvidia_spec_model: str = "nvidia/llama-3.3-nemotron-super-49b-v1.5"
+    nvidia_context_model: str = "nvidia/llama-3.1-nemotron-ultra-253b-v1"
+    openrouter_base_url: str = "https://openrouter.ai/api/v1"
+    openrouter_spec_model: str = "nvidia/nemotron-3-ultra-550b-a55b:free"
+    openrouter_context_model: str = "nvidia/nemotron-3-ultra-550b-a55b:free"
     llm_timeout_seconds: int = 120
     llm_max_concurrency: int = 4
     llm_endpoints_per_request: int = 40

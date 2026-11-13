@@ -12,7 +12,15 @@ import re
 from pathlib import Path
 from typing import Any
 
-from .ast_utils import ImportMap, ModuleResolver, dotted_name, kwarg, string_arg
+from .ast_utils import (
+    ImportMap,
+    ModuleResolver,
+    class_bases,
+    dotted_name,
+    iter_python_files,
+    kwarg,
+    string_arg,
+)
 
 _MODEL_FIELD_TYPES: tuple[tuple[re.Pattern[str], dict[str, Any]], ...] = (
     (re.compile(r"EmailField$"), {"type": "string", "format": "email"}),
@@ -178,6 +186,48 @@ def _parse_meta(class_node: ast.ClassDef, resolver: ModuleResolver, file_path: P
             elif "exclude" in targets and isinstance(item.value, (ast.List, ast.Tuple)):
                 exclude = {string_arg(element) for element in item.value.elts if string_arg(element)}
     return model_node, meta_fields, exclude
+
+
+def discover_serializer_components(
+    project_path: Path,
+    *,
+    max_files: int = 20_000,
+    max_bytes: int = 2_000_000,
+) -> tuple[dict[str, dict[str, Any]], list[str]]:
+    """Find DRF serializer classes without importing Django."""
+
+    warnings: list[str] = []
+    components: dict[str, dict[str, Any]] = {}
+    resolver = ModuleResolver(project_path, max_files=max_files, max_bytes=max_bytes)
+
+    for path in iter_python_files(project_path, max_files=max_files, max_bytes=max_bytes):
+        tree = resolver.tree(path)
+        if tree is None:
+            continue
+        for node in tree.body:
+            if not isinstance(node, ast.ClassDef):
+                continue
+            bases = class_bases(node)
+            is_serializer = node.name.endswith("Serializer") or any(
+                base in {"Serializer", "ModelSerializer"} or base.endswith("Serializer")
+                for base in bases
+            )
+            if not is_serializer:
+                continue
+            components.setdefault(
+                node.name,
+                {
+                    "name": node.name,
+                    "type": "serializer",
+                    "path": str(path),
+                    "parent_classes": bases,
+                    "properties": [],
+                    "data_classes": [],
+                    "supports_request": True,
+                    "supports_response": True,
+                },
+            )
+    return components, warnings
 
 
 def enrich_django_components(

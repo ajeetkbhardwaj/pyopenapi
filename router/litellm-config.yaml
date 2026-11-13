@@ -1,0 +1,633 @@
+model_list:
+- model_name: nvidia-auto
+  litellm_params:
+    model: nvidia_nim/moonshotai/kimi-k3.1-pro
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-auto
+  litellm_params:
+    model: nvidia_nim/mistralai/mistral-large
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-auto
+  litellm_params:
+    model: nvidia_nim/nvidia/nemotron-3.5-bolt-e4b
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-auto
+  litellm_params:
+    model: nvidia_nim/minimaxai/minimax-m3.1-flash
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-auto
+  litellm_params:
+    model: nvidia_nim/nvidia/nemotron-3.5-super-vl-120b-a12b
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-auto
+  litellm_params:
+    model: nvidia_nim/stepfun-ai/step-5-preview
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-auto
+  litellm_params:
+    model: nvidia_nim/deepseek-ai/deepseek-v4.1-flash
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-auto
+  litellm_params:
+    model: nvidia_nim/z-ai/glm-5.3-flash
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-auto
+  litellm_params:
+    model: nvidia_nim/nvidia/nemotron-3.5-lightning-30b-a3b
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-auto
+  litellm_params:
+    model: nvidia_nim/meta/muse-glimmer-30b
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-auto
+  litellm_params:
+    model: nvidia_nim/nvidia/riva-translate-4b-instruct-v2
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-auto
+  litellm_params:
+    model: nvidia_nim/nvidia/ising-calibration-1.5-31b
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-auto
+  litellm_params:
+    model: nvidia_nim/poolside/laguna-xs-2.1
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-auto
+  litellm_params:
+    model: nvidia_nim/google/diffusiongemma-26b-a4b-it
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-auto
+  litellm_params:
+    model: nvidia_nim/nvidia/nemotron-3-ultra-550b-a55b
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-auto
+  litellm_params:
+    model: nvidia_nim/nvidia/nemotron-3.5-content-safety
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-auto
+  litellm_params:
+    model: nvidia_nim/nvidia/cosmos3-nano-reasoner
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-auto
+  litellm_params:
+    model: nvidia_nim/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-auto
+  litellm_params:
+    model: nvidia_nim/nvidia/ising-calibration-1-35b-a3b
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-auto
+  litellm_params:
+    model: nvidia_nim/google/gemma-4-31b-it
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-auto
+  litellm_params:
+    model: nvidia_nim/nvidia/llama-3.1-nemotron-safety-guard-8b-v3
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-auto
+  litellm_params:
+    model: nvidia_nim/openai/gpt-oss-20b
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-auto
+  litellm_params:
+    model: nvidia_nim/meta/llama-guard-4-12b
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-auto
+  litellm_params:
+    model: nvidia_nim/meta/llama-3.2-90b-vision-instruct
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-auto
+  litellm_params:
+    model: nvidia_nim/google/paligemma
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-coding
+  litellm_params:
+    model: nvidia_nim/moonshotai/kimi-k3.1-pro
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-coding
+  litellm_params:
+    model: nvidia_nim/mistralai/mistral-large
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-coding
+  litellm_params:
+    model: nvidia_nim/minimaxai/minimax-m3.1-flash
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-coding
+  litellm_params:
+    model: nvidia_nim/nvidia/nemotron-3.5-super-vl-120b-a12b
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-coding
+  litellm_params:
+    model: nvidia_nim/deepseek-ai/deepseek-v4.1-flash
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-coding
+  litellm_params:
+    model: nvidia_nim/nvidia/nemotron-3.5-lightning-30b-a3b
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-coding
+  litellm_params:
+    model: nvidia_nim/poolside/laguna-xs-2.1
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-coding
+  litellm_params:
+    model: nvidia_nim/nvidia/nemotron-3-ultra-550b-a55b
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-coding
+  litellm_params:
+    model: nvidia_nim/google/gemma-4-31b-it
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-agents
+  litellm_params:
+    model: nvidia_nim/moonshotai/kimi-k3.1-pro
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-agents
+  litellm_params:
+    model: nvidia_nim/mistralai/mistral-large
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-agents
+  litellm_params:
+    model: nvidia_nim/nvidia/nemotron-3.5-bolt-e4b
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-agents
+  litellm_params:
+    model: nvidia_nim/minimaxai/minimax-m3.1-flash
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-agents
+  litellm_params:
+    model: nvidia_nim/nvidia/nemotron-3.5-super-vl-120b-a12b
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-agents
+  litellm_params:
+    model: nvidia_nim/stepfun-ai/step-5-preview
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-agents
+  litellm_params:
+    model: nvidia_nim/deepseek-ai/deepseek-v4.1-flash
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-agents
+  litellm_params:
+    model: nvidia_nim/z-ai/glm-5.3-flash
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-agents
+  litellm_params:
+    model: nvidia_nim/nvidia/nemotron-3.5-lightning-30b-a3b
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-agents
+  litellm_params:
+    model: nvidia_nim/meta/muse-glimmer-30b
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-agents
+  litellm_params:
+    model: nvidia_nim/poolside/laguna-xs-2.1
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-agents
+  litellm_params:
+    model: nvidia_nim/nvidia/nemotron-3-ultra-550b-a55b
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-agents
+  litellm_params:
+    model: nvidia_nim/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-agents
+  litellm_params:
+    model: nvidia_nim/google/gemma-4-31b-it
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-reasoning
+  litellm_params:
+    model: nvidia_nim/moonshotai/kimi-k3.1-pro
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-reasoning
+  litellm_params:
+    model: nvidia_nim/mistralai/mistral-large
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-reasoning
+  litellm_params:
+    model: nvidia_nim/nvidia/nemotron-3.5-bolt-e4b
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-reasoning
+  litellm_params:
+    model: nvidia_nim/nvidia/nemotron-3.5-super-vl-120b-a12b
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-reasoning
+  litellm_params:
+    model: nvidia_nim/stepfun-ai/step-5-preview
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-reasoning
+  litellm_params:
+    model: nvidia_nim/deepseek-ai/deepseek-v4.1-flash
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-reasoning
+  litellm_params:
+    model: nvidia_nim/z-ai/glm-5.3-flash
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-reasoning
+  litellm_params:
+    model: nvidia_nim/meta/muse-glimmer-30b
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-reasoning
+  litellm_params:
+    model: nvidia_nim/nvidia/nemotron-3-ultra-550b-a55b
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-reasoning
+  litellm_params:
+    model: nvidia_nim/nvidia/cosmos3-nano-reasoner
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-reasoning
+  litellm_params:
+    model: nvidia_nim/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-reasoning
+  litellm_params:
+    model: nvidia_nim/google/gemma-4-31b-it
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-reasoning
+  litellm_params:
+    model: nvidia_nim/openai/gpt-oss-20b
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-reasoning
+  litellm_params:
+    model: nvidia_nim/meta/llama-3.2-90b-vision-instruct
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-vision
+  litellm_params:
+    model: nvidia_nim/mistralai/mistral-large
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-vision
+  litellm_params:
+    model: nvidia_nim/nvidia/nemotron-3.5-super-vl-120b-a12b
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-vision
+  litellm_params:
+    model: nvidia_nim/stepfun-ai/step-5-preview
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-vision
+  litellm_params:
+    model: nvidia_nim/deepseek-ai/deepseek-v4.1-flash
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-vision
+  litellm_params:
+    model: nvidia_nim/z-ai/glm-5.3-flash
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-vision
+  litellm_params:
+    model: nvidia_nim/meta/muse-glimmer-30b
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-vision
+  litellm_params:
+    model: nvidia_nim/nvidia/ising-calibration-1.5-31b
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-vision
+  litellm_params:
+    model: nvidia_nim/nvidia/cosmos3-nano-reasoner
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-vision
+  litellm_params:
+    model: nvidia_nim/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-vision
+  litellm_params:
+    model: nvidia_nim/nvidia/ising-calibration-1-35b-a3b
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-vision
+  litellm_params:
+    model: nvidia_nim/meta/llama-3.2-90b-vision-instruct
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-vision
+  litellm_params:
+    model: nvidia_nim/google/paligemma
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-safety
+  litellm_params:
+    model: nvidia_nim/nvidia/nemotron-3.5-content-safety
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-safety
+  litellm_params:
+    model: nvidia_nim/nvidia/llama-3.1-nemotron-safety-guard-8b-v3
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nvidia-safety
+  litellm_params:
+    model: nvidia_nim/meta/llama-guard-4-12b
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: kimi-k3.1-pro
+  litellm_params:
+    model: nvidia_nim/moonshotai/kimi-k3.1-pro
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: mistral-large
+  litellm_params:
+    model: nvidia_nim/mistralai/mistral-large
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nemotron-3.5-bolt-e4b
+  litellm_params:
+    model: nvidia_nim/nvidia/nemotron-3.5-bolt-e4b
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: minimax-m3.1-flash
+  litellm_params:
+    model: nvidia_nim/minimaxai/minimax-m3.1-flash
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nemotron-3.5-super-vl-120b-a12b
+  litellm_params:
+    model: nvidia_nim/nvidia/nemotron-3.5-super-vl-120b-a12b
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: step-5-preview
+  litellm_params:
+    model: nvidia_nim/stepfun-ai/step-5-preview
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: deepseek-v4.1-flash
+  litellm_params:
+    model: nvidia_nim/deepseek-ai/deepseek-v4.1-flash
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: glm-5.3-flash
+  litellm_params:
+    model: nvidia_nim/z-ai/glm-5.3-flash
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nemotron-3.5-lightning-30b-a3b
+  litellm_params:
+    model: nvidia_nim/nvidia/nemotron-3.5-lightning-30b-a3b
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: muse-glimmer-30b
+  litellm_params:
+    model: nvidia_nim/meta/muse-glimmer-30b
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: riva-translate-4b-instruct-v2
+  litellm_params:
+    model: nvidia_nim/nvidia/riva-translate-4b-instruct-v2
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: ising-calibration-1.5-31b
+  litellm_params:
+    model: nvidia_nim/nvidia/ising-calibration-1.5-31b
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: laguna-xs-2.1
+  litellm_params:
+    model: nvidia_nim/poolside/laguna-xs-2.1
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: diffusiongemma-26b-a4b-it
+  litellm_params:
+    model: nvidia_nim/google/diffusiongemma-26b-a4b-it
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nemotron-3-ultra-550b-a55b
+  litellm_params:
+    model: nvidia_nim/nvidia/nemotron-3-ultra-550b-a55b
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nemotron-3.5-content-safety
+  litellm_params:
+    model: nvidia_nim/nvidia/nemotron-3.5-content-safety
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: cosmos3-nano-reasoner
+  litellm_params:
+    model: nvidia_nim/nvidia/cosmos3-nano-reasoner
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: nemotron-3-nano-omni-30b-a3b-reasoning
+  litellm_params:
+    model: nvidia_nim/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: ising-calibration-1-35b-a3b
+  litellm_params:
+    model: nvidia_nim/nvidia/ising-calibration-1-35b-a3b
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: gemma-4-31b-it
+  litellm_params:
+    model: nvidia_nim/google/gemma-4-31b-it
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: llama-3.1-nemotron-safety-guard-8b-v3
+  litellm_params:
+    model: nvidia_nim/nvidia/llama-3.1-nemotron-safety-guard-8b-v3
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: gpt-oss-20b
+  litellm_params:
+    model: nvidia_nim/openai/gpt-oss-20b
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: llama-guard-4-12b
+  litellm_params:
+    model: nvidia_nim/meta/llama-guard-4-12b
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: llama-3.2-90b-vision-instruct
+  litellm_params:
+    model: nvidia_nim/meta/llama-3.2-90b-vision-instruct
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+- model_name: paligemma
+  litellm_params:
+    model: nvidia_nim/google/paligemma
+    api_key: os.environ/NVIDIA_API_KEY
+    api_base: https://integrate.api.nvidia.com/v1
+    timeout: 30
+litellm_settings:
+  num_retries: 3
+  request_timeout: 30
+  drop_params: true
+  fallbacks:
+  - nvidia-coding:
+    - nvidia-agents
+    - nvidia-reasoning
+  - nvidia-agents:
+    - nvidia-coding
+    - nvidia-reasoning
+  - nvidia-reasoning:
+    - nvidia-agents
+    - nvidia-coding
+router_settings:
+  routing_strategy: latency-based-routing
+  num_retries: 3
+  cooldown_time: 60
+  allowed_fails: 2
+  enable_pre_call_checks: true

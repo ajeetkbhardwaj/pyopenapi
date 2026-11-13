@@ -1,0 +1,19 @@
+openapi: 3.0.0
+info: {title: Complex AllOf Test, version: 1.0}
+components:
+  schemas:
+    Id: { type: object, required: [id], properties: { id: { type: string, format: uuid } } }
+    UserPayload: { type: object, properties: { name: { type: string } } } # 'required' is missing
+paths:
+  /items:
+    post:
+      responses:
+        '201':
+          description: A created item
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Id'
+                  # Timestamp component is missing
+                  - $ref: '#/components/schemas/UserPayload'

@@ -1,0 +1,15 @@
+openapi: 3.0.0
+info: {title: Ref and AllOf Test, version: 1.0}
+components:
+  schemas:
+    User: { type: object, properties: { id: { type: integer }, name: { type: string } } }
+paths:
+  /user/{id}:
+    get:
+      responses:
+        '200':
+          description: A user response
+          content:
+            application/json:
+              schema: # Missing the BaseSuccess part of allOf
+                $ref: '#/components/schemas/User'

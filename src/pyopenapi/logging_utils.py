@@ -44,7 +44,7 @@ def get_request_id() -> str | None:
 class _JsonFormatter(logging.Formatter):
     """Render log records as one JSON object per line."""
 
-    def format(self, record: logging.LogRecord) -> str:  # noqa: A003 - stdlib API
+    def format(self, record: logging.LogRecord) -> str:
         payload: dict[str, Any] = {
             "ts": time.strftime("%Y-%m-%dT%H:%M:%S", time.gmtime(record.created)),
             "level": record.levelname,

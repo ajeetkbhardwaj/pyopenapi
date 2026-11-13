@@ -38,6 +38,7 @@ _MAX_TEXT = 1200
 
 _PROVIDER_ENGINES = {
     "nvidia",
+    "openrouter",
     "lmstudio",
     "llamacpp",
     "ollama",
@@ -62,12 +63,25 @@ def nvidia_api_key() -> str | None:
     return os.getenv("NVIDIA_API_KEY") or os.getenv("PYOPENAPI_NVIDIA_API_KEY")
 
 
+def openrouter_api_key() -> str | None:
+    """Return the OpenRouter API key from the environment, if present."""
+
+    return os.getenv("OPENROUTER_API_KEY") or os.getenv("PYOPENAPI_OPENROUTER_API_KEY")
+
+
 def nvidia_available() -> bool:
     if nvidia_api_key():
         return True
     # Ensure pyopenapi/.env is loaded before reporting absence.
     get_settings()
     return bool(nvidia_api_key())
+
+
+def openrouter_available() -> bool:
+    if openrouter_api_key():
+        return True
+    get_settings()
+    return bool(openrouter_api_key())
 
 
 def _ollama_base_url() -> str:
@@ -95,11 +109,29 @@ def resolve_provider(settings: Settings | None = None, *, name: str | None = Non
     context_override = os.getenv("PYOPENAPI_LLM_CONTEXT_MODEL")
 
     if requested == "auto":
-        if nvidia_api_key():
-            requested = "nvidia"
-        elif os.getenv("OLLAMA_HOST"):
-            requested = "ollama"
-        else:
+        # Prefer NVIDIA NIM (Nemotron family) as primary; fall back to any
+        # available provider so local paths can still produce agent outcomes.
+        preferred = (getattr(settings, "agent_preferred_provider", None) or os.getenv("PYOPENAPI_AGENT_PREFERRED_PROVIDER") or "nvidia").strip().lower()
+        order = [preferred, "nvidia", "openrouter", "ollama"]
+        seen = set()
+        candidates = []
+        for c in order:
+            if c and c not in seen:
+                candidates.append(c)
+                seen.add(c)
+        selected = None
+        for candidate in candidates:
+            if candidate == "nvidia" and nvidia_api_key():
+                selected = "nvidia"
+                break
+            if candidate == "openrouter" and openrouter_api_key():
+                selected = "openrouter"
+                break
+            if candidate == "ollama" and os.getenv("OLLAMA_HOST"):
+                selected = "ollama"
+                break
+        requested = selected or "none"
+        if requested == "none":
             return None
 
     if requested == "nvidia":
@@ -109,6 +141,22 @@ def resolve_provider(settings: Settings | None = None, *, name: str | None = Non
             api_key=key_override or nvidia_api_key(),
             spec_model=spec_override or settings.nvidia_spec_model,
             context_model=context_override or settings.nvidia_context_model,
+            requires_key=True,
+            auth_type="bearer",
+        )
+
+    if requested == "openrouter":
+        return ProviderConfig(
+            name="openrouter",
+            base_url=base_override
+            or os.getenv("PYOPENAPI_OPENROUTER_BASE_URL")
+            or settings.openrouter_base_url,
+            api_key=key_override or openrouter_api_key(),
+            spec_model=spec_override
+            or os.getenv("PYOPENAPI_OPENROUTER_SPEC_MODEL")
+            or os.getenv("OPENROUTER_MODEL")
+            or settings.openrouter_spec_model,
+            context_model=context_override or settings.openrouter_context_model,
             requires_key=True,
             auth_type="bearer",
         )
@@ -151,6 +199,11 @@ def _headers(provider: ProviderConfig) -> dict[str, str]:
         elif provider.auth_type == "bearer":
             headers["Authorization"] = f"Bearer {provider.api_key}"
         # auth_type == "none" -> no auth header
+    if provider.name == "openrouter":
+        headers["HTTP-Referer"] = os.getenv(
+            "PYOPENAPI_OPENROUTER_SITE_URL", "https://github.com/knowl-apidocs"
+        )
+        headers["X-Title"] = os.getenv("PYOPENAPI_OPENROUTER_APP_NAME", "pyopenapi")
     return headers
 
 
@@ -308,12 +361,33 @@ async def _post_chat(
         "max_tokens": max_tokens,
         "response_format": {"type": "json_object"},
     }
+    if provider.name == "openrouter":
+        try:
+            floor = int(os.getenv("PYOPENAPI_OPENROUTER_MAX_TOKENS", "4096"))
+        except ValueError:
+            floor = 4096
+        payload["max_tokens"] = max(max_tokens, floor)
+        payload["reasoning"] = {
+            "effort": os.getenv("PYOPENAPI_OPENROUTER_REASONING_EFFORT", "low")
+        }
+    elif provider.name == "nvidia":
+        model_l = (model or "").lower()
+        if "nemotron" in model_l:
+            try:
+                floor = int(os.getenv("PYOPENAPI_NVIDIA_MAX_TOKENS", "4096"))
+            except ValueError:
+                floor = 4096
+            payload["max_tokens"] = max(max_tokens, floor)
     url = provider.base_url.rstrip("/") + "/chat/completions"
 
     response = await client.post(url, headers=_headers(provider), json=payload)
     if response.status_code in {400, 422}:
         # Some local servers do not accept response_format; retry once without it.
         payload.pop("response_format", None)
+        response = await client.post(url, headers=_headers(provider), json=payload)
+    if response.status_code in {400, 422} and "reasoning" in payload:
+        # Some OpenRouter models do not accept the reasoning hint.
+        payload.pop("reasoning", None)
         response = await client.post(url, headers=_headers(provider), json=payload)
     if response.status_code == 401:
         raise RuntimeError(f"LLM authentication failed (401): {response.text[:200]}")

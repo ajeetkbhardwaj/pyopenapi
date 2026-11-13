@@ -1,0 +1,40 @@
+{"ts": "2026-11-12T18:00:41+00:00", "type": "run_start", "analysis_id": "6563069fb8d71af8", "project_path": "/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/fastapiapp", "framework": "fastapi", "provider": "router", "model": null, "openapi_version": "3.0.3"}
+{"ts": "2026-11-12T18:00:41+00:00", "type": "stage_start", "stage": "detector", "item_count": 1}
+{"ts": "2026-11-12T18:00:44+00:00", "type": "stage_end", "stage": "detector", "success": 1, "failure": 0, "duration_ms": 3381}
+{"ts": "2026-11-12T18:00:44+00:00", "type": "stage_start", "stage": "endpoint", "item_count": 7}
+{"ts": "2026-11-12T18:00:44+00:00", "type": "item_start", "kind": "endpoint", "id": "b355ded082e3ecb6", "label": "GET /customers/{customer_id}"}
+{"ts": "2026-11-12T18:00:44+00:00", "type": "item_start", "kind": "endpoint", "id": "fc28c6a415686a79", "label": "GET /customers/{customer_id}/orders"}
+{"ts": "2026-11-12T18:00:44+00:00", "type": "item_start", "kind": "endpoint", "id": "a3c96506a231f051", "label": "GET /health"}
+{"ts": "2026-11-12T18:00:44+00:00", "type": "item_start", "kind": "endpoint", "id": "20431da57929117a", "label": "POST /orders"}
+{"ts": "2026-11-12T18:00:44+00:00", "type": "item_start", "kind": "endpoint", "id": "8a302b53e50772ac", "label": "GET /orders/{order_id}"}
+{"ts": "2026-11-12T18:00:44+00:00", "type": "item_start", "kind": "endpoint", "id": "d53b7c0cea53bdf3", "label": "GET, POST /products"}
+{"ts": "2026-11-12T18:00:44+00:00", "type": "item_start", "kind": "endpoint", "id": "0bd6415ed8235919", "label": "DELETE, GET, PATCH /products/{product_id}"}
+{"ts": "2026-11-12T18:00:45+00:00", "type": "item_done", "kind": "endpoint", "id": "b355ded082e3ecb6", "label": "GET /customers/{customer_id}", "confidence": 0.9}
+{"ts": "2026-11-12T18:00:45+00:00", "type": "item_done", "kind": "endpoint", "id": "a3c96506a231f051", "label": "GET /health", "confidence": 0.9}
+{"ts": "2026-11-12T18:00:47+00:00", "type": "item_done", "kind": "endpoint", "id": "20431da57929117a", "label": "POST /orders", "confidence": null}
+{"ts": "2026-11-12T18:00:48+00:00", "type": "item_done", "kind": "endpoint", "id": "fc28c6a415686a79", "label": "GET /customers/{customer_id}/orders", "confidence": null}
+{"ts": "2026-11-12T18:00:50+00:00", "type": "item_done", "kind": "endpoint", "id": "0bd6415ed8235919", "label": "DELETE, GET, PATCH /products/{product_id}", "confidence": 0.9}
+{"ts": "2026-11-12T18:00:52+00:00", "type": "item_done", "kind": "endpoint", "id": "d53b7c0cea53bdf3", "label": "GET, POST /products", "confidence": 0.8}
+{"ts": "2026-11-12T18:00:52+00:00", "type": "item_done", "kind": "endpoint", "id": "8a302b53e50772ac", "label": "GET /orders/{order_id}", "confidence": null}
+{"ts": "2026-11-12T18:00:52+00:00", "type": "stage_end", "stage": "endpoint", "success": 7, "failure": 0, "duration_ms": 7995}
+{"ts": "2026-11-12T18:00:52+00:00", "type": "stage_start", "stage": "component", "item_count": 6}
+{"ts": "2026-11-12T18:00:52+00:00", "type": "item_start", "kind": "component", "id": "a52915452e32c601", "label": "ProductStatus (enum)"}
+{"ts": "2026-11-12T18:00:52+00:00", "type": "item_start", "kind": "component", "id": "cfccead739aa3da4", "label": "ProductBase (pydantic_model)"}
+{"ts": "2026-11-12T18:00:52+00:00", "type": "item_start", "kind": "component", "id": "8821293a6291da5b", "label": "ProductUpdate (pydantic_model)"}
+{"ts": "2026-11-12T18:00:52+00:00", "type": "item_start", "kind": "component", "id": "6fdd56fcc97e1001", "label": "Customer (pydantic_model)"}
+{"ts": "2026-11-12T18:00:52+00:00", "type": "item_start", "kind": "component", "id": "d10cf02cab203962", "label": "OrderItem (pydantic_model)"}
+{"ts": "2026-11-12T18:00:52+00:00", "type": "item_start", "kind": "component", "id": "7ad701307124cda3", "label": "Order (pydantic_model)"}
+{"ts": "2026-11-12T18:00:54+00:00", "type": "item_done", "kind": "component", "id": "a52915452e32c601", "label": "ProductStatus (enum)", "confidence": 1.0}
+{"ts": "2026-11-12T18:00:54+00:00", "type": "item_done", "kind": "component", "id": "6fdd56fcc97e1001", "label": "Customer (pydantic_model)", "confidence": 1.0}
+{"ts": "2026-11-12T18:00:55+00:00", "type": "item_done", "kind": "component", "id": "d10cf02cab203962", "label": "OrderItem (pydantic_model)", "confidence": 1.0}
+{"ts": "2026-11-12T18:00:56+00:00", "type": "item_done", "kind": "component", "id": "7ad701307124cda3", "label": "Order (pydantic_model)", "confidence": 1.0}
+{"ts": "2026-11-12T18:00:57+00:00", "type": "item_done", "kind": "component", "id": "cfccead739aa3da4", "label": "ProductBase (pydantic_model)", "confidence": 1.0}
+{"ts": "2026-11-12T18:00:57+00:00", "type": "item_done", "kind": "component", "id": "8821293a6291da5b", "label": "ProductUpdate (pydantic_model)", "confidence": 1.0}
+{"ts": "2026-11-12T18:00:57+00:00", "type": "stage_end", "stage": "component", "success": 6, "failure": 0, "duration_ms": 4904}
+{"ts": "2026-11-12T18:00:57+00:00", "type": "stage_start", "stage": "assembly", "item_count": 1}
+{"ts": "2026-11-12T18:00:57+00:00", "type": "stage_end", "stage": "assembly", "success": 1, "failure": 0, "duration_ms": 0}
+{"ts": "2026-11-12T18:00:57+00:00", "type": "stage_start", "stage": "validation", "item_count": 1}
+{"ts": "2026-11-12T18:00:57+00:00", "type": "stage_end", "stage": "validation", "success": 1, "failure": 0, "duration_ms": 0}
+{"ts": "2026-11-12T18:00:57+00:00", "type": "stage_start", "stage": "quality", "item_count": 1}
+{"ts": "2026-11-12T18:00:57+00:00", "type": "stage_end", "stage": "quality", "success": 1, "failure": 0, "duration_ms": 0}
+{"ts": "2026-11-12T18:00:57+00:00", "type": "run_done", "spec_path": "/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/fastapiapp/output-agent/openapi.yml", "quality_score": 0.829, "duration_ms": 16300, "usage": {"prompt_tokens": 5966, "completion_tokens": 2873, "total_tokens": 8839, "requests": 14, "budget": 0, "budget_exceeded": false}}

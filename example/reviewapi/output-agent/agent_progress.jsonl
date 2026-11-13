@@ -1,0 +1,70 @@
+{"ts": "2026-11-12T18:01:43+00:00", "type": "run_start", "analysis_id": "9d2d60fd3cf5fe24", "project_path": "/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi", "framework": "django", "provider": "router", "model": null, "openapi_version": "3.0.3"}
+{"ts": "2026-11-12T18:01:43+00:00", "type": "stage_start", "stage": "detector", "item_count": 1}
+{"ts": "2026-11-12T18:01:48+00:00", "type": "stage_end", "stage": "detector", "success": 1, "failure": 0, "duration_ms": 4436}
+{"ts": "2026-11-12T18:01:48+00:00", "type": "stage_start", "stage": "endpoint", "item_count": 16}
+{"ts": "2026-11-12T18:01:48+00:00", "type": "item_start", "kind": "endpoint", "id": "3d032a4229870871", "label": "GET /admin"}
+{"ts": "2026-11-12T18:01:48+00:00", "type": "item_start", "kind": "endpoint", "id": "0433f95ea671d153", "label": "GET, POST /api/v2/advanced-products/"}
+{"ts": "2026-11-12T18:01:48+00:00", "type": "item_start", "kind": "endpoint", "id": "1c7d47993bda2da2", "label": "GET /api/v2/advanced-products/special_offers/"}
+{"ts": "2026-11-12T18:01:48+00:00", "type": "item_start", "kind": "endpoint", "id": "f5998e9806ada172", "label": "DELETE, GET, PATCH, PUT /api/v2/advanced-products/{pk}/"}
+{"ts": "2026-11-12T18:01:48+00:00", "type": "item_start", "kind": "endpoint", "id": "de08ad33108b57b8", "label": "GET /api/v2/advanced-products/{pk}/get_competitors/"}
+{"ts": "2026-11-12T18:01:48+00:00", "type": "item_start", "kind": "endpoint", "id": "20ebbc173dcbe524", "label": "GET, POST /api/v2/categories/"}
+{"ts": "2026-11-12T18:01:48+00:00", "type": "item_start", "kind": "endpoint", "id": "c7ecbdb190b7d9c6", "label": "DELETE, GET, PATCH, PUT /api/v2/categories/{pk}/"}
+{"ts": "2026-11-12T18:01:48+00:00", "type": "item_start", "kind": "endpoint", "id": "db0798ffc286e859", "label": "GET /api/v2/categories/{pk}/list_products/"}
+{"ts": "2026-11-12T18:01:48+00:00", "type": "item_start", "kind": "endpoint", "id": "a19c52435ec64203", "label": "GET /api/v2/manufacturers/"}
+{"ts": "2026-11-12T18:01:48+00:00", "type": "item_start", "kind": "endpoint", "id": "556ba9625a522533", "label": "GET /api/v2/manufacturers/{pk}/"}
+{"ts": "2026-11-12T18:01:48+00:00", "type": "item_start", "kind": "endpoint", "id": "b4d1ee779306c529", "label": "GET, POST /api/v2/products/"}
+{"ts": "2026-11-12T18:01:48+00:00", "type": "item_start", "kind": "endpoint", "id": "2bf271475b379d11", "label": "GET /api/v2/products/top_products/"}
+{"ts": "2026-11-12T18:01:48+00:00", "type": "item_start", "kind": "endpoint", "id": "ecb492a5a69be801", "label": "DELETE, GET, PATCH, PUT /api/v2/products/{pk}/"}
+{"ts": "2026-11-12T18:01:48+00:00", "type": "item_start", "kind": "endpoint", "id": "21a54c9a3d9cf737", "label": "GET, POST /api/v2/reviews/"}
+{"ts": "2026-11-12T18:01:48+00:00", "type": "item_start", "kind": "endpoint", "id": "cc4c2e534a2bdb0e", "label": "DELETE, GET, PATCH, PUT /api/v2/reviews/{pk}/"}
+{"ts": "2026-11-12T18:01:48+00:00", "type": "item_start", "kind": "endpoint", "id": "c11123dd87e3dd59", "label": "POST /api/v2/reviews/{pk}/submit_comment/"}
+{"ts": "2026-11-12T18:01:51+00:00", "type": "item_done", "kind": "endpoint", "id": "3d032a4229870871", "label": "GET /admin", "confidence": 0.0}
+{"ts": "2026-11-12T18:01:53+00:00", "type": "item_done", "kind": "endpoint", "id": "20ebbc173dcbe524", "label": "GET, POST /api/v2/categories/", "confidence": 0.8}
+{"ts": "2026-11-12T18:01:53+00:00", "type": "item_done", "kind": "endpoint", "id": "0433f95ea671d153", "label": "GET, POST /api/v2/advanced-products/", "confidence": null}
+{"ts": "2026-11-12T18:01:54+00:00", "type": "item_done", "kind": "endpoint", "id": "de08ad33108b57b8", "label": "GET /api/v2/advanced-products/{pk}/get_competitors/", "confidence": 0.0}
+{"ts": "2026-11-12T18:01:54+00:00", "type": "item_done", "kind": "endpoint", "id": "1c7d47993bda2da2", "label": "GET /api/v2/advanced-products/special_offers/", "confidence": 0.8}
+{"ts": "2026-11-12T18:01:57+00:00", "type": "item_done", "kind": "endpoint", "id": "db0798ffc286e859", "label": "GET /api/v2/categories/{pk}/list_products/", "confidence": 0.0}
+{"ts": "2026-11-12T18:01:57+00:00", "type": "item_done", "kind": "endpoint", "id": "a19c52435ec64203", "label": "GET /api/v2/manufacturers/", "confidence": 0.8}
+{"ts": "2026-11-12T18:01:59+00:00", "type": "item_done", "kind": "endpoint", "id": "f5998e9806ada172", "label": "DELETE, GET, PATCH, PUT /api/v2/advanced-products/{pk}/", "confidence": 1.0}
+{"ts": "2026-11-12T18:01:59+00:00", "type": "item_done", "kind": "endpoint", "id": "c7ecbdb190b7d9c6", "label": "DELETE, GET, PATCH, PUT /api/v2/categories/{pk}/", "confidence": 1.0}
+{"ts": "2026-11-12T18:02:01+00:00", "type": "item_done", "kind": "endpoint", "id": "b4d1ee779306c529", "label": "GET, POST /api/v2/products/", "confidence": 0.8}
+{"ts": "2026-11-12T18:02:01+00:00", "type": "item_done", "kind": "endpoint", "id": "21a54c9a3d9cf737", "label": "GET, POST /api/v2/reviews/", "confidence": 0.8}
+{"ts": "2026-11-12T18:02:03+00:00", "type": "item_done", "kind": "endpoint", "id": "2bf271475b379d11", "label": "GET /api/v2/products/top_products/", "confidence": null}
+{"ts": "2026-11-12T18:02:04+00:00", "type": "item_done", "kind": "endpoint", "id": "c11123dd87e3dd59", "label": "POST /api/v2/reviews/{pk}/submit_comment/", "confidence": 0.8}
+{"ts": "2026-11-12T18:02:09+00:00", "type": "item_done", "kind": "endpoint", "id": "ecb492a5a69be801", "label": "DELETE, GET, PATCH, PUT /api/v2/products/{pk}/", "confidence": 1.0}
+{"ts": "2026-11-12T18:02:11+00:00", "type": "item_done", "kind": "endpoint", "id": "cc4c2e534a2bdb0e", "label": "DELETE, GET, PATCH, PUT /api/v2/reviews/{pk}/", "confidence": 1.0}
+{"ts": "2026-11-12T18:02:13+00:00", "type": "item_done", "kind": "endpoint", "id": "556ba9625a522533", "label": "GET /api/v2/manufacturers/{pk}/", "confidence": null}
+{"ts": "2026-11-12T18:02:13+00:00", "type": "stage_end", "stage": "endpoint", "success": 16, "failure": 0, "duration_ms": 25452}
+{"ts": "2026-11-12T18:02:13+00:00", "type": "stage_start", "stage": "component", "item_count": 12}
+{"ts": "2026-11-12T18:02:13+00:00", "type": "item_start", "kind": "component", "id": "ca193211c6821110", "label": "SupplierSerializer (serializer)"}
+{"ts": "2026-11-12T18:02:13+00:00", "type": "item_start", "kind": "component", "id": "25dc743a716cbc83", "label": "ReviewSerializer (serializer)"}
+{"ts": "2026-11-12T18:02:13+00:00", "type": "item_start", "kind": "component", "id": "4d9c75ae28117dac", "label": "CategorySerializer (serializer)"}
+{"ts": "2026-11-12T18:02:13+00:00", "type": "item_start", "kind": "component", "id": "4c1b8e30b8cd89a3", "label": "ManufacturerSerializer (serializer)"}
+{"ts": "2026-11-12T18:02:13+00:00", "type": "item_start", "kind": "component", "id": "d7702418c6b54ae8", "label": "AdvancedProductSerializer (serializer)"}
+{"ts": "2026-11-12T18:02:13+00:00", "type": "item_start", "kind": "component", "id": "94b7af4171d7a387", "label": "ProductSerializer (serializer)"}
+{"ts": "2026-11-12T18:02:13+00:00", "type": "item_start", "kind": "component", "id": "8f0bed1c500d235a", "label": "Supplier (model)"}
+{"ts": "2026-11-12T18:02:13+00:00", "type": "item_start", "kind": "component", "id": "23c41bc3fc657b1c", "label": "Review (model)"}
+{"ts": "2026-11-12T18:02:13+00:00", "type": "item_start", "kind": "component", "id": "68e078c4399caeb2", "label": "Category (model)"}
+{"ts": "2026-11-12T18:02:13+00:00", "type": "item_start", "kind": "component", "id": "2fd7ceea1b9059ae", "label": "Manufacturer (model)"}
+{"ts": "2026-11-12T18:02:13+00:00", "type": "item_start", "kind": "component", "id": "e9ed612a6c7cc0c5", "label": "AdvancedProduct (model)"}
+{"ts": "2026-11-12T18:02:13+00:00", "type": "item_start", "kind": "component", "id": "1e9740f4e9c04a52", "label": "Product (model)"}
+{"ts": "2026-11-12T18:02:15+00:00", "type": "item_done", "kind": "component", "id": "4c1b8e30b8cd89a3", "label": "ManufacturerSerializer (serializer)", "confidence": 1.0}
+{"ts": "2026-11-12T18:02:16+00:00", "type": "item_done", "kind": "component", "id": "25dc743a716cbc83", "label": "ReviewSerializer (serializer)", "confidence": 1.0}
+{"ts": "2026-11-12T18:02:17+00:00", "type": "item_done", "kind": "component", "id": "94b7af4171d7a387", "label": "ProductSerializer (serializer)", "confidence": 1.0}
+{"ts": "2026-11-12T18:02:17+00:00", "type": "item_done", "kind": "component", "id": "8f0bed1c500d235a", "label": "Supplier (model)", "confidence": 1.0}
+{"ts": "2026-11-12T18:02:18+00:00", "type": "item_done", "kind": "component", "id": "ca193211c6821110", "label": "SupplierSerializer (serializer)", "confidence": 1.0}
+{"ts": "2026-11-12T18:02:18+00:00", "type": "item_done", "kind": "component", "id": "68e078c4399caeb2", "label": "Category (model)", "confidence": 1.0}
+{"ts": "2026-11-12T18:02:20+00:00", "type": "item_done", "kind": "component", "id": "2fd7ceea1b9059ae", "label": "Manufacturer (model)", "confidence": 0.0}
+{"ts": "2026-11-12T18:02:22+00:00", "type": "item_done", "kind": "component", "id": "e9ed612a6c7cc0c5", "label": "AdvancedProduct (model)", "confidence": 1.0}
+{"ts": "2026-11-12T18:02:22+00:00", "type": "item_done", "kind": "component", "id": "23c41bc3fc657b1c", "label": "Review (model)", "confidence": 1.0}
+{"ts": "2026-11-12T18:02:22+00:00", "type": "item_done", "kind": "component", "id": "1e9740f4e9c04a52", "label": "Product (model)", "confidence": 1.0}
+{"ts": "2026-11-12T18:02:23+00:00", "type": "item_done", "kind": "component", "id": "4d9c75ae28117dac", "label": "CategorySerializer (serializer)", "confidence": 1.0}
+{"ts": "2026-11-12T18:02:29+00:00", "type": "item_done", "kind": "component", "id": "d7702418c6b54ae8", "label": "AdvancedProductSerializer (serializer)", "confidence": 1.0}
+{"ts": "2026-11-12T18:02:29+00:00", "type": "stage_end", "stage": "component", "success": 12, "failure": 0, "duration_ms": 15828}
+{"ts": "2026-11-12T18:02:29+00:00", "type": "stage_start", "stage": "assembly", "item_count": 1}
+{"ts": "2026-11-12T18:02:29+00:00", "type": "stage_end", "stage": "assembly", "success": 1, "failure": 0, "duration_ms": 0}
+{"ts": "2026-11-12T18:02:29+00:00", "type": "stage_start", "stage": "validation", "item_count": 1}
+{"ts": "2026-11-12T18:02:29+00:00", "type": "stage_end", "stage": "validation", "success": 1, "failure": 0, "duration_ms": 0}
+{"ts": "2026-11-12T18:02:29+00:00", "type": "stage_start", "stage": "quality", "item_count": 1}
+{"ts": "2026-11-12T18:02:29+00:00", "type": "stage_end", "stage": "quality", "success": 1, "failure": 0, "duration_ms": 0}
+{"ts": "2026-11-12T18:02:29+00:00", "type": "run_done", "spec_path": "/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi/output-agent/openapi.yml", "quality_score": 0.873, "duration_ms": 45752, "usage": {"prompt_tokens": 20327, "completion_tokens": 6144, "total_tokens": 26471, "requests": 29, "budget": 0, "budget_exceeded": false}}

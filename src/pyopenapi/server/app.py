@@ -5,11 +5,11 @@ from __future__ import annotations
 from ..config import get_settings
 from ..logging_utils import configure_logging
 from ..utils import install_stdout_guard
-from .instance import mcp
 
 # Importing these modules registers tools and resources on the shared instance.
-from . import resources as _resources  # noqa: F401,E402
-from . import tools as _tools  # noqa: F401,E402
+from . import resources as _resources  # noqa: F401
+from . import tools as _tools  # noqa: F401
+from .instance import mcp
 
 __all__ = ["mcp", "run"]
 

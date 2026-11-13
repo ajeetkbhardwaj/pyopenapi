@@ -1,0 +1,24 @@
+# In test_specs/05_test.yaml
+openapi: 3.0.0
+info: {title: Scoring Mode Test, version: 1.0}
+paths:
+  /data:
+    get:
+      responses:
+        '200':
+          description: Data with varying depth, missing the final property.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  topLevelId: { type: string }
+                  a:
+                    type: object
+                    properties:
+                      b:
+                        type: object
+                        properties:
+                          c:
+                            type: object
+                            properties: {} # 'deepId' is missing from this object

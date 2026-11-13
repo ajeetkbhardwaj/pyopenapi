@@ -18,9 +18,10 @@ from __future__ import annotations
 
 import ast
 import re
+from collections.abc import Iterable
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any
 
 from .ast_utils import (
     ImportMap,
@@ -433,7 +434,7 @@ def _resolve_view(
             target = expr.func.value if isinstance(expr.func, ast.Attribute) else expr.func
             if expr.args and isinstance(expr.args[0], ast.Dict):
                 mapping = {}
-                for key_node, value_node in zip(expr.args[0].keys, expr.args[0].values):
+                for key_node, value_node in zip(expr.args[0].keys, expr.args[0].values, strict=False):
                     key = string_arg(key_node)
                     value = string_arg(value_node)
                     if key and value:

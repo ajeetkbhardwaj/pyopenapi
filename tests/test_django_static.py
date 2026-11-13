@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from pyopenapi.analyzers.base import AnalysisOptions
+from pyopenapi.analyzers.django import analyze_django
 from pyopenapi.analyzers.django_components_static import enrich_django_components
 from pyopenapi.analyzers.django_static import extract_django_endpoints
 
@@ -52,3 +54,23 @@ def test_enriches_serializer_fields_from_model(django_project: Path) -> None:
     assert fields["created_at"]["format"] == "date-time"
     assert fields["created_at"]["read_only"] is True
     assert "Document" in enriched
+
+
+def test_analyze_django_without_legacy_analyzers(
+    django_project: Path, tmp_path: Path, monkeypatch
+) -> None:
+    monkeypatch.delenv("PYOPENAPI_KNOWL_ROOT", raising=False)
+    monkeypatch.delenv("KNOWL_APIDOCS_ROOT", raising=False)
+
+    raw = analyze_django(
+        django_project,
+        tmp_path / "out",
+        AnalysisOptions(use_dynamic=False),
+        None,
+    )
+
+    assert raw.metadata["code_analyzer"] == "static"
+    assert raw.metadata["endpoint_source"] == "static"
+    assert raw.endpoints
+    assert "DocumentSerializer" in raw.components
+    assert "Document" in raw.components

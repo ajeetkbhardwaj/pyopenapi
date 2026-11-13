@@ -1,0 +1,18 @@
+openapi: 3.0.0
+info: {title: Array of Refs Ideal, version: 1.0}
+components:
+  schemas:
+    Tag: { type: object, properties: { tagId: { type: integer }, tagName: { type: string, maxLength: 20 } } }
+paths:
+  /tags:
+    get:
+      responses:
+        '200':
+          description: A list of tags
+          content:
+            application/json:
+              schema:
+                type: array
+                minItems: 1
+                items:
+                  $ref: '#/components/schemas/Tag'

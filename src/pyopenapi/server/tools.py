@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import asyncio
+import json
 from pathlib import Path
 from typing import Annotated, Any, Literal
 
@@ -11,15 +12,21 @@ from pydantic import Field
 
 from ..config import get_settings
 from ..core.analysis import filter_endpoints, summarize_component, summarize_endpoint
+from ..core.llm import llm_available
 from ..core.markdown import generate_markdown as _generate_markdown
 from ..core.spec import (
     build_openapi_from_analysis,
-    diff_specs as _diff_specs,
-    generate_openapi as _generate_openapi,
-    merge_specs as _merge_specs,
     write_spec,
 )
-from ..core.llm import llm_available
+from ..core.spec import (
+    diff_specs as _diff_specs,
+)
+from ..core.spec import (
+    generate_openapi as _generate_openapi,
+)
+from ..core.spec import (
+    merge_specs as _merge_specs,
+)
 from ..core.validation import load_spec, validate_spec
 from ..errors import PyOpenAPIError
 from ..logging_utils import get_logger
@@ -40,7 +47,7 @@ logger = get_logger("pyopenapi.tools")
 
 FrameworkName = Literal["auto", "django", "flask", "fastapi"]
 EngineName = Literal[
-    "auto", "static", "nvidia", "lmstudio", "llamacpp", "ollama", "openai-compatible", "llm"
+    "auto", "agent", "static", "nvidia", "openrouter", "lmstudio", "llamacpp", "ollama", "openai-compatible", "llm"
 ]
 FormatName = Literal["yml", "yaml", "json"]
 LayoutName = Literal["multi", "single"]
@@ -94,7 +101,7 @@ _FRAMEWORKS: list[FrameworkInfo] = [
             "flask-smorest @bp.arguments/@bp.response",
             "Marshmallow schema components",
         ],
-        notes="Static extraction; LLM generation not yet wired for Flask.",
+        notes="Static extraction plus LLM agent generation (engine='agent'/'auto').",
     ),
     FrameworkInfo(
         name="fastapi",
@@ -397,6 +404,7 @@ async def generate_openapi(
     skip_missing_context: bool = False,
     force_add_components: bool = False,
     openapi_version: OpenAPIVersion | None = None,
+    allow_partial: bool = False,
     ctx: Context | None = None,
 ) -> dict[str, Any]:
     """Generate an OpenAPI specification.
@@ -407,8 +415,8 @@ async def generate_openapi(
             analysis_id is omitted).
         output_dir: Where to write openapi.yml/json. Defaults to
             <project_root>/output/ for local projects, otherwise cache.
-        engine: "auto" (configured provider, else static), "static", "nvidia",
-            "lmstudio", "llamacpp", "ollama", "openai-compatible", or legacy "llm".
+        engine: "auto" (agent when a provider is configured), "agent", "static", "nvidia",
+            "openrouter", "lmstudio", "llamacpp", "ollama", "openai-compatible", or legacy "llm".
         fmt: "yml" (or "yaml") or "json".
         spec_model: LLM model for schema/request/response generation.
         context_model: LLM model for missing-context resolution.
@@ -422,6 +430,7 @@ async def generate_openapi(
         skip_missing_context: Django LLM only; skip missing-symbol resolution.
         force_add_components: Django LLM only; keep components that fail validation.
         openapi_version: "3.0.3" (default) or "3.1.0".
+        allow_partial: Emit a partial spec and warnings when some agent items fail.
     """
 
     try:
@@ -462,6 +471,7 @@ async def generate_openapi(
             skip_missing_context=skip_missing_context,
             force_add_components=force_add_components,
             openapi_version=openapi_version,
+            allow_partial=allow_partial,
             logger=logger,
         )
         await _progress(ctx, 3, 3, "OpenAPI generation complete")
@@ -562,11 +572,13 @@ async def validate_openapi(
     spec_path: str | None = None,
     openapi: str | None = None,
     openapi_version: OpenAPIVersion | None = None,
+    strict: bool = False,
 ) -> dict[str, Any]:
     """Validate an OpenAPI document structurally.
 
     Provide exactly one source: analysis_id (builds a static spec), spec_path, or
-    openapi (raw YAML/JSON string).
+    openapi (raw YAML/JSON string). Set ``strict=True`` to run full schema
+    validation (requires the optional 'openapi-spec-validator' package).
     """
 
     try:
@@ -587,7 +599,7 @@ async def validate_openapi(
         else:
             source = str(openapi)
 
-        report: ValidationReport = await asyncio.to_thread(validate_spec, source)
+        report: ValidationReport = await asyncio.to_thread(validate_spec, source, strict=strict)
         return _ok(report=report.model_dump())
     except Exception as exc:
         return _fail(exc)
@@ -601,6 +613,7 @@ async def merge_specs(
     output_dir: str | None = None,
     fmt: FormatName = "yml",
     openapi_version: OpenAPIVersion | None = None,
+    on_conflict: str = "warn",
 ) -> dict[str, Any]:
     """Merge multiple OpenAPI documents (paths or analysis ids) into one.
 
@@ -611,6 +624,7 @@ async def merge_specs(
         output_dir: Where to write the merged spec. Defaults to <cache>/merged.
         fmt: "yml", "yaml" or "json".
         openapi_version: Override the output OpenAPI version.
+        on_conflict: "first", "warn" or "error" for duplicate operations/schemas.
     """
 
     try:
@@ -621,7 +635,9 @@ async def merge_specs(
             title=title,
             version=version,
             openapi_version=openapi_version,
+            on_conflict=on_conflict,
         )
+        merge_warnings = merged.pop("x-pyopenapi-warnings", [])
         out = Path(output_dir) if output_dir else get_settings().resolved_cache_dir() / "merged"
         target = await asyncio.to_thread(write_spec, merged, out, fmt=fmt)
         paths = merged.get("paths") or {}
@@ -631,7 +647,7 @@ async def merge_specs(
             "spec_count": len(documents),
             "path_count": len(paths),
             "component_count": len(schemas),
-            "warnings": [],
+            "warnings": merge_warnings,
         }
         return _ok(result=result)
     except Exception as exc:
@@ -806,8 +822,8 @@ async def generate_docs(
         project_path: Local project path or GitHub repository URL.
         framework: "auto", "django", "flask" or "fastapi".
         output_dir: Base output directory. Defaults to <cache>/analyses/<id>/output.
-        engine: "auto", "static", "nvidia", "lmstudio", "llamacpp", "ollama",
-            "openai-compatible", or legacy "llm".
+        engine: "auto", "agent", "static", "nvidia", "openrouter", "lmstudio", "llamacpp",
+            "ollama", "openai-compatible", or legacy "llm".
         layout: Markdown layout ("multi" or "single").
         use_dynamic: Django only; runtime URLconf extraction.
         django_settings_module: Django settings module.
@@ -887,6 +903,143 @@ async def _load_source(source: str | Path | dict[str, Any]) -> Any:
         f"Could not resolve '{source}' to an OpenAPI file or analysis id.",
         hint="Call list_analyses to see cached ids, or pass a spec file path.",
     )
+
+
+async def _resolve_agent_output_dir(source: str | Path) -> Path:
+    """Resolve an analysis id, output directory, spec path, or trace path."""
+
+    import re
+
+    source_text = str(source)
+    candidate = Path(source_text).expanduser().resolve()
+    if candidate.is_file():
+        if candidate.name in {"agent_trace.json", "agent_progress.jsonl"}:
+            return candidate.parent
+        # spec file -> output directory
+        return candidate.parent
+    if candidate.is_dir():
+        return candidate
+    if re.fullmatch(r"[0-9a-f]{8,64}", source_text):
+        record = await asyncio.to_thread(manager().load, source_text)
+        return Path(record.summary.output_dir) / "output"
+    raise PyOpenAPIError(
+        f"Could not resolve '{source}' to an analysis id or output directory.",
+        hint="Pass a cached analysis id, output directory, openapi spec path, or agent_trace.json path.",
+    )
+
+
+def _read_json_file(path: Path) -> dict[str, Any]:
+    if not path.exists():
+        raise PyOpenAPIError(
+            f"File not found: {path}",
+            hint="Run generate_openapi with engine='agent' (or --dashboard) to create agent artifacts.",
+        )
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        raise PyOpenAPIError(f"Invalid JSON in {path}: {exc}") from exc
+    if not isinstance(data, dict):
+        raise PyOpenAPIError(f"Expected a JSON object in {path}.")
+    return data
+
+
+
+@mcp.tool()
+async def get_generation_trace(
+    source: Annotated[
+        str,
+        Field(
+            description=(
+                "Cached analysis id, output directory, spec path, or agent_trace.json path. "
+                "For agent runs the trace is agent_trace.json in the generation output directory."
+            )
+        ),
+    ],
+) -> dict[str, Any]:
+    """Return the agent generation trace for an agent pipeline run.
+
+    The trace includes stage metrics, per-item reasoning attempts (redacted),
+    findings, provider/model metadata, and timing. It is produced by
+    ``engine='agent'``.
+    """
+
+    try:
+        output_dir = await _resolve_agent_output_dir(source)
+        trace_path = output_dir / "agent_trace.json"
+        trace = await asyncio.to_thread(_read_json_file, trace_path)
+        return _ok(source=str(output_dir), trace_path=str(trace_path), trace=trace)
+    except Exception as exc:
+        return _fail(exc)
+
+
+@mcp.tool()
+async def get_quality_report(
+    source: Annotated[
+        str,
+        Field(
+            description="Cached analysis id, output directory, spec path, or agent_trace.json path."
+        ),
+    ],
+) -> dict[str, Any]:
+    """Return the deterministic quality report for an agent pipeline run.
+
+    Quality findings and score are recorded in ``agent_trace.json`` by the
+    agent pipeline.
+    """
+
+    try:
+        output_dir = await _resolve_agent_output_dir(source)
+        trace_path = output_dir / "agent_trace.json"
+        trace = await asyncio.to_thread(_read_json_file, trace_path)
+        findings = trace.get("findings") or []
+        quality_findings = [
+            finding
+            for finding in findings
+            if isinstance(finding, dict) and finding.get("stage") == "quality"
+        ]
+        metadata = trace.get("metadata") or {}
+        return _ok(
+            source=str(output_dir),
+            trace_path=str(trace_path),
+            quality_score=metadata.get("quality_score"),
+            finding_count=len(quality_findings),
+            findings=quality_findings,
+            trace_status=trace.get("status"),
+        )
+    except Exception as exc:
+        return _fail(exc)
+
+
+@mcp.tool()
+async def get_generation_progress(
+    source: Annotated[
+        str,
+        Field(
+            description=(
+                "Cached analysis id, output directory, spec path, or agent_progress.jsonl path. "
+                "Progress is written during agent generation and can be viewed live with "
+                "`pyopenapi dashboard <output_dir>`."
+            )
+        ),
+    ],
+) -> dict[str, Any]:
+    """Return the current live progress state for an agent pipeline run."""
+
+    try:
+        from ..core.progress import build_dashboard_state, read_events
+
+        output_dir = await _resolve_agent_output_dir(source)
+        progress_path = output_dir / "agent_progress.jsonl"
+        events = await asyncio.to_thread(read_events, progress_path)
+        state = build_dashboard_state(events)
+        return _ok(
+            source=str(output_dir),
+            progress_path=str(progress_path),
+            event_count=len(events),
+            state=state,
+        )
+    except Exception as exc:
+        return _fail(exc)
 
 
 async def _resolve_record(

@@ -8,7 +8,7 @@ from typing import Any
 from ..errors import FrameworkNotSupportedError
 from .base import AnalysisOptions, RawAnalysis
 
-__all__ = ["AnalyzerAdapter", "AnalysisOptions", "RawAnalysis", "get_adapter", "analyze"]
+__all__ = ["AnalysisOptions", "AnalyzerAdapter", "RawAnalysis", "analyze", "get_adapter"]
 
 
 class AnalyzerAdapter:

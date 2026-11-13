@@ -155,7 +155,7 @@ def _field_call_kwargs(call: ast.Call) -> dict[str, Any]:
         info["alias"] = alias
     metadata = kwarg(call, "metadata")
     if isinstance(metadata, ast.Dict):
-        for key_node, value_node in zip(metadata.keys, metadata.values):
+        for key_node, value_node in zip(metadata.keys, metadata.values, strict=False):
             key = string_arg(key_node)
             if key == "description":
                 text = string_arg(value_node)

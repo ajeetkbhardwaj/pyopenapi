@@ -1,12 +1,16 @@
 """OpenAPI spec generation.
 
-Two engines are available:
+Engines:
 
+* ``agent`` - the agent-native pipeline: IR + per-endpoint/component reasoning
+  + deterministic assembly. This is the default when an LLM provider is
+  configured.
 * ``llm`` - the upstream knowl-apidocs LLM pipeline (Django, richest output)
 * ``static`` - a deterministic builder from cached analysis (all frameworks)
 
-``engine="auto"`` uses the LLM pipeline when credentials are present and the
-framework is Django; otherwise it falls back to the static builder.
+``engine="auto"`` selects the agent pipeline when a provider is configured and
+falls back to the deterministic static builder with a warning when no provider
+is available. Pass ``engine="static"`` to always skip the LLM.
 """
 
 from __future__ import annotations
@@ -23,15 +27,25 @@ import yaml
 
 from ..bootstrap import ensure_knowl_on_path
 from ..config import get_settings
-from ..errors import FrameworkNotSupportedError, LLMNotConfiguredError, SpecGenerationError
+from ..errors import (
+    FrameworkNotSupportedError,
+    LLMNotConfiguredError,
+    SpecGenerationError,
+)
 from ..logging_utils import get_logger
 from ..models import DiffChange, DiffResult, GenerationResult, LLMUsage
-from ..utils import Stopwatch, atomic_write_text, ensure_directory, redirect_stdout_to_stderr, slugify
+from ..utils import (
+    Stopwatch,
+    atomic_write_text,
+    ensure_directory,
+    redirect_stdout_to_stderr,
+    slugify,
+)
 from .analysis import AnalysisRecord
-from .llm import enrich_openapi_with_llm, nvidia_available, resolve_provider
+from .llm import enrich_openapi_with_llm, nvidia_available
 
 _HTTP_METHODS = {"get", "put", "post", "delete", "options", "head", "patch", "trace"}
-_PROVIDER_ENGINES = {"nvidia", "lmstudio", "llamacpp", "ollama", "openai-compatible"}
+_PROVIDER_ENGINES = {"nvidia", "openrouter", "lmstudio", "llamacpp", "ollama", "openai-compatible"}
 
 
 def legacy_llm_available() -> bool:
@@ -464,14 +478,14 @@ async def _generate_with_llm(
     ensure_knowl_on_path()
 
     try:
-        from gen_apidocs2 import SpecGenerator
         from common.interfaces.batch_processor import BatchProcessor
         from common.interfaces.prompt_management import PromptManager
         from common.interfaces.spec_manager import OpenAPISpecManager
         from common.llm.llm import LLMManager
         from common.stats import StatsCollector
-        from python_analyzer import PythonCodeAnalyzer
         from django_analyzer import DjangoAnalyzer
+        from gen_apidocs2 import SpecGenerator
+        from python_analyzer import PythonCodeAnalyzer
     except Exception as exc:  # pragma: no cover
         raise SpecGenerationError(
             "Could not import the knowl-apidocs generation pipeline.",
@@ -570,6 +584,8 @@ async def generate_openapi(
     skip_missing_context: bool = False,
     force_add_components: bool = False,
     openapi_version: str | None = None,
+    progress_path: str | Path | None = None,
+    allow_partial: bool = False,
     logger: Any | None = None,
 ) -> GenerationResult:
     logger = logger or get_logger("pyopenapi.spec")
@@ -581,25 +597,28 @@ async def generate_openapi(
     llm_usage = None
 
     resolved_engine = engine.lower()
-    allowed = {"auto", "llm", "static", *_PROVIDER_ENGINES}
+    allowed = {"auto", "agent", "llm", "static", *_PROVIDER_ENGINES}
     if resolved_engine not in allowed:
         raise SpecGenerationError(
-            "engine must be one of: auto, static, llm, nvidia, lmstudio, llamacpp, ollama, openai-compatible"
+            "engine must be one of: auto, agent, static, llm, nvidia, openrouter, "
+            "lmstudio, llamacpp, ollama, openai-compatible"
         )
 
     framework = record.summary.framework
     if resolved_engine == "auto":
-        provider = resolve_provider()
-        if provider is not None:
-            resolved_engine = provider.name
-        elif framework == "django" and legacy_llm_available():
+        from .agent_llm import agent_llm_available
+
+        provider_available = agent_llm_available(settings=get_settings())
+        if framework == "django" and legacy_llm_available() and not provider_available:
             resolved_engine = "llm"
+        elif provider_available:
+            resolved_engine = "agent"
         else:
             resolved_engine = "static"
             warnings.append(
-                "No LLM provider was detected; generated a deterministic spec from static analysis. "
-                "Set NVIDIA_API_KEY, OLLAMA_HOST, PYOPENAPI_LLM_PROVIDER or PYOPENAPI_LLM_BASE_URL "
-                "for enriched output."
+                "No LLM provider was configured; generated a deterministic static spec. "
+                "Configure NVIDIA_API_KEY/NVIDIA_NIM_API_KEY or OPENROUTER_API_KEY "
+                "(or pass engine='agent') for agent-enriched output."
             )
 
     if resolved_engine == "nvidia" and not nvidia_available():
@@ -608,7 +627,27 @@ async def generate_openapi(
             hint="Set NVIDIA_API_KEY (or PYOPENAPI_NVIDIA_API_KEY) in the environment or .env file.",
         )
 
-    if resolved_engine == "llm":
+    if resolved_engine == "agent":
+        from .pipeline import PipelineOrchestrator
+
+        pipeline = PipelineOrchestrator(
+            settings=get_settings(),
+            model=spec_model,
+            max_concurrency=max_concurrency or 5,
+        )
+        pipeline_result = await pipeline.run(
+            record,
+            out,
+            fmt=fmt,
+            openapi_version=target_version,
+            progress_path=progress_path,
+            allow_partial=allow_partial,
+        )
+        spec = pipeline_result.spec
+        spec_path = pipeline_result.spec_path
+        llm_usage = pipeline_result.usage
+        warnings.extend(pipeline_result.warnings)
+    elif resolved_engine == "llm":
         if framework != "django":
             raise FrameworkNotSupportedError(
                 f"LLM spec generation currently supports Django only (detected: {framework}).",
@@ -695,13 +734,19 @@ def merge_specs(
     title: str | None = None,
     version: str = "0.1.0",
     openapi_version: str | None = None,
+    on_conflict: str = "warn",
 ) -> dict[str, Any]:
     """Merge multiple OpenAPI documents into one.
 
     Paths are unioned; a duplicate ``<method> <path>`` from a later document is
-    skipped (first one wins) and reported as a warning. Component schemas and
-    security schemes are merged by name, and tags are de-duplicated.
+    skipped and reported. ``on_conflict`` controls duplicate handling:
+    ``"first"`` keeps the first silently, ``"warn"`` keeps the first and records
+    a warning, and ``"error"`` raises. Warnings are attached under the
+    ``x-pyopenapi-warnings`` extension.
     """
+
+    if on_conflict not in {"first", "warn", "error"}:
+        raise SpecGenerationError("on_conflict must be one of: first, warn, error.")
 
     documents = _load_specs(specs)
     if not documents:
@@ -736,9 +781,13 @@ def merge_specs(
                             bucket["parameters"] = operation
                         continue
                     if method.lower() in bucket:
-                        warnings.append(
+                        message = (
                             f"Duplicate operation '{method.upper()} {path}' from {label} was skipped."
                         )
+                        if on_conflict == "error":
+                            raise SpecGenerationError(message)
+                        if on_conflict == "warn":
+                            warnings.append(message)
                         continue
                     bucket[method] = copy.deepcopy(operation)
 
@@ -750,7 +799,11 @@ def merge_specs(
             target = merged["components"].setdefault(key, {})
             for name, value in source.items():
                 if name in target:
-                    warnings.append(f"Duplicate {key} entry '{name}' from {label} was skipped.")
+                    message = f"Duplicate {key} entry '{name}' from {label} was skipped."
+                    if on_conflict == "error":
+                        raise SpecGenerationError(message)
+                    if on_conflict == "warn":
+                        warnings.append(message)
                     continue
                 target[name] = copy.deepcopy(value)
 
@@ -768,11 +821,33 @@ def merge_specs(
         merged["components"].pop("schemas")
     if not merged["components"]:
         merged.pop("components")
+    if warnings:
+        merged["x-pyopenapi-warnings"] = warnings
     return merged
 
 
 def _operation_signature(operation: Any) -> str:
     return json.dumps(operation, sort_keys=True, ensure_ascii=False)
+
+
+def _schema_change_breaking(old_schema: Any, new_schema: Any) -> bool:
+    """Heuristic: removals and type changes break clients; additions do not."""
+
+    if not isinstance(old_schema, dict) or not isinstance(new_schema, dict):
+        return True
+    old_props = old_schema.get("properties") or {}
+    new_props = new_schema.get("properties") or {}
+    if isinstance(old_props, dict) and isinstance(new_props, dict):
+        if set(old_props) - set(new_props):
+            return True
+        for name in set(old_props) & set(new_props):
+            old_type = (old_props.get(name) or {}).get("type")
+            new_type = (new_props.get(name) or {}).get("type")
+            if old_type and new_type and old_type != new_type:
+                return True
+    old_required = set(old_schema.get("required") or [])
+    new_required = set(new_schema.get("required") or [])
+    return bool(new_required - old_required)
 
 
 def diff_specs(
@@ -845,12 +920,13 @@ def diff_specs(
         )
     for name in sorted(set(old_schemas) & set(new_schemas)):
         if _operation_signature(old_schemas[name]) != _operation_signature(new_schemas[name]):
+            breaking = _schema_change_breaking(old_schemas[name], new_schemas[name])
             changes.append(
                 DiffChange(
                     kind="changed",
                     path=f"#/components/schemas/{name}",
                     message="Schema changed.",
-                    severity="warning",
+                    severity="error" if breaking else "warning",
                 )
             )
 

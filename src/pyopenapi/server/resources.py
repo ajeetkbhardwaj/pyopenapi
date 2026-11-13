@@ -7,10 +7,10 @@ from pathlib import Path
 
 import yaml
 
+from ..config import get_settings
 from ..core.analysis import summarize_component, summarize_endpoint
 from ..core.markdown import generate_markdown
 from ..core.spec import build_openapi_from_analysis
-from ..config import get_settings
 from ..logging_utils import get_logger
 from .deps import manager
 from .instance import mcp
@@ -153,3 +153,45 @@ def warnings_resource(analysis_id: str) -> str:
     return json.dumps(
         {"analysis_id": analysis_id, "warnings": record.summary.warnings}, indent=2
     )
+
+
+
+@mcp.resource("pyopenapi://analysis/{analysis_id}/trace", mime_type="application/json")
+def trace_resource(analysis_id: str) -> str:
+    """Agent generation trace for an analysis (agent engine output)."""
+
+    record = manager().load(analysis_id)
+    trace_path = Path(record.summary.output_dir) / "output" / "agent_trace.json"
+    if not trace_path.exists():
+        return json.dumps(
+            {
+                "analysis_id": analysis_id,
+                "ok": False,
+                "error": "agent_trace.json not found",
+                "hint": "Run generate_openapi with engine='agent' for this analysis.",
+            },
+            indent=2,
+        )
+    return trace_path.read_text(encoding="utf-8")
+
+
+@mcp.resource("pyopenapi://analysis/{analysis_id}/progress", mime_type="application/json")
+def progress_resource(analysis_id: str) -> str:
+    """Current agent generation progress state for an analysis."""
+
+    from ..core.progress import build_dashboard_state, read_events
+
+    record = manager().load(analysis_id)
+    progress_path = Path(record.summary.output_dir) / "output" / "agent_progress.jsonl"
+    events = read_events(progress_path)
+    state = build_dashboard_state(events)
+    return json.dumps(
+        {
+            "analysis_id": analysis_id,
+            "progress_path": str(progress_path),
+            "event_count": len(events),
+            "state": state,
+        },
+        indent=2,
+    )
+

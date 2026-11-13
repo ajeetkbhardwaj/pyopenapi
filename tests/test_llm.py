@@ -95,10 +95,8 @@ async def test_enrichment_merges_documentation(fake_nvidia) -> None:
 
 @pytest.mark.asyncio
 async def test_enrichment_requires_key(monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.delenv("NVIDIA_API_KEY", raising=False)
-    monkeypatch.delenv("PYOPENAPI_NVIDIA_API_KEY", raising=False)
-    monkeypatch.delenv("PYOPENAPI_LLM_PROVIDER", raising=False)
-    monkeypatch.delenv("OLLAMA_HOST", raising=False)
+    monkeypatch.setenv("PYOPENAPI_LLM_PROVIDER", "openai-compatible")
+    monkeypatch.delenv("PYOPENAPI_LLM_BASE_URL", raising=False)
     spec, warnings = await llm.enrich_openapi_with_llm(_sample_spec())
     assert any("no provider configured" in warning for warning in warnings)
     assert spec["paths"]["/api/documents/"]["get"]["summary"] == "DocumentViewSet.list"
@@ -117,13 +115,34 @@ def test_resolve_provider_ollama(monkeypatch: pytest.MonkeyPatch) -> None:
 
 
 def test_auto_selects_ollama(monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.delenv("NVIDIA_API_KEY", raising=False)
-    monkeypatch.delenv("PYOPENAPI_NVIDIA_API_KEY", raising=False)
+    monkeypatch.setattr(llm, "nvidia_api_key", lambda: None)
+    monkeypatch.setattr(llm, "openrouter_api_key", lambda: None)
     monkeypatch.delenv("PYOPENAPI_LLM_PROVIDER", raising=False)
     monkeypatch.setenv("OLLAMA_HOST", "127.0.0.1:11434")
     provider = llm.resolve_provider()
     assert provider is not None
     assert provider.name == "ollama"
+
+
+def test_resolve_provider_openrouter(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("OPENROUTER_API_KEY", "test-openrouter-key")
+    monkeypatch.setenv("PYOPENAPI_LLM_PROVIDER", "openrouter")
+    provider = llm.resolve_provider()
+    assert provider is not None
+    assert provider.name == "openrouter"
+    assert provider.base_url == "https://openrouter.ai/api/v1"
+    assert provider.requires_key is True
+    assert provider.spec_model == "nvidia/nemotron-3-ultra-550b-a55b:free"
+
+
+def test_auto_selects_openrouter(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(llm, "nvidia_api_key", lambda: None)
+    monkeypatch.setattr(llm, "openrouter_api_key", lambda: "test-openrouter-key")
+    monkeypatch.delenv("PYOPENAPI_LLM_PROVIDER", raising=False)
+    monkeypatch.delenv("OLLAMA_HOST", raising=False)
+    provider = llm.resolve_provider()
+    assert provider is not None
+    assert provider.name == "openrouter"
 
 
 @pytest.mark.asyncio

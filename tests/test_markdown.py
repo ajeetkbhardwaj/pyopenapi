@@ -2,10 +2,9 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from pyopenapi.core.analysis import filter_endpoints
+from pyopenapi.core.analysis import AnalysisManager, filter_endpoints
 from pyopenapi.core.markdown import generate_markdown
 from pyopenapi.core.spec import build_openapi_from_analysis
-from pyopenapi.core.analysis import AnalysisManager
 
 
 def test_generates_multi_file_markdown(django_project: Path, isolated_settings, tmp_path: Path) -> None:

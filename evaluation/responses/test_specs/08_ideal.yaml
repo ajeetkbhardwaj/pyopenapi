@@ -1,0 +1,20 @@
+openapi: 3.0.0
+info: {title: Complex AllOf Ideal, version: 1.0}
+components:
+  schemas:
+    Id: { type: object, required: [id], properties: { id: { type: string, format: uuid } } }
+    Timestamp: { type: object, required: [createdAt], properties: { createdAt: { type: string, format: date-time } } }
+    UserPayload: { type: object, required: [name], properties: { name: { type: string } } }
+paths:
+  /items:
+    post:
+      responses:
+        '201':
+          description: A created item
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Id'
+                  - $ref: '#/components/schemas/Timestamp'
+                  - $ref: '#/components/schemas/UserPayload'

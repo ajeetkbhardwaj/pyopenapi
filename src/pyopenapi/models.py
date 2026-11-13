@@ -197,6 +197,7 @@ class GenerationResult(BaseModel):
     openapi_version: str | None = None
     title: str | None = None
     llm_usage: LLMUsage | None = None
+    dashboard_path: str | None = None
 
 
 class MarkdownFile(BaseModel):

@@ -1,0 +1,612 @@
+openapi: 3.0.3
+info:
+  title: Merged API
+  version: 0.1.0
+  description: Merged specification combining 2 document(s).
+paths:
+  /customers/{customer_id}:
+    get:
+      operationId: get_customers_customer_id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+      summary: Get customer by ID
+      description: Retrieve a specific customer's information using their unique identifier.
+      tags:
+      - customers
+      parameters:
+      - name: customer_id
+        in: path
+        required: true
+        schema:
+          type: integer
+  /customers/{customer_id}/orders:
+    get:
+      operationId: get_customers_customer_id_orders
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+      summary: List all orders for a specific customer
+      description: Retrieves a paginated list of orders associated with the given
+        customer identifier. Optionally includes draft orders in the response when
+        the include_draft parameter is set to true.
+      tags:
+      - customers
+      parameters:
+      - name: customer_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: include_draft
+        in: query
+        required: false
+        schema:
+          type: boolean
+  /health:
+    get:
+      operationId: get_health
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+      summary: Health check
+      description: Returns the health status of the service. Use this endpoint to
+        verify that the application is running correctly and ready to accept requests.
+      tags:
+      - health
+  /orders:
+    post:
+      operationId: post_orders
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+      summary: Create a new order
+      description: Creates a new order in the system. Returns the created order object
+        with its assigned identifier and current state.
+      tags:
+      - orders
+      parameters:
+      - name: idempotency_key
+        in: header
+        required: false
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+        description: Order details including items, quantities, and customer information.
+  /orders/{order_id}:
+    get:
+      operationId: get_orders_order_id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+      summary: Retrieve an order by its unique identifier
+      description: Returns the details of a specific order identified by the order_id
+        path parameter. Use this endpoint to fetch order information including items,
+        customer details, and status.
+      tags:
+      - orders
+      parameters:
+      - name: order_id
+        in: path
+        required: true
+        schema:
+          type: integer
+  /products:
+    get:
+      operationId: get_products
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+      summary: List all products
+      description: Retrieves a paginated list of products with optional filtering
+        and search capabilities. Results can be filtered by status and searched using
+        a query string.
+      tags:
+      - products
+      parameters:
+      - name: status_filter
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: q
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+    post:
+      operationId: post_products
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+      summary: Create a new product
+      description: Creates a new product in the system. The product details should
+        be provided in the request body.
+      tags:
+      - products
+      parameters:
+      - name: product
+        in: query
+        required: false
+        schema:
+          type: string
+  /products/{product_id}:
+    delete:
+      operationId: delete_products_product_id
+      responses:
+        '204':
+          description: No content
+      summary: Delete a product
+      description: Removes a product from the system by its unique identifier. Returns
+        no content on success.
+      tags:
+      - products
+      parameters:
+      - name: product_id
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      operationId: get_products_product_id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+      summary: Retrieve a product
+      description: Returns detailed information about a specific product identified
+        by its unique identifier.
+      tags:
+      - products
+      parameters:
+      - name: product_id
+        in: path
+        required: true
+        schema:
+          type: integer
+    patch:
+      operationId: patch_products_product_id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+      summary: Update a product
+      description: Partially updates a product's information using the provided update
+        data. Returns the updated product.
+      tags:
+      - products
+      parameters:
+      - name: product_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductUpdate'
+        description: JSON object containing the fields to update in the product.
+  /api/items:
+    get:
+      operationId: get_api_items
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+      summary: List all items
+      description: Retrieves a list of all available items from the collection. Returns
+        an array of item objects with their associated metadata.
+      tags:
+      - api
+    post:
+      operationId: post_api_items
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+      summary: Create a new item
+      description: Creates a new item in the collection. The request body should contain
+        the item data including required fields for the new item.
+      tags:
+      - api
+  /api/items/{item_id}:
+    delete:
+      operationId: delete_api_items_item_id
+      responses:
+        '204':
+          description: No content
+      summary: Delete an item
+      description: Removes the specified item from the collection. Returns 204 No
+        Content on success.
+      tags:
+      - api
+      parameters:
+      - name: item_id
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      operationId: get_api_items_item_id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+      summary: Retrieve an item
+      description: Returns the details of the specified item. Use this endpoint to
+        fetch a single item by its unique identifier.
+      tags:
+      - api
+      parameters:
+      - name: item_id
+        in: path
+        required: true
+        schema:
+          type: integer
+    put:
+      operationId: put_api_items_item_id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+      summary: Update an item
+      description: Updates the specified item with new data. Returns the updated item
+        on success.
+      tags:
+      - api
+      parameters:
+      - name: item_id
+        in: path
+        required: true
+        schema:
+          type: integer
+  /api/users/{user_id}:
+    get:
+      operationId: get_api_users_user_id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+      summary: Retrieve a user by ID
+      description: Returns the details of a specific user identified by the user_id
+        path parameter.
+      tags:
+      - Users
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/users/{user_id}/orders:
+    get:
+      operationId: get_api_users_user_id_orders
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+      summary: List all orders for a specific user
+      description: Retrieves a paginated list of orders associated with the specified
+        user ID. Returns order details including order ID, items, total amount, and
+        status.
+      tags:
+      - api
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: integer
+components:
+  schemas:
+    ProductStatus:
+      type: string
+      enum:
+      - draft
+      - published
+      - archived
+      description: Enumeration representing the lifecycle status of a product in the
+        system.
+    ProductBase:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name or title of the product.
+          example: Wireless Bluetooth Headphones
+        description:
+          type: string
+          nullable: true
+          description: A detailed description of the product. Can be null if no description
+            is available.
+          example: High-quality wireless headphones with noise cancellation and 30-hour
+            battery life.
+        price:
+          type: number
+          format: float
+          description: The price of the product as a floating-point number.
+          example: 99.99
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ProductStatus'
+          description: The current status of the product, represented as a ProductStatus
+            object.
+          example: active
+        tags:
+          type: array
+          items:
+            type: string
+          description: A list of tags or keywords associated with the product for
+            categorization and search purposes.
+          example:
+          - electronics
+          - audio
+          - wireless
+      description: Base model representing a product with core attributes including
+        name, description, price, status, and tags.
+    ProductUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+          description: The name of the product. Can be updated to change the product's
+            display name.
+          example: Wireless Bluetooth Headphones
+        description:
+          type: string
+          nullable: true
+          description: A detailed description of the product. Used to provide or update
+            product specifications, features, and usage information.
+          example: High-quality wireless headphones with active noise cancellation
+            and 30-hour battery life
+        price:
+          type: number
+          format: float
+          nullable: true
+          description: The price of the product as a floating-point number. Used to
+            set or update the product's cost.
+          example: 99.99
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ProductStatus'
+          nullable: true
+          description: The current status of the product, referencing the ProductStatus
+            model. Indicates availability, listing state, or other status-related
+            information.
+          example: active
+        tags:
+          type: array
+          items:
+            type: string
+          nullable: true
+          description: An array of string tags associated with the product. Used for
+            categorization, filtering, and search functionality.
+          example:
+          - electronics
+          - wireless
+          - audio
+      description: Pydantic model for updating product information. Used as a partial
+        update schema in product modification endpoints, allowing optional fields
+        to be specified for selective updates.
+    Customer:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the customer
+          example: 1
+        email:
+          type: string
+          description: Email address of the customer
+          example: customer@example.com
+        full_name:
+          type: string
+          nullable: true
+          description: Full name of the customer, can be null if not provided
+          example: John Doe
+        active:
+          type: boolean
+          description: Indicates whether the customer account is active
+          example: true
+      required:
+      - id
+      - email
+      description: Customer model representing a user entity with contact information
+        and status.
+    OrderItem:
+      type: object
+      properties:
+        product_id:
+          type: integer
+          description: Unique identifier of the product being ordered
+          example: 12345
+        quantity:
+          type: integer
+          description: Number of units of the product to order
+          example: 2
+        unit_price:
+          type: number
+          format: float
+          description: Price per unit of the product at the time of ordering
+          example: 19.99
+      required:
+      - product_id
+      description: Represents an item in an order, containing product details and
+        pricing information.
+    Order:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the order.
+          example: 12345
+        customer_id:
+          type: integer
+          description: Unique identifier of the customer who placed the order.
+          example: 67890
+        items:
+          type: array
+          items:
+            type: object
+            ref: OrderItem
+          description: List of items included in the order.
+          example:
+          - product_id: 1
+            quantity: 2
+            price: 29.99
+        total:
+          type: number
+          format: float
+          description: Total cost of the order.
+          example: 59.98
+        note:
+          type: string
+          nullable: true
+          description: Optional note or special instructions for the order.
+          example: Please deliver before 5 PM
+      required:
+      - id
+      - customer_id
+      - items
+      - total
+      description: Represents an order placed by a customer in the system.
+    ItemStatus:
+      type: string
+      enum:
+      - draft
+      - active
+      - archived
+      description: Enumeration representing the status of an item in the system. Defines
+        the possible states an item can be in, such as draft, active, or archived.
+    ItemCreate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name or title of the item being created. This field is
+            optional but recommended for identifying the item.
+          example: Laptop
+        price:
+          type: number
+          format: float
+          description: The price of the item as a floating-point number. Represents
+            the cost in the system's default currency.
+          example: 999.99
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ItemStatus'
+          description: The current status of the item, represented by an ItemStatus
+            object. Indicates the item's state in the system.
+          example: active
+        tags:
+          type: array
+          items:
+            type: string
+          description: An array of string tags for categorizing or labeling the item.
+            Useful for filtering and searching items.
+          example:
+          - electronics
+          - sale
+          - featured
+      description: Pydantic model for creating a new item in the system. This model
+        defines the structure and validation rules for item creation requests.
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the user
+          example: 1
+        email:
+          type: string
+          description: Email address of the user
+          example: user@example.com
+        full_name:
+          type: string
+          nullable: true
+          description: Full name of the user, can be null if not provided
+          example: John Doe
+        is_active:
+          type: boolean
+          description: Indicates whether the user account is active
+          example: true
+      required:
+      - id
+      - email
+      description: User model representing a user entity in the system.
+tags:
+- name: customers
+- name: health
+- name: orders
+- name: products
+- name: api
+x-pyopenapi-warnings:
+- Duplicate operation 'GET /health' from Flask API was skipped.
+- Duplicate schemas entry 'Order' from Flask API was skipped.

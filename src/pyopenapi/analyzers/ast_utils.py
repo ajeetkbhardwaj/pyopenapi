@@ -3,9 +3,9 @@
 from __future__ import annotations
 
 import ast
+from collections.abc import Iterable
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Iterable
 
 _SKIP_DIRS = {
     ".git",
@@ -146,7 +146,7 @@ class ImportMap:
     aliases: dict[str, tuple[str | None, str | None]] = field(default_factory=dict)
 
     @classmethod
-    def from_tree(cls, tree: ast.Module) -> "ImportMap":
+    def from_tree(cls, tree: ast.Module) -> ImportMap:
         result = cls()
         for node in ast.walk(tree):
             if isinstance(node, ast.ImportFrom):

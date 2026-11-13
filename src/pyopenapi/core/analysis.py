@@ -8,7 +8,8 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
-from ..analyzers import AnalysisOptions, analyze as run_analyzer
+from ..analyzers import AnalysisOptions
+from ..analyzers import analyze as run_analyzer
 from ..config import Settings, get_settings
 from ..detection import detect_framework
 from ..errors import (

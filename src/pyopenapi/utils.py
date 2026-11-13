@@ -11,9 +11,10 @@ import re
 import sys
 import tempfile
 import time
+from collections.abc import Iterator
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Iterator
+from typing import Any
 
 try:  # POSIX only
     import fcntl
@@ -202,9 +203,9 @@ def file_lock(path: Path, *, timeout: float = 900.0, poll: float = 0.25) -> Iter
             try:
                 fcntl.flock(fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
                 break
-            except OSError:
+            except OSError as exc:
                 if time.monotonic() >= deadline:
-                    raise TimeoutError(f"Timed out waiting for lock: {path}")
+                    raise TimeoutError(f"Timed out waiting for lock: {path}") from exc
                 time.sleep(poll)
         yield
     finally:

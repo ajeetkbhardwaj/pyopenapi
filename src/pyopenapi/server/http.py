@@ -132,30 +132,58 @@ class HttpGuardMiddleware:
                 )
                 return
 
+        body_messages: list[dict[str, Any]] = []
         received = 0
         max_bytes = self.settings.max_request_bytes
         too_large = False
+        disconnected = False
 
-        async def limited_receive():
-            nonlocal received, too_large
+        while True:
             message = await receive()
             if message["type"] == "http.request":
                 received += len(message.get("body", b""))
                 if max_bytes and received > max_bytes:
                     too_large = True
-                    return {"type": "http.disconnect"}
-            return message
+                    # Drain remaining body so the connection stays well-defined.
+                    while message.get("more_body", False):
+                        message = await receive()
+                        if message["type"] != "http.request":
+                            break
+                    break
+                body_messages.append(message)
+                if not message.get("more_body", False):
+                    break
+                continue
+            if message["type"] == "http.disconnect":
+                disconnected = True
+                break
+            body_messages.append(message)
 
-        async def guarded_send(message):
-            if too_large and message["type"] == "http.response.start":
-                increment("http_request_too_large_total")
-                response = JSONResponse(
-                    {"error": "request_too_large", "message": "Request body limit exceeded."},
-                    status_code=413,
-                )
-                await response(scope, receive, send)
-                return
-            await send(message)
+        if disconnected:
+            return
+        if too_large:
+            increment("http_request_too_large_total")
+            await respond(
+                413,
+                {
+                    "error": "request_too_large",
+                    "message": (
+                        f"Request body exceeds {human_bytes(self.settings.max_request_bytes)}."
+                    ),
+                },
+            )
+            return
+
+        replay_index = 0
+
+        async def replay_receive() -> dict[str, Any]:
+            nonlocal replay_index
+            if replay_index < len(body_messages):
+                message = body_messages[replay_index]
+                replay_index += 1
+                return message
+            # After buffered request messages, forward live events (e.g. disconnect).
+            return await receive()
 
         status_code = 500
 
@@ -163,17 +191,17 @@ class HttpGuardMiddleware:
             nonlocal status_code
             if message["type"] == "http.response.start":
                 status_code = int(message.get("status", 500))
-            await guarded_send(message)
+            await send(message)
 
         try:
             timeout = self.settings.request_timeout_seconds
             if timeout and timeout > 0:
                 await asyncio.wait_for(
-                    self.app(scope, limited_receive, status_send),
+                    self.app(scope, replay_receive, status_send),
                     timeout=timeout,
                 )
             else:
-                await self.app(scope, limited_receive, status_send)
+                await self.app(scope, replay_receive, status_send)
         except asyncio.TimeoutError:
             increment("http_timeouts_total")
             await respond(
@@ -249,10 +277,11 @@ def build_http_app(mcp, *, transport: str, settings: Settings) -> Starlette:
         # A StreamableHTTPSessionManager can only be started once. Build a
         # fresh manager per app so repeated app construction (tests, reloads)
         # does not reuse an already-started manager.
-        mcp._session_manager = None  # noqa: SLF001
+        mcp._session_manager = None
         inner = mcp.streamable_http_app()
         manager = mcp.session_manager
-        lifespan = lambda app: manager.run()
+        def lifespan(app):
+            return manager.run()
 
     routes = []
     if settings.enable_health_endpoints:

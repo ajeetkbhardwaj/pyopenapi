@@ -67,10 +67,40 @@ def find_knowl_root() -> Path:
     )
 
 
+def _analyzer_dirs() -> list[Path]:
+    """Locate installed analyzer modules via the import system."""
+
+    import importlib.util
+
+    dirs: list[Path] = []
+    for module in ("django_analyzer", "python_analyzer"):
+        try:
+            spec = importlib.util.find_spec(module)
+        except (ImportError, ValueError):
+            continue
+        if spec and spec.origin:
+            try:
+                dirs.append(Path(spec.origin).resolve().parent)
+            except OSError:
+                continue
+    return dirs
+
+
 def ensure_knowl_on_path() -> Path:
     """Insert the repository (and ``genapidocs_v2``) into ``sys.path``."""
 
-    root = find_knowl_root()
+    try:
+        root = find_knowl_root()
+    except KnowlRootNotFound:
+        analyzer_dirs = _analyzer_dirs()
+        if not analyzer_dirs:
+            raise
+        for entry in analyzer_dirs:
+            value = str(entry)
+            if value not in sys.path:
+                sys.path.insert(0, value)
+        return analyzer_dirs[0]
+
     for entry in (root, root / "genapidocs_v2"):
         value = str(entry)
         if value not in sys.path:
@@ -79,35 +109,37 @@ def ensure_knowl_on_path() -> Path:
 
 
 def load_env() -> Path | None:
-    """Load ``.env`` from the repository root and the current directory."""
+    """Load a ``.env`` file into ``os.environ`` without overriding real env vars.
 
-    loaded: Path | None = None
+    Precedence: ``PYOPENAPI_ENV_FILE`` if set, then ``./.env``, then the
+    repository/package-root ``.env``. Returns the file that was loaded.
+    """
+
     try:
         from dotenv import load_dotenv
-    except Exception:  # pragma: no cover
+    except Exception:
         return None
 
-    try:
-        root = find_knowl_root()
-        env_file = root / ".env"
-        if env_file.is_file():
-            load_dotenv(env_file, override=False)
-            loaded = env_file
-    except KnowlRootNotFound:
-        pass
+    candidates: list[Path] = []
+    override = os.getenv("PYOPENAPI_ENV_FILE")
+    if override:
+        candidates.append(Path(override).expanduser())
+    else:
+        candidates.append(Path.cwd() / ".env")
+        candidates.append(Path(__file__).resolve().parents[2] / ".env")
 
-    # Editable/source layout: src/pyopenapi/bootstrap.py -> project root.
-    try:
-        project_env = Path(__file__).resolve().parents[2] / ".env"
-    except IndexError:  # pragma: no cover - defensive
-        project_env = None
-    if project_env and project_env.is_file():
-        load_dotenv(project_env, override=False)
-        loaded = loaded or project_env
-
-    cwd_env = Path.cwd() / ".env"
-    if cwd_env.is_file():
-        load_dotenv(cwd_env, override=False)
-        loaded = loaded or cwd_env
-
-    return loaded
+    seen: set[Path] = set()
+    for candidate in candidates:
+        try:
+            resolved = candidate.resolve()
+        except OSError:
+            continue
+        if resolved in seen or not resolved.is_file():
+            continue
+        seen.add(resolved)
+        try:
+            load_dotenv(resolved, override=False)
+        except Exception:
+            continue
+        return resolved
+    return None

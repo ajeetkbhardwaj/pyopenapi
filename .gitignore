@@ -15,5 +15,4 @@ htmlcov/
 *.log
 .pyopenapi/
 .knowl_logs2/
-.env
-.env.example
+.mini-router/

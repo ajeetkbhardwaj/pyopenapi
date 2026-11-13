@@ -315,8 +315,8 @@ def _collect_parameters(
 
     args = [*node.args.args, *node.args.kwonlyargs]
     defaults: list[ast.AST | None] = [None] * (len(args) - len(node.args.defaults)) + list(node.args.defaults)
-    default_by_name = {arg.arg: default for arg, default in zip(args, defaults)}
-    for arg, default in zip(node.args.kwonlyargs, node.args.kw_defaults):
+    default_by_name = {arg.arg: default for arg, default in zip(args, defaults, strict=False)}
+    for arg, default in zip(node.args.kwonlyargs, node.args.kw_defaults, strict=False):
         default_by_name[arg.arg] = default
 
     for arg in args:
@@ -325,7 +325,7 @@ def _collect_parameters(
             continue
         annotation = arg.annotation
         default = default_by_name.get(name)
-        location, inner, required, dependency, metadata = _param_details(name, annotation, default)
+        location, inner, required, dependency, _metadata = _param_details(name, annotation, default)
 
         if location == "skip":
             continue

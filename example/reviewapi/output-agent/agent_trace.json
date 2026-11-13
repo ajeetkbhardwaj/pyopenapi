@@ -1,0 +1,2132 @@
+{
+  "trace_id": "c20189aa-3ab1-4cd0-a9d8-238e0e3772b7",
+  "analysis_id": "9d2d60fd3cf5fe24",
+  "project_path": "/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi",
+  "framework": "django",
+  "engine": "agent",
+  "provider": "router",
+  "model": null,
+  "prompt_version": null,
+  "started_at": "2026-11-12T18:01:43+00:00",
+  "completed_at": "2026-11-12T18:02:29+00:00",
+  "duration_ms": 45750,
+  "status": "completed",
+  "stages": [
+    {
+      "stage": "detector",
+      "started_at": "2026-11-12T18:01:43+00:00",
+      "completed_at": "2026-11-12T18:01:48+00:00",
+      "duration_ms": 4436,
+      "item_count": 1,
+      "success_count": 1,
+      "failure_count": 0,
+      "fallback_count": 0,
+      "errors": [],
+      "metadata": {}
+    },
+    {
+      "stage": "endpoint",
+      "started_at": "2026-11-12T18:01:48+00:00",
+      "completed_at": "2026-11-12T18:02:13+00:00",
+      "duration_ms": 25452,
+      "item_count": 16,
+      "success_count": 16,
+      "failure_count": 0,
+      "fallback_count": 0,
+      "errors": [],
+      "metadata": {}
+    },
+    {
+      "stage": "component",
+      "started_at": "2026-11-12T18:02:13+00:00",
+      "completed_at": "2026-11-12T18:02:29+00:00",
+      "duration_ms": 15828,
+      "item_count": 12,
+      "success_count": 12,
+      "failure_count": 0,
+      "fallback_count": 0,
+      "errors": [],
+      "metadata": {}
+    },
+    {
+      "stage": "assembly",
+      "started_at": "2026-11-12T18:02:29+00:00",
+      "completed_at": "2026-11-12T18:02:29+00:00",
+      "duration_ms": 0,
+      "item_count": 0,
+      "success_count": 1,
+      "failure_count": 0,
+      "fallback_count": 0,
+      "errors": [],
+      "metadata": {}
+    },
+    {
+      "stage": "validation",
+      "started_at": "2026-11-12T18:02:29+00:00",
+      "completed_at": "2026-11-12T18:02:29+00:00",
+      "duration_ms": 0,
+      "item_count": 0,
+      "success_count": 1,
+      "failure_count": 0,
+      "fallback_count": 0,
+      "errors": [],
+      "metadata": {}
+    },
+    {
+      "stage": "quality",
+      "started_at": "2026-11-12T18:02:29+00:00",
+      "completed_at": "2026-11-12T18:02:29+00:00",
+      "duration_ms": 0,
+      "item_count": 0,
+      "success_count": 1,
+      "failure_count": 0,
+      "fallback_count": 0,
+      "errors": [],
+      "metadata": {
+        "score": 0.873
+      }
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "stage": "detector",
+      "item_id": "7cbb2d642cd53deb",
+      "provider": "router",
+      "model": "poolside/laguna-xs-2.1",
+      "prompt_version": "2026-11-11.1",
+      "prompt_hash": "d31180b74204e1798c57",
+      "input_summary": {
+        "system_prompt": "You are a precise API metadata editor. You receive a normalized project summary. Return one JSON object and no prose. Infer only what the evidence supports. Never invent endpoints or schemas. Keep the title short and the description factual.",
+        "prompt": "{\"task\":\"Infer API title, description and top-level tags.\",\"response_shape\":{\"title\":\"short API title\",\"description\":\"1-3 sentences\",\"version\":\"0.1.0\",\"tags\":[\"tag\"],\"confidence\":0.0},\"project\":{\"framework\":\"django\",\"project_path\":\"/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi\",\"endpoints\":[{\"path\":\"/admin\",\"methods\":[\"get\"],\"tags\":[\"admin\"]},{\"path\":\"/api/v2/advanced-products/\",\"methods\":[\"get\",\"post\"],\"tags\":[\"api\"]},{\"path\":\"/api/v2/advanced-products/special_offers/\",\"methods\":[\"get\"],\"tags\":[\"api\"]},{\"path\":\"/api/v2/advanced-products/{pk}/\",\"methods\":[\"delete\",\"get\",\"patch\",\"put\"],\"tags\":[\"api\"]},{\"path\":\"/api/v2/advanced-products/{pk}/get_competitors/\",\"methods\":[\"get\"],\"tags\":[\"api\"]},{\"path\":\"/api/v2/categories/\",\"methods\":[\"get\",\"post\"],\"tags\":[\"api\"]},{\"path\":\"/api/v2/categories/{pk}/\",\"methods\":[\"delete\",\"get\",\"patch\",\"put\"],\"tags\":[\"api\"]},{\"path\":\"/api/v2/categories/{pk}/list_products/\",\"methods\":[\"get\"],\"tags\":[\"api\"]},{\"path\":\"/api/v2/manufacturers/\",\"methods\":[\"get\"],\"tags\":[\"api\"]},{\"path\":\"/api/v2/manufacturers/{pk}/\",\"methods\":[\"get\"],\"tags\":[\"api\"]},{\"path\":\"/api/v2/products/\",\"methods\":[\"get\",\"post\"],\"tags\":[\"api\"]},{\"path\":\"/api/v2/products/top_products/\",\"methods\":[\"get\"],\"tags\":[\"api\"]},{\"path\":\"/api/v2/products/{pk}/\",\"methods\":[\"delete\",\"get\",\"patch\",\"put\"],\"tags\":[\"api\"]},{\"path\":\"/api/v2/reviews/\",\"methods\":[\"get\",\"post\"],\"tags\":[\"api\"]},{\"path\":\"/api/v2/reviews/{pk}/\",\"methods\":[\"delete\",\"get\",\"patch\",\"put\"]"
+      },
+      "output_summary": {
+        "title": "Review API",
+        "description": "A Django-based API for managing products, categories, manufacturers, reviews, and suppliers. Provides CRUD operations for core entities and specialized endpoints for product insights and review interactions.",
+        "version": "0.1.0",
+        "tags": [
+          "admin",
+          "api"
+        ],
+        "confidence": 0.9
+      },
+      "prompt_tokens": 628,
+      "completion_tokens": 84,
+      "total_tokens": 712,
+      "cost_usd": 0.0,
+      "latency_ms": 4411,
+      "valid": true,
+      "errors": [],
+      "fallback_used": false,
+      "confidence": 0.9,
+      "metadata": {
+        "framework": "django",
+        "router_model": "nvidia-fast",
+        "attempts": 1
+      }
+    },
+    {
+      "attempt": 1,
+      "stage": "endpoint",
+      "item_id": "3d032a4229870871",
+      "provider": "router",
+      "model": "poolside/laguna-xs-2.1",
+      "prompt_version": "2026-11-11.1",
+      "prompt_hash": "b9bde6e46c859b373a5f",
+      "input_summary": {
+        "system_prompt": "You are a precise API specification editor. You receive a normalized endpoint extracted from source code. Return one JSON object and no prose. Never invent paths, methods, parameters, schemas or response codes. Only improve human-facing text: summaries, descriptions, parameter descriptions, request/response descriptions and tags. Preserve every structural field. If evidence is insufficient, keep text generic and lower confidence.",
+        "prompt": "{\"task\":\"Improve endpoint documentation text.\",\"response_shape\":{\"operations\":{\"<method>\":{\"summary\":\"short summary\",\"description\":\"1-3 sentences\",\"tags\":[\"tag\"],\"parameters\":{\"<name>\":{\"description\":\"text\"}},\"request_description\":\"text\",\"responses\":{\"<status>\":{\"description\":\"text\"}}}},\"confidence\":0.0},\"endpoint\":{\"endpoint_id\":\"3d032a4229870871\",\"framework\":\"django\",\"path\":\"/admin\",\"operations\":[{\"method\":\"get\",\"operation_id\":\"get_admin\",\"summary\":\"urls\",\"tags\":[\"admin\"],\"parameters\":[],\"responses\":[{\"status\":\"200\",\"description\":\"Successful response\",\"many\":false,\"content_type\":\"application/json\",\"schema_data\":{},\"metadata\":{}}],\"security\":[],\"security_schemes\":{},\"deprecated\":false,\"source_refs\":[{\"symbol\":\"urls\",\"metadata\":{}}],\"confidence\":{\"score\":1.0,\"source\":\"static\"},\"metadata\":{}}],\"tags\":[\"admin\"],\"source_refs\":[{\"symbol\":\"urls\",\"metadata\":{}}],\"confidence\":{\"score\":1.0,\"source\":\"static\"},\"metadata\":{}}}"
+      },
+      "output_summary": {
+        "operations": {
+          "get": {
+            "summary": "Admin dashboard",
+            "description": "Renders the Django admin interface for managing application data. Requires authentication and appropriate permissions to access administrative functions.",
+            "tags": [
+              "admin"
+            ],
+            "parameters": {
+              "request_description": "No parameters required.",
+              "responses": {
+                "200": {
+                  "description": "Successful response - renders the admin dashboard interface with navigation and management options."
+                }
+              }
+            },
+            "confidence": 0.0
+          },
+          "post": {
+            "summary": "Admin action handler",
+            "description": "Processes administrative actions submitted through the admin interface. Handles form submissions for creating, updating, or deleting managed objects.",
+            "tags": [
+              "admin"
+            ],
+            "parameters": {
+              "request_description": "Accepts POST data containing admin action parameters and form submissions.",
+              "responses": {
+                "200": {
+                  "description": "Successful response - confirms the admin action was processed and redirects or renders appropriate content."
+                }
+              }
+            },
+            "confidence": 0.0
+          }
+        },
+        "confidence": 0.0
+      },
+      "prompt_tokens": 323,
+      "completion_tokens": 175,
+      "total_tokens": 498,
+      "cost_usd": 0.0,
+      "latency_ms": 2786,
+      "valid": true,
+      "errors": [],
+      "fallback_used": false,
+      "confidence": 0.0,
+      "metadata": {
+        "path": "/admin",
+        "framework": "django",
+        "router_model": "nvidia-fast",
+        "attempts": 1
+      }
+    },
+    {
+      "attempt": 1,
+      "stage": "endpoint",
+      "item_id": "20ebbc173dcbe524",
+      "provider": "router",
+      "model": "poolside/laguna-xs-2.1",
+      "prompt_version": "2026-11-11.1",
+      "prompt_hash": "415645857668e69c31bc",
+      "input_summary": {
+        "system_prompt": "You are a precise API specification editor. You receive a normalized endpoint extracted from source code. Return one JSON object and no prose. Never invent paths, methods, parameters, schemas or response codes. Only improve human-facing text: summaries, descriptions, parameter descriptions, request/response descriptions and tags. Preserve every structural field. If evidence is insufficient, keep text generic and lower confidence.",
+        "prompt": "{\"task\":\"Improve endpoint documentation text.\",\"response_shape\":{\"operations\":{\"<method>\":{\"summary\":\"short summary\",\"description\":\"1-3 sentences\",\"tags\":[\"tag\"],\"parameters\":{\"<name>\":{\"description\":\"text\"}},\"request_description\":\"text\",\"responses\":{\"<status>\":{\"description\":\"text\"}}}},\"confidence\":0.0},\"endpoint\":{\"endpoint_id\":\"20ebbc173dcbe524\",\"framework\":\"django\",\"path\":\"/api/v2/categories/\",\"operations\":[{\"method\":\"get\",\"operation_id\":\"get_api_v2_categories\",\"summary\":\"CategoryViewSet.list\",\"tags\":[\"api\"],\"parameters\":[],\"responses\":[{\"status\":\"200\",\"description\":\"Successful response\",\"model_ref\":\"CategorySerializer\",\"many\":true,\"content_type\":\"application/json\",\"schema_data\":{},\"metadata\":{}}],\"security\":[],\"security_schemes\":{},\"deprecated\":false,\"source_refs\":[{\"path\":\"/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi/reviews/views.py\",\"symbol\":\"list\",\"metadata\":{}}],\"confidence\":{\"score\":1.0,\"source\":\"static\"},\"metadata\":{\"is_viewset\":true,\"response_serializer\":\"CategorySerializer\",\"response_many\":true}},{\"method\":\"post\",\"operation_id\":\"post_api_v2_categories\",\"summary\":\"CategoryViewSet.create\",\"tags\":[\"api\"],\"parameters\":[],\"request\":{\"model_ref\":\"CategorySerializer\",\"required\":true,\"content_type\":\"application/json\",\"schema_data\":{},\"metadata\":{}},\"responses\":[{\"status\":\"201\",\"description\":\"Successful response\",\"model_ref\":\"CategorySerializer\",\"many\":false,\"content_type\":\"application/json\",\"schema_data\":{},\"metadata\":{}}],\"secu"
+      },
+      "output_summary": {
+        "operations": {
+          "get": {
+            "summary": "List all categories",
+            "description": "Returns a paginated list of all available categories in the system.",
+            "tags": [
+              "api"
+            ],
+            "parameters": {},
+            "request_description": "No request body required.",
+            "responses": {
+              "200": {
+                "description": "Successful response with a list of category objects.",
+                "model_ref": "CategorySerializer",
+                "many": true,
+                "content_type": "application/json"
+              }
+            }
+          },
+          "post": {
+            "summary": "Create a new category",
+            "description": "Creates a new category using the provided data. Returns the created category object on success.",
+            "tags": [
+              "api"
+            ],
+            "parameters": {},
+            "request_description": "Category data to create a new category.",
+            "responses": {
+              "201": {
+                "description": "Successful response with the created category object.",
+                "model_ref": "CategorySerializer",
+                "many": false,
+                "content_type": "application/json"
+              }
+            }
+          }
+        },
+        "confidence": 0.8
+      },
+      "prompt_tokens": 636,
+      "completion_tokens": 171,
+      "total_tokens": 807,
+      "cost_usd": 0.0,
+      "latency_ms": 2045,
+      "valid": true,
+      "errors": [],
+      "fallback_used": false,
+      "confidence": 0.8,
+      "metadata": {
+        "path": "/api/v2/categories/",
+        "framework": "django",
+        "router_model": "nvidia-fast",
+        "attempts": 1
+      }
+    },
+    {
+      "attempt": 1,
+      "stage": "endpoint",
+      "item_id": "0433f95ea671d153",
+      "provider": "router",
+      "model": "poolside/laguna-xs-2.1",
+      "prompt_version": "2026-11-11.1",
+      "prompt_hash": "59540ce8186dd85a5c53",
+      "input_summary": {
+        "system_prompt": "You are a precise API specification editor. You receive a normalized endpoint extracted from source code. Return one JSON object and no prose. Never invent paths, methods, parameters, schemas or response codes. Only improve human-facing text: summaries, descriptions, parameter descriptions, request/response descriptions and tags. Preserve every structural field. If evidence is insufficient, keep text generic and lower confidence.",
+        "prompt": "{\"task\":\"Improve endpoint documentation text.\",\"response_shape\":{\"operations\":{\"<method>\":{\"summary\":\"short summary\",\"description\":\"1-3 sentences\",\"tags\":[\"tag\"],\"parameters\":{\"<name>\":{\"description\":\"text\"}},\"request_description\":\"text\",\"responses\":{\"<status>\":{\"description\":\"text\"}}}},\"confidence\":0.0},\"endpoint\":{\"endpoint_id\":\"0433f95ea671d153\",\"framework\":\"django\",\"path\":\"/api/v2/advanced-products/\",\"operations\":[{\"method\":\"get\",\"operation_id\":\"get_api_v2_advanced_products\",\"summary\":\"AdvancedProductViewSet.list\",\"tags\":[\"api\"],\"parameters\":[],\"responses\":[{\"status\":\"200\",\"description\":\"Successful response\",\"model_ref\":\"AdvancedProductSerializer\",\"many\":true,\"content_type\":\"application/json\",\"schema_data\":{},\"metadata\":{}}],\"security\":[],\"security_schemes\":{},\"deprecated\":false,\"source_refs\":[{\"path\":\"/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi/reviews/views.py\",\"symbol\":\"list\",\"metadata\":{}}],\"confidence\":{\"score\":1.0,\"source\":\"static\"},\"metadata\":{\"is_viewset\":true,\"response_serializer\":\"AdvancedProductSerializer\",\"response_many\":true}},{\"method\":\"post\",\"operation_id\":\"post_api_v2_advanced_products\",\"summary\":\"AdvancedProductViewSet.create\",\"tags\":[\"api\"],\"parameters\":[],\"request\":{\"model_ref\":\"AdvancedProductSerializer\",\"required\":true,\"content_type\":\"application/json\",\"schema_data\":{},\"metadata\":{}},\"responses\":[{\"status\":\"201\",\"description\":\"Successful response\",\"model_ref\":\"AdvancedProductSerializer\",\"many\":false,\"content_"
+      },
+      "output_summary": {
+        "operations": {
+          "get": {
+            "summary": "List all advanced products",
+            "description": "Returns a paginated list of advanced products available in the system. Use this endpoint to retrieve product information including details, specifications, and metadata for all advanced products.",
+            "tags": [
+              "api"
+            ],
+            "parameters": {},
+            "request_description": "No request body required for GET requests.",
+            "responses": {
+              "200": {
+                "description": "Successful response with a list of advanced products"
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Create a new advanced product",
+          "description": "Creates a new advanced product in the system. Requires a valid product payload in the request body. Returns the created product with its assigned identifier and details.",
+          "tags": [
+            "api"
+          ],
+          "parameters": {},
+          "request_description": "Advanced product data including name, description, specifications, and other product attributes required for creation.",
+          "responses": {
+            "201": {
+              "description": "Successful response with the created advanced product object"
+            }
+          }
+        }
+      },
+      "prompt_tokens": 650,
+      "completion_tokens": 179,
+      "total_tokens": 829,
+      "cost_usd": 0.0,
+      "latency_ms": 5613,
+      "valid": true,
+      "errors": [],
+      "fallback_used": false,
+      "confidence": null,
+      "metadata": {
+        "path": "/api/v2/advanced-products/",
+        "framework": "django",
+        "router_model": "nvidia-fast",
+        "attempts": 1
+      }
+    },
+    {
+      "attempt": 1,
+      "stage": "endpoint",
+      "item_id": "de08ad33108b57b8",
+      "provider": "router",
+      "model": "poolside/laguna-xs-2.1",
+      "prompt_version": "2026-11-11.1",
+      "prompt_hash": "a569391571641a8e063c",
+      "input_summary": {
+        "system_prompt": "You are a precise API specification editor. You receive a normalized endpoint extracted from source code. Return one JSON object and no prose. Never invent paths, methods, parameters, schemas or response codes. Only improve human-facing text: summaries, descriptions, parameter descriptions, request/response descriptions and tags. Preserve every structural field. If evidence is insufficient, keep text generic and lower confidence.",
+        "prompt": "{\"task\":\"Improve endpoint documentation text.\",\"response_shape\":{\"operations\":{\"<method>\":{\"summary\":\"short summary\",\"description\":\"1-3 sentences\",\"tags\":[\"tag\"],\"parameters\":{\"<name>\":{\"description\":\"text\"}},\"request_description\":\"text\",\"responses\":{\"<status>\":{\"description\":\"text\"}}}},\"confidence\":0.0},\"endpoint\":{\"endpoint_id\":\"de08ad33108b57b8\",\"framework\":\"django\",\"path\":\"/api/v2/advanced-products/{pk}/get_competitors/\",\"operations\":[{\"method\":\"get\",\"operation_id\":\"get_api_v2_advanced_products_pk_get_competitors\",\"summary\":\"AdvancedProductViewSet.get_competitors\",\"tags\":[\"api\"],\"parameters\":[{\"name\":\"pk\",\"location\":\"path\",\"required\":true,\"type\":\"string\",\"schema_data\":{\"type\":\"string\"},\"metadata\":{}}],\"responses\":[{\"status\":\"200\",\"description\":\"Successful response\",\"model_ref\":\"AdvancedProductSerializer\",\"many\":false,\"content_type\":\"application/json\",\"schema_data\":{},\"metadata\":{}}],\"security\":[],\"security_schemes\":{},\"deprecated\":false,\"source_refs\":[{\"path\":\"/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi/reviews/views.py\",\"symbol\":\"get_competitors\",\"metadata\":{}}],\"confidence\":{\"score\":1.0,\"source\":\"static\"},\"metadata\":{\"is_viewset\":true,\"response_serializer\":\"AdvancedProductSerializer\"}}],\"tags\":[\"api\"],\"source_refs\":[{\"path\":\"/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi/reviews/views.py\",\"symbol\":\"get_competitors\",\"metadata\":{}}],\"confidence\":{\"score\":1.0,\"source\":\"static\"},\"metadata\":{}"
+      },
+      "output_summary": {
+        "operations": {
+          "get": {
+            "summary": "Retrieve competitors for an advanced product",
+            "description": "Returns a list of competitors associated with the specified advanced product. This endpoint provides competitive intelligence data for products in the advanced category.",
+            "tags": [
+              "api"
+            ],
+            "parameters": {
+              "pk": {
+                "description": "Unique identifier of the advanced product to retrieve competitors for"
+              }
+            },
+            "request_description": "No request body required. This is a read-only endpoint that retrieves competitor information for an existing product.",
+            "responses": {
+              "200": {
+                "description": "Successfully retrieved the list of competitors for the specified advanced product"
+              }
+            }
+          }
+        },
+        "confidence": 0.0
+      },
+      "prompt_tokens": 463,
+      "completion_tokens": 118,
+      "total_tokens": 581,
+      "cost_usd": 0.0,
+      "latency_ms": 6131,
+      "valid": true,
+      "errors": [],
+      "fallback_used": false,
+      "confidence": 0.0,
+      "metadata": {
+        "path": "/api/v2/advanced-products/{pk}/get_competitors/",
+        "framework": "django",
+        "router_model": "nvidia-fast",
+        "attempts": 1
+      }
+    },
+    {
+      "attempt": 1,
+      "stage": "endpoint",
+      "item_id": "1c7d47993bda2da2",
+      "provider": "router",
+      "model": "poolside/laguna-xs-2.1",
+      "prompt_version": "2026-11-11.1",
+      "prompt_hash": "d4173e91636310428d54",
+      "input_summary": {
+        "system_prompt": "You are a precise API specification editor. You receive a normalized endpoint extracted from source code. Return one JSON object and no prose. Never invent paths, methods, parameters, schemas or response codes. Only improve human-facing text: summaries, descriptions, parameter descriptions, request/response descriptions and tags. Preserve every structural field. If evidence is insufficient, keep text generic and lower confidence.",
+        "prompt": "{\"task\":\"Improve endpoint documentation text.\",\"response_shape\":{\"operations\":{\"<method>\":{\"summary\":\"short summary\",\"description\":\"1-3 sentences\",\"tags\":[\"tag\"],\"parameters\":{\"<name>\":{\"description\":\"text\"}},\"request_description\":\"text\",\"responses\":{\"<status>\":{\"description\":\"text\"}}}},\"confidence\":0.0},\"endpoint\":{\"endpoint_id\":\"1c7d47993bda2da2\",\"framework\":\"django\",\"path\":\"/api/v2/advanced-products/special_offers/\",\"operations\":[{\"method\":\"get\",\"operation_id\":\"get_api_v2_advanced_products_special_offers\",\"summary\":\"AdvancedProductViewSet.special_offers\",\"tags\":[\"api\"],\"parameters\":[],\"responses\":[{\"status\":\"200\",\"description\":\"Successful response\",\"model_ref\":\"AdvancedProductSerializer\",\"many\":false,\"content_type\":\"application/json\",\"schema_data\":{},\"metadata\":{}}],\"security\":[],\"security_schemes\":{},\"deprecated\":false,\"source_refs\":[{\"path\":\"/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi/reviews/views.py\",\"symbol\":\"special_offers\",\"metadata\":{}}],\"confidence\":{\"score\":1.0,\"source\":\"static\"},\"metadata\":{\"is_viewset\":true,\"response_serializer\":\"AdvancedProductSerializer\"}}],\"tags\":[\"api\"],\"source_refs\":[{\"path\":\"/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi/reviews/views.py\",\"symbol\":\"special_offers\",\"metadata\":{}}],\"confidence\":{\"score\":1.0,\"source\":\"static\"},\"metadata\":{}}}"
+      },
+      "output_summary": {
+        "operations": {
+          "get": {
+            "summary": "Retrieve special offers for advanced products",
+            "description": "Returns a list of special offers available for advanced products. This endpoint provides access to promotional offers and discounts on premium product offerings.",
+            "tags": [
+              "api"
+            ],
+            "parameters": {},
+            "request_description": "No request body required. This is a read-only endpoint that returns special offers data.",
+            "responses": {
+              "200": {
+                "description": "Successfully retrieved special offers list"
+              }
+            }
+          }
+        },
+        "confidence": 0.8
+      },
+      "prompt_tokens": 426,
+      "completion_tokens": 145,
+      "total_tokens": 571,
+      "cost_usd": 0.0,
+      "latency_ms": 6377,
+      "valid": true,
+      "errors": [],
+      "fallback_used": false,
+      "confidence": 0.8,
+      "metadata": {
+        "path": "/api/v2/advanced-products/special_offers/",
+        "framework": "django",
+        "router_model": "nvidia-fast",
+        "attempts": 1
+      }
+    },
+    {
+      "attempt": 1,
+      "stage": "endpoint",
+      "item_id": "db0798ffc286e859",
+      "provider": "router",
+      "model": "poolside/laguna-xs-2.1",
+      "prompt_version": "2026-11-11.1",
+      "prompt_hash": "e964c3c9ac3052706b3e",
+      "input_summary": {
+        "system_prompt": "You are a precise API specification editor. You receive a normalized endpoint extracted from source code. Return one JSON object and no prose. Never invent paths, methods, parameters, schemas or response codes. Only improve human-facing text: summaries, descriptions, parameter descriptions, request/response descriptions and tags. Preserve every structural field. If evidence is insufficient, keep text generic and lower confidence.",
+        "prompt": "{\"task\":\"Improve endpoint documentation text.\",\"response_shape\":{\"operations\":{\"<method>\":{\"summary\":\"short summary\",\"description\":\"1-3 sentences\",\"tags\":[\"tag\"],\"parameters\":{\"<name>\":{\"description\":\"text\"}},\"request_description\":\"text\",\"responses\":{\"<status>\":{\"description\":\"text\"}}}},\"confidence\":0.0},\"endpoint\":{\"endpoint_id\":\"db0798ffc286e859\",\"framework\":\"django\",\"path\":\"/api/v2/categories/{pk}/list_products/\",\"operations\":[{\"method\":\"get\",\"operation_id\":\"get_api_v2_categories_pk_list_products\",\"summary\":\"CategoryViewSet.list_products\",\"tags\":[\"api\"],\"parameters\":[{\"name\":\"pk\",\"location\":\"path\",\"required\":true,\"type\":\"string\",\"schema_data\":{\"type\":\"string\"},\"metadata\":{}}],\"responses\":[{\"status\":\"200\",\"description\":\"Successful response\",\"model_ref\":\"CategorySerializer\",\"many\":false,\"content_type\":\"application/json\",\"schema_data\":{},\"metadata\":{}}],\"security\":[],\"security_schemes\":{},\"deprecated\":false,\"source_refs\":[{\"path\":\"/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi/reviews/views.py\",\"symbol\":\"list_products\",\"metadata\":{}}],\"confidence\":{\"score\":1.0,\"source\":\"static\"},\"metadata\":{\"is_viewset\":true,\"response_serializer\":\"CategorySerializer\"}}],\"tags\":[\"api\"],\"source_refs\":[{\"path\":\"/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi/reviews/views.py\",\"symbol\":\"list_products\",\"metadata\":{}}],\"confidence\":{\"score\":1.0,\"source\":\"static\"},\"metadata\":{}}}"
+      },
+      "output_summary": {
+        "operations": {
+          "get": {
+            "summary": "List products in a category",
+            "description": "Returns a list of products belonging to the specified category. Use this endpoint to retrieve all products associated with a particular category by its unique identifier.",
+            "tags": [
+              "api"
+            ],
+            "parameters": {
+              "pk": {
+                "description": "Unique identifier of the category to retrieve products for"
+              }
+            },
+            "request_description": "No request body required. This endpoint accepts only the category ID as a path parameter.",
+            "responses": {
+              "200": {
+                "description": "Successful response containing the category details with associated products",
+                "model_ref": "CategorySerializer",
+                "many": false,
+                "content_type": "application/json"
+              }
+            }
+          }
+        },
+        "confidence": 0.0
+      },
+      "prompt_tokens": 447,
+      "completion_tokens": 130,
+      "total_tokens": 577,
+      "cost_usd": 0.0,
+      "latency_ms": 3422,
+      "valid": true,
+      "errors": [],
+      "fallback_used": false,
+      "confidence": 0.0,
+      "metadata": {
+        "path": "/api/v2/categories/{pk}/list_products/",
+        "framework": "django",
+        "router_model": "nvidia-fast",
+        "attempts": 1
+      }
+    },
+    {
+      "attempt": 1,
+      "stage": "endpoint",
+      "item_id": "a19c52435ec64203",
+      "provider": "router",
+      "model": "poolside/laguna-xs-2.1",
+      "prompt_version": "2026-11-11.1",
+      "prompt_hash": "f36894b5c062cea53373",
+      "input_summary": {
+        "system_prompt": "You are a precise API specification editor. You receive a normalized endpoint extracted from source code. Return one JSON object and no prose. Never invent paths, methods, parameters, schemas or response codes. Only improve human-facing text: summaries, descriptions, parameter descriptions, request/response descriptions and tags. Preserve every structural field. If evidence is insufficient, keep text generic and lower confidence.",
+        "prompt": "{\"task\":\"Improve endpoint documentation text.\",\"response_shape\":{\"operations\":{\"<method>\":{\"summary\":\"short summary\",\"description\":\"1-3 sentences\",\"tags\":[\"tag\"],\"parameters\":{\"<name>\":{\"description\":\"text\"}},\"request_description\":\"text\",\"responses\":{\"<status>\":{\"description\":\"text\"}}}},\"confidence\":0.0},\"endpoint\":{\"endpoint_id\":\"a19c52435ec64203\",\"framework\":\"django\",\"path\":\"/api/v2/manufacturers/\",\"operations\":[{\"method\":\"get\",\"operation_id\":\"get_api_v2_manufacturers\",\"summary\":\"ManufacturerViewSet.list\",\"tags\":[\"api\"],\"parameters\":[],\"responses\":[{\"status\":\"200\",\"description\":\"Successful response\",\"model_ref\":\"ManufacturerSerializer\",\"many\":true,\"content_type\":\"application/json\",\"schema_data\":{},\"metadata\":{}}],\"security\":[],\"security_schemes\":{},\"deprecated\":false,\"source_refs\":[{\"path\":\"/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi/reviews/views.py\",\"symbol\":\"list\",\"metadata\":{}}],\"confidence\":{\"score\":1.0,\"source\":\"static\"},\"metadata\":{\"is_viewset\":true,\"response_serializer\":\"ManufacturerSerializer\",\"response_many\":true}}],\"tags\":[\"api\"],\"source_refs\":[{\"path\":\"/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi/reviews/views.py\",\"symbol\":\"list\",\"metadata\":{}}],\"confidence\":{\"score\":1.0,\"source\":\"static\"},\"metadata\":{}}}"
+      },
+      "output_summary": {
+        "operations": {
+          "get": {
+            "summary": "List all manufacturers",
+            "description": "Returns a paginated list of manufacturers with their details. Use this endpoint to retrieve all available manufacturers in the system.",
+            "tags": [
+              "manufacturers"
+            ],
+            "parameters": {},
+            "request_description": "No request body required. Returns a list of manufacturer objects.",
+            "responses": {
+              "200": {
+                "description": "A list of manufacturer objects returned successfully"
+              }
+            }
+          }
+        },
+        "confidence": 0.8
+      },
+      "prompt_tokens": 419,
+      "completion_tokens": 88,
+      "total_tokens": 507,
+      "cost_usd": 0.0,
+      "latency_ms": 2919,
+      "valid": true,
+      "errors": [],
+      "fallback_used": false,
+      "confidence": 0.8,
+      "metadata": {
+        "path": "/api/v2/manufacturers/",
+        "framework": "django",
+        "router_model": "nvidia-fast",
+        "attempts": 1
+      }
+    },
+    {
+      "attempt": 1,
+      "stage": "endpoint",
+      "item_id": "f5998e9806ada172",
+      "provider": "router",
+      "model": "poolside/laguna-xs-2.1",
+      "prompt_version": "2026-11-11.1",
+      "prompt_hash": "8f50e002b353379b9bd0",
+      "input_summary": {
+        "system_prompt": "You are a precise API specification editor. You receive a normalized endpoint extracted from source code. Return one JSON object and no prose. Never invent paths, methods, parameters, schemas or response codes. Only improve human-facing text: summaries, descriptions, parameter descriptions, request/response descriptions and tags. Preserve every structural field. If evidence is insufficient, keep text generic and lower confidence.",
+        "prompt": "{\"task\":\"Improve endpoint documentation text.\",\"response_shape\":{\"operations\":{\"<method>\":{\"summary\":\"short summary\",\"description\":\"1-3 sentences\",\"tags\":[\"tag\"],\"parameters\":{\"<name>\":{\"description\":\"text\"}},\"request_description\":\"text\",\"responses\":{\"<status>\":{\"description\":\"text\"}}}},\"confidence\":0.0},\"endpoint\":{\"endpoint_id\":\"f5998e9806ada172\",\"framework\":\"django\",\"path\":\"/api/v2/advanced-products/{pk}/\",\"operations\":[{\"method\":\"delete\",\"operation_id\":\"delete_api_v2_advanced_products_pk\",\"summary\":\"AdvancedProductViewSet.destroy\",\"tags\":[\"api\"],\"parameters\":[{\"name\":\"pk\",\"location\":\"path\",\"required\":true,\"type\":\"string\",\"schema_data\":{\"type\":\"string\"},\"metadata\":{}}],\"responses\":[{\"status\":\"204\",\"description\":\"No content\",\"many\":false,\"content_type\":\"application/json\",\"schema_data\":{},\"metadata\":{}}],\"security\":[],\"security_schemes\":{},\"deprecated\":false,\"source_refs\":[{\"path\":\"/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi/reviews/views.py\",\"symbol\":\"destroy\",\"metadata\":{}}],\"confidence\":{\"score\":1.0,\"source\":\"static\"},\"metadata\":{\"is_viewset\":true}},{\"method\":\"get\",\"operation_id\":\"get_api_v2_advanced_products_pk\",\"summary\":\"AdvancedProductViewSet.retrieve\",\"tags\":[\"api\"],\"parameters\":[{\"name\":\"pk\",\"location\":\"path\",\"required\":true,\"type\":\"string\",\"schema_data\":{\"type\":\"string\"},\"metadata\":{}}],\"responses\":[{\"status\":\"200\",\"description\":\"Successful response\",\"model_ref\":\"AdvancedProductSerializer\",\"many\":false,\"content_type\":\"appl"
+      },
+      "output_summary": {
+        "operations": {
+          "delete": {
+            "summary": "Delete an advanced product",
+            "description": "Removes the specified advanced product from the system. This action is irreversible and will permanently delete the product.",
+            "tags": [
+              "api"
+            ],
+            "parameters": {
+              "pk": {
+                "description": "Unique identifier of the advanced product to delete"
+              }
+            },
+            "request_description": "No request body required for deletion.",
+            "responses": {
+              "204": {
+                "description": "Successfully deleted the advanced product"
+              }
+            }
+          },
+          "get": {
+            "summary": "Retrieve an advanced product",
+            "description": "Returns detailed information about a specific advanced product identified by its unique identifier.",
+            "tags": [
+              "api"
+            ],
+            "parameters": {
+              "pk": {
+                "description": "Unique identifier of the advanced product to retrieve"
+              }
+            },
+            "request_description": "No request body required.",
+            "responses": {
+              "200": {
+                "description": "Successfully retrieved the advanced product details"
+              }
+            }
+          },
+          "patch": {
+            "summary": "Partially update an advanced product",
+            "description": "Updates one or more fields of the specified advanced product. Only the fields provided in the request will be modified.",
+            "tags": [
+              "api"
+            ],
+            "parameters": {
+              "pk": {
+                "description": "Unique identifier of the advanced product to update"
+              }
+            },
+            "request_description": "JSON object containing the fields to update. Only provided fields will be modified.",
+            "responses": {
+              "200": {
+                "description": "Successfully updated the advanced product"
+              }
+            }
+          },
+          "put": {
+            "summary": "Update an advanced product",
+            "description": "Replaces all fields of the specified advanced product with the provided data. All fields must be included in the request.",
+            "tags": [
+              "api"
+            ],
+            "parameters": {
+              "pk": {
+                "description": "Unique identifier of the advanced product to update"
+              }
+            },
+            "request_description": "JSON object containing all fields of the advanced product to replace the existing data.",
+            "responses": {
+              "200": {
+                "description": "Successfully updated the advanced product"
+              }
+            }
+          }
+        },
+        "confidence": 1.0
+      },
+      "prompt_tokens": 1174,
+      "completion_tokens": 570,
+      "total_tokens": 1744,
+      "cost_usd": 0.0,
+      "latency_ms": 10877,
+      "valid": true,
+      "errors": [],
+      "fallback_used": false,
+      "confidence": 1.0,
+      "metadata": {
+        "path": "/api/v2/advanced-products/{pk}/",
+        "framework": "django",
+        "router_model": "nvidia-fast",
+        "attempts": 1
+      }
+    },
+    {
+      "attempt": 1,
+      "stage": "endpoint",
+      "item_id": "c7ecbdb190b7d9c6",
+      "provider": "router",
+      "model": "poolside/laguna-xs-2.1",
+      "prompt_version": "2026-11-11.1",
+      "prompt_hash": "378cf127ee50e1317dd6",
+      "input_summary": {
+        "system_prompt": "You are a precise API specification editor. You receive a normalized endpoint extracted from source code. Return one JSON object and no prose. Never invent paths, methods, parameters, schemas or response codes. Only improve human-facing text: summaries, descriptions, parameter descriptions, request/response descriptions and tags. Preserve every structural field. If evidence is insufficient, keep text generic and lower confidence.",
+        "prompt": "{\"task\":\"Improve endpoint documentation text.\",\"response_shape\":{\"operations\":{\"<method>\":{\"summary\":\"short summary\",\"description\":\"1-3 sentences\",\"tags\":[\"tag\"],\"parameters\":{\"<name>\":{\"description\":\"text\"}},\"request_description\":\"text\",\"responses\":{\"<status>\":{\"description\":\"text\"}}}},\"confidence\":0.0},\"endpoint\":{\"endpoint_id\":\"c7ecbdb190b7d9c6\",\"framework\":\"django\",\"path\":\"/api/v2/categories/{pk}/\",\"operations\":[{\"method\":\"delete\",\"operation_id\":\"delete_api_v2_categories_pk\",\"summary\":\"CategoryViewSet.destroy\",\"tags\":[\"api\"],\"parameters\":[{\"name\":\"pk\",\"location\":\"path\",\"required\":true,\"type\":\"string\",\"schema_data\":{\"type\":\"string\"},\"metadata\":{}}],\"responses\":[{\"status\":\"204\",\"description\":\"No content\",\"many\":false,\"content_type\":\"application/json\",\"schema_data\":{},\"metadata\":{}}],\"security\":[],\"security_schemes\":{},\"deprecated\":false,\"source_refs\":[{\"path\":\"/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi/reviews/views.py\",\"symbol\":\"destroy\",\"metadata\":{}}],\"confidence\":{\"score\":1.0,\"source\":\"static\"},\"metadata\":{\"is_viewset\":true}},{\"method\":\"get\",\"operation_id\":\"get_api_v2_categories_pk\",\"summary\":\"CategoryViewSet.retrieve\",\"tags\":[\"api\"],\"parameters\":[{\"name\":\"pk\",\"location\":\"path\",\"required\":true,\"type\":\"string\",\"schema_data\":{\"type\":\"string\"},\"metadata\":{}}],\"responses\":[{\"status\":\"200\",\"description\":\"Successful response\",\"model_ref\":\"CategorySerializer\",\"many\":false,\"content_type\":\"application/json\",\"schema_data\":{},\"metadata\":"
+      },
+      "output_summary": {
+        "operations": {
+          "delete": {
+            "summary": "Delete a category",
+            "description": "Removes a category from the system. The category must exist and will be permanently deleted.",
+            "tags": [
+              "api"
+            ],
+            "parameters": {
+              "pk": {
+                "description": "Unique identifier of the category to delete"
+              }
+            },
+            "request_description": "No request body required for deletion.",
+            "responses": {
+              "204": {
+                "description": "Category successfully deleted. No content returned."
+              }
+            }
+          },
+          "get": {
+            "summary": "Retrieve a category",
+            "description": "Returns detailed information about a specific category identified by its unique identifier.",
+            "tags": [
+              "api"
+            ],
+            "parameters": {
+              "pk": {
+                "description": "Unique identifier of the category to retrieve"
+              }
+            },
+            "request_description": "No request body required for retrieval.",
+            "responses": {
+              "200": {
+                "description": "Category details retrieved successfully"
+              }
+            }
+          },
+          "patch": {
+            "summary": "Update a category partially",
+            "description": "Updates specific fields of a category using partial data. Only provided fields will be modified.",
+            "tags": [
+              "api"
+            ],
+            "parameters": {
+              "pk": {
+                "description": "Unique identifier of the category to update"
+              }
+            },
+            "request_description": "Partial category data to update. Only the fields included will be modified.",
+            "responses": {
+              "200": {
+                "description": "Category successfully updated with partial data"
+              }
+            }
+          },
+          "put": {
+            "summary": "Update a category completely",
+            "description": "Replaces the entire category with new data. All fields must be provided.",
+            "tags": [
+              "api"
+            ],
+            "parameters": {
+              "pk": {
+                "description": "Unique identifier of the category to update"
+              }
+            },
+            "request_description": "Complete category data to replace the existing category.",
+            "responses": {
+              "200": {
+                "description": "Category successfully updated with complete data"
+              }
+            }
+          }
+        },
+        "confidence": 1.0
+      },
+      "prompt_tokens": 1154,
+      "completion_tokens": 542,
+      "total_tokens": 1696,
+      "cost_usd": 0.0,
+      "latency_ms": 6424,
+      "valid": true,
+      "errors": [],
+      "fallback_used": false,
+      "confidence": 1.0,
+      "metadata": {
+        "path": "/api/v2/categories/{pk}/",
+        "framework": "django",
+        "router_model": "nvidia-fast",
+        "attempts": 1
+      }
+    },
+    {
+      "attempt": 1,
+      "stage": "endpoint",
+      "item_id": "b4d1ee779306c529",
+      "provider": "router",
+      "model": "poolside/laguna-xs-2.1",
+      "prompt_version": "2026-11-11.1",
+      "prompt_hash": "f16a82346cad2b4802c2",
+      "input_summary": {
+        "system_prompt": "You are a precise API specification editor. You receive a normalized endpoint extracted from source code. Return one JSON object and no prose. Never invent paths, methods, parameters, schemas or response codes. Only improve human-facing text: summaries, descriptions, parameter descriptions, request/response descriptions and tags. Preserve every structural field. If evidence is insufficient, keep text generic and lower confidence.",
+        "prompt": "{\"task\":\"Improve endpoint documentation text.\",\"response_shape\":{\"operations\":{\"<method>\":{\"summary\":\"short summary\",\"description\":\"1-3 sentences\",\"tags\":[\"tag\"],\"parameters\":{\"<name>\":{\"description\":\"text\"}},\"request_description\":\"text\",\"responses\":{\"<status>\":{\"description\":\"text\"}}}},\"confidence\":0.0},\"endpoint\":{\"endpoint_id\":\"b4d1ee779306c529\",\"framework\":\"django\",\"path\":\"/api/v2/products/\",\"operations\":[{\"method\":\"get\",\"operation_id\":\"get_api_v2_products\",\"summary\":\"ProductViewSet.list\",\"tags\":[\"api\"],\"parameters\":[],\"responses\":[{\"status\":\"200\",\"description\":\"Successful response\",\"model_ref\":\"ProductSerializer\",\"many\":true,\"content_type\":\"application/json\",\"schema_data\":{},\"metadata\":{}}],\"security\":[],\"security_schemes\":{},\"deprecated\":false,\"source_refs\":[{\"path\":\"/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi/reviews/views.py\",\"symbol\":\"list\",\"metadata\":{}}],\"confidence\":{\"score\":1.0,\"source\":\"static\"},\"metadata\":{\"is_viewset\":true,\"response_serializer\":\"ProductSerializer\",\"response_many\":true}},{\"method\":\"post\",\"operation_id\":\"post_api_v2_products\",\"summary\":\"ProductViewSet.create\",\"tags\":[\"api\"],\"parameters\":[],\"request\":{\"model_ref\":\"ProductSerializer\",\"required\":true,\"content_type\":\"application/json\",\"schema_data\":{},\"metadata\":{}},\"responses\":[{\"status\":\"201\",\"description\":\"Successful response\",\"model_ref\":\"ProductSerializer\",\"many\":false,\"content_type\":\"application/json\",\"schema_data\":{},\"metadata\":{}}],\"security\":[],\"se"
+      },
+      "output_summary": {
+        "operations": {
+          "get": {
+            "summary": "List all products",
+            "description": "Returns a paginated list of products available in the system. Use this endpoint to retrieve product information including details such as name, description, price, and other relevant attributes.",
+            "tags": [
+              "api",
+              "products"
+            ],
+            "parameters": {},
+            "request_description": "No request body required for this endpoint.",
+            "responses": {
+              "200": {
+                "description": "A list of products successfully retrieved"
+              }
+            }
+          },
+          "post": {
+            "summary": "Create a new product",
+            "description": "Creates a new product in the system. The request body should contain all required product details. Returns the created product with its assigned identifier.",
+            "tags": [
+              "api",
+              "products"
+            ],
+            "parameters": {},
+            "request_description": "A JSON object containing the product data to create. Required fields include the product name and other attributes defined in the ProductSerializer.",
+            "responses": {
+              "201": {
+                "description": "Product successfully created with the provided data"
+              }
+            }
+          }
+        },
+        "confidence": 0.8
+      },
+      "prompt_tokens": 639,
+      "completion_tokens": 281,
+      "total_tokens": 920,
+      "cost_usd": 0.0,
+      "latency_ms": 4178,
+      "valid": true,
+      "errors": [],
+      "fallback_used": false,
+      "confidence": 0.8,
+      "metadata": {
+        "path": "/api/v2/products/",
+        "framework": "django",
+        "router_model": "nvidia-fast",
+        "attempts": 1
+      }
+    },
+    {
+      "attempt": 1,
+      "stage": "endpoint",
+      "item_id": "21a54c9a3d9cf737",
+      "provider": "router",
+      "model": "poolside/laguna-xs-2.1",
+      "prompt_version": "2026-11-11.1",
+      "prompt_hash": "9027cd9da9306b8b9668",
+      "input_summary": {
+        "system_prompt": "You are a precise API specification editor. You receive a normalized endpoint extracted from source code. Return one JSON object and no prose. Never invent paths, methods, parameters, schemas or response codes. Only improve human-facing text: summaries, descriptions, parameter descriptions, request/response descriptions and tags. Preserve every structural field. If evidence is insufficient, keep text generic and lower confidence.",
+        "prompt": "{\"task\":\"Improve endpoint documentation text.\",\"response_shape\":{\"operations\":{\"<method>\":{\"summary\":\"short summary\",\"description\":\"1-3 sentences\",\"tags\":[\"tag\"],\"parameters\":{\"<name>\":{\"description\":\"text\"}},\"request_description\":\"text\",\"responses\":{\"<status>\":{\"description\":\"text\"}}}},\"confidence\":0.0},\"endpoint\":{\"endpoint_id\":\"21a54c9a3d9cf737\",\"framework\":\"django\",\"path\":\"/api/v2/reviews/\",\"operations\":[{\"method\":\"get\",\"operation_id\":\"get_api_v2_reviews\",\"summary\":\"ReviewViewSet.list\",\"tags\":[\"api\"],\"parameters\":[],\"responses\":[{\"status\":\"200\",\"description\":\"Successful response\",\"model_ref\":\"ReviewSerializer\",\"many\":true,\"content_type\":\"application/json\",\"schema_data\":{},\"metadata\":{}}],\"security\":[],\"security_schemes\":{},\"deprecated\":false,\"source_refs\":[{\"path\":\"/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi/reviews/views.py\",\"symbol\":\"list\",\"metadata\":{}}],\"confidence\":{\"score\":1.0,\"source\":\"static\"},\"metadata\":{\"is_viewset\":true,\"response_serializer\":\"ReviewSerializer\",\"response_many\":true}},{\"method\":\"post\",\"operation_id\":\"post_api_v2_reviews\",\"summary\":\"ReviewViewSet.create\",\"tags\":[\"api\"],\"parameters\":[],\"request\":{\"model_ref\":\"ReviewSerializer\",\"required\":true,\"content_type\":\"application/json\",\"schema_data\":{},\"metadata\":{}},\"responses\":[{\"status\":\"201\",\"description\":\"Successful response\",\"model_ref\":\"ReviewSerializer\",\"many\":false,\"content_type\":\"application/json\",\"schema_data\":{},\"metadata\":{}}],\"security\":[],\"security_sc"
+      },
+      "output_summary": {
+        "operations": {
+          "get": {
+            "summary": "List all reviews",
+            "description": "Returns a paginated list of all reviews in the system. Supports filtering and ordering by standard Django REST Framework conventions.",
+            "tags": [
+              "reviews"
+            ],
+            "parameters": {},
+            "request_description": "",
+            "responses": {
+              "200": {
+                "description": "A list of review objects matching the query parameters"
+              }
+            }
+          },
+          "post": {
+            "summary": "Create a new review",
+            "description": "Creates a new review entry. Requires valid review data in the request body. Returns the created review object on success.",
+            "tags": [
+              "reviews"
+            ],
+            "parameters": {},
+            "request_description": "Review data object containing all required fields for creating a new review",
+            "responses": {
+              "201": {
+                "description": "The newly created review object"
+              }
+            }
+          }
+        },
+        "confidence": 0.8
+      },
+      "prompt_tokens": 640,
+      "completion_tokens": 241,
+      "total_tokens": 881,
+      "cost_usd": 0.0,
+      "latency_ms": 2144,
+      "valid": true,
+      "errors": [],
+      "fallback_used": false,
+      "confidence": 0.8,
+      "metadata": {
+        "path": "/api/v2/reviews/",
+        "framework": "django",
+        "router_model": "nvidia-fast",
+        "attempts": 1
+      }
+    },
+    {
+      "attempt": 1,
+      "stage": "endpoint",
+      "item_id": "2bf271475b379d11",
+      "provider": "router",
+      "model": "poolside/laguna-xs-2.1",
+      "prompt_version": "2026-11-11.1",
+      "prompt_hash": "93dfb2b69e002086a109",
+      "input_summary": {
+        "system_prompt": "You are a precise API specification editor. You receive a normalized endpoint extracted from source code. Return one JSON object and no prose. Never invent paths, methods, parameters, schemas or response codes. Only improve human-facing text: summaries, descriptions, parameter descriptions, request/response descriptions and tags. Preserve every structural field. If evidence is insufficient, keep text generic and lower confidence.",
+        "prompt": "{\"task\":\"Improve endpoint documentation text.\",\"response_shape\":{\"operations\":{\"<method>\":{\"summary\":\"short summary\",\"description\":\"1-3 sentences\",\"tags\":[\"tag\"],\"parameters\":{\"<name>\":{\"description\":\"text\"}},\"request_description\":\"text\",\"responses\":{\"<status>\":{\"description\":\"text\"}}}},\"confidence\":0.0},\"endpoint\":{\"endpoint_id\":\"2bf271475b379d11\",\"framework\":\"django\",\"path\":\"/api/v2/products/top_products/\",\"operations\":[{\"method\":\"get\",\"operation_id\":\"get_api_v2_products_top_products\",\"summary\":\"ProductViewSet.top_products\",\"tags\":[\"api\"],\"parameters\":[],\"responses\":[{\"status\":\"200\",\"description\":\"Successful response\",\"model_ref\":\"ProductSerializer\",\"many\":false,\"content_type\":\"application/json\",\"schema_data\":{},\"metadata\":{}}],\"security\":[],\"security_schemes\":{},\"deprecated\":false,\"source_refs\":[{\"path\":\"/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi/reviews/views.py\",\"symbol\":\"top_products\",\"metadata\":{}}],\"confidence\":{\"score\":1.0,\"source\":\"static\"},\"metadata\":{\"is_viewset\":true,\"response_serializer\":\"ProductSerializer\"}}],\"tags\":[\"api\"],\"source_refs\":[{\"path\":\"/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi/reviews/views.py\",\"symbol\":\"top_products\",\"metadata\":{}}],\"confidence\":{\"score\":1.0,\"source\":\"static\"},\"metadata\":{}}}"
+      },
+      "output_summary": {
+        "operations": {
+          "get": {
+            "summary": "Retrieve top products",
+            "description": "Returns a list of the most popular or featured products in the catalog. This endpoint provides a quick way to showcase trending items without requiring complex filtering or search parameters.",
+            "tags": [
+              "api"
+            ],
+            "parameters": {},
+            "request_description": "No request body required. This is a read-only endpoint that returns data based on predefined criteria.",
+            "responses": {
+              "200": {
+                "description": "Successful response containing a single top product object with details such as id, name, price, and other product attributes.",
+                "model_ref": "ProductSerializer",
+                "many": false,
+                "content_type": "application/json",
+                "schema_data": {},
+                "metadata": {}
+              }
+            },
+            "security": [],
+            "security_schemes": {},
+            "deprecated": false,
+            "source_refs": [
+              {
+                "path": "/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi/reviews/views.py",
+                "symbol": "top_products",
+                "metadata": {}
+              }
+            ],
+            "confidence": {
+              "score": 1.0,
+              "source": "static"
+            },
+            "metadata": {
+              "is_viewset": true,
+              "response_serializer": "ProductSerializer"
+            }
+          },
+          "tags": [
+            "api"
+          ],
+          "source_refs": [
+            {
+              "path": "/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi/reviews/views.py",
+              "symbol": "top_products",
+              "metadata": {}
+            }
+          ],
+          "confidence": {
+            "score": 1.0,
+            "source": "static"
+          },
+          "metadata": {}
+        },
+        "endpoint_id": "2bf271475b379d11",
+        "framework": "django",
+        "path": "/api/v2/products/top_products/"
+      },
+      "prompt_tokens": 417,
+      "completion_tokens": 321,
+      "total_tokens": 738,
+      "cost_usd": 0.0,
+      "latency_ms": 6616,
+      "valid": true,
+      "errors": [],
+      "fallback_used": false,
+      "confidence": null,
+      "metadata": {
+        "path": "/api/v2/products/top_products/",
+        "framework": "django",
+        "router_model": "nvidia-fast",
+        "attempts": 1
+      }
+    },
+    {
+      "attempt": 1,
+      "stage": "endpoint",
+      "item_id": "c11123dd87e3dd59",
+      "provider": "router",
+      "model": "poolside/laguna-xs-2.1",
+      "prompt_version": "2026-11-11.1",
+      "prompt_hash": "154870a0edec56552bce",
+      "input_summary": {
+        "system_prompt": "You are a precise API specification editor. You receive a normalized endpoint extracted from source code. Return one JSON object and no prose. Never invent paths, methods, parameters, schemas or response codes. Only improve human-facing text: summaries, descriptions, parameter descriptions, request/response descriptions and tags. Preserve every structural field. If evidence is insufficient, keep text generic and lower confidence.",
+        "prompt": "{\"task\":\"Improve endpoint documentation text.\",\"response_shape\":{\"operations\":{\"<method>\":{\"summary\":\"short summary\",\"description\":\"1-3 sentences\",\"tags\":[\"tag\"],\"parameters\":{\"<name>\":{\"description\":\"text\"}},\"request_description\":\"text\",\"responses\":{\"<status>\":{\"description\":\"text\"}}}},\"confidence\":0.0},\"endpoint\":{\"endpoint_id\":\"c11123dd87e3dd59\",\"framework\":\"django\",\"path\":\"/api/v2/reviews/{pk}/submit_comment/\",\"operations\":[{\"method\":\"post\",\"operation_id\":\"post_api_v2_reviews_pk_submit_comment\",\"summary\":\"ReviewViewSet.submit_comment\",\"tags\":[\"api\"],\"parameters\":[{\"name\":\"pk\",\"location\":\"path\",\"required\":true,\"type\":\"string\",\"schema_data\":{\"type\":\"string\"},\"metadata\":{}}],\"request\":{\"model_ref\":\"ReviewSerializer\",\"required\":true,\"content_type\":\"application/json\",\"schema_data\":{},\"metadata\":{}},\"responses\":[{\"status\":\"200\",\"description\":\"Successful response\",\"model_ref\":\"ReviewSerializer\",\"many\":false,\"content_type\":\"application/json\",\"schema_data\":{},\"metadata\":{}}],\"security\":[],\"security_schemes\":{},\"deprecated\":false,\"source_refs\":[{\"path\":\"/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi/reviews/views.py\",\"symbol\":\"submit_comment\",\"metadata\":{}}],\"confidence\":{\"score\":1.0,\"source\":\"static\"},\"metadata\":{\"is_viewset\":true,\"request_serializer\":\"ReviewSerializer\",\"response_serializer\":\"ReviewSerializer\"}}],\"tags\":[\"api\"],\"source_refs\":[{\"path\":\"/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi/revi"
+      },
+      "output_summary": {
+        "operations": {
+          "post": {
+            "summary": "Submit a comment on a review",
+            "description": "Adds a new comment to the specified review. Returns the updated review object including the newly added comment.",
+            "tags": [
+              "reviews",
+              "comments"
+            ],
+            "parameters": {
+              "pk": {
+                "description": "Unique identifier of the review to comment on"
+              }
+            },
+            "request_description": "JSON object containing the comment data to be submitted to the review.",
+            "responses": {
+              "200": {
+                "description": "Comment successfully submitted. Returns the updated review with the new comment included."
+              }
+            }
+          }
+        },
+        "confidence": 0.8
+      },
+      "prompt_tokens": 483,
+      "completion_tokens": 174,
+      "total_tokens": 657,
+      "cost_usd": 0.0,
+      "latency_ms": 2370,
+      "valid": true,
+      "errors": [],
+      "fallback_used": false,
+      "confidence": 0.8,
+      "metadata": {
+        "path": "/api/v2/reviews/{pk}/submit_comment/",
+        "framework": "django",
+        "router_model": "nvidia-fast",
+        "attempts": 1
+      }
+    },
+    {
+      "attempt": 1,
+      "stage": "endpoint",
+      "item_id": "ecb492a5a69be801",
+      "provider": "router",
+      "model": "poolside/laguna-xs-2.1",
+      "prompt_version": "2026-11-11.1",
+      "prompt_hash": "a357ba467c02d9bf6565",
+      "input_summary": {
+        "system_prompt": "You are a precise API specification editor. You receive a normalized endpoint extracted from source code. Return one JSON object and no prose. Never invent paths, methods, parameters, schemas or response codes. Only improve human-facing text: summaries, descriptions, parameter descriptions, request/response descriptions and tags. Preserve every structural field. If evidence is insufficient, keep text generic and lower confidence.",
+        "prompt": "{\"task\":\"Improve endpoint documentation text.\",\"response_shape\":{\"operations\":{\"<method>\":{\"summary\":\"short summary\",\"description\":\"1-3 sentences\",\"tags\":[\"tag\"],\"parameters\":{\"<name>\":{\"description\":\"text\"}},\"request_description\":\"text\",\"responses\":{\"<status>\":{\"description\":\"text\"}}}},\"confidence\":0.0},\"endpoint\":{\"endpoint_id\":\"ecb492a5a69be801\",\"framework\":\"django\",\"path\":\"/api/v2/products/{pk}/\",\"operations\":[{\"method\":\"delete\",\"operation_id\":\"delete_api_v2_products_pk\",\"summary\":\"ProductViewSet.destroy\",\"tags\":[\"api\"],\"parameters\":[{\"name\":\"pk\",\"location\":\"path\",\"required\":true,\"type\":\"string\",\"schema_data\":{\"type\":\"string\"},\"metadata\":{}}],\"responses\":[{\"status\":\"204\",\"description\":\"No content\",\"many\":false,\"content_type\":\"application/json\",\"schema_data\":{},\"metadata\":{}}],\"security\":[],\"security_schemes\":{},\"deprecated\":false,\"source_refs\":[{\"path\":\"/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi/reviews/views.py\",\"symbol\":\"destroy\",\"metadata\":{}}],\"confidence\":{\"score\":1.0,\"source\":\"static\"},\"metadata\":{\"is_viewset\":true}},{\"method\":\"get\",\"operation_id\":\"get_api_v2_products_pk\",\"summary\":\"ProductViewSet.retrieve\",\"tags\":[\"api\"],\"parameters\":[{\"name\":\"pk\",\"location\":\"path\",\"required\":true,\"type\":\"string\",\"schema_data\":{\"type\":\"string\"},\"metadata\":{}}],\"responses\":[{\"status\":\"200\",\"description\":\"Successful response\",\"model_ref\":\"ProductSerializer\",\"many\":false,\"content_type\":\"application/json\",\"schema_data\":{},\"metadata\":{}}],\"sec"
+      },
+      "output_summary": {
+        "operations": {
+          "delete": {
+            "summary": "Delete a product",
+            "description": "Removes a product from the system. Returns 204 No Content on successful deletion.",
+            "tags": [
+              "api"
+            ],
+            "parameters": {
+              "pk": {
+                "description": "Unique identifier of the product to delete"
+              }
+            },
+            "request_description": "No request body required for deletion.",
+            "responses": {
+              "204": {
+                "description": "Product successfully deleted"
+              }
+            }
+          },
+          "get": {
+            "summary": "Retrieve a product",
+            "description": "Returns detailed information about a specific product identified by its unique identifier.",
+            "tags": [
+              "api"
+            ],
+            "parameters": {
+              "pk": {
+                "description": "Unique identifier of the product to retrieve"
+              }
+            },
+            "request_description": "No request body required for retrieval.",
+            "responses": {
+              "200": {
+                "description": "Product details retrieved successfully"
+              }
+            }
+          },
+          "patch": {
+            "summary": "Partially update a product",
+            "description": "Updates one or more fields of an existing product. Only provided fields will be modified.",
+            "tags": [
+              "api"
+            ],
+            "parameters": {
+              "pk": {
+                "description": "Unique identifier of the product to update"
+              }
+            },
+            "request_description": "Partial product data to update. Only specified fields will be modified.",
+            "responses": {
+              "200": {
+                "description": "Product successfully updated"
+              }
+            }
+          },
+          "put": {
+            "summary": "Update a product",
+            "description": "Replaces all fields of an existing product with the provided data.",
+            "tags": [
+              "api"
+            ],
+            "parameters": {
+              "pk": {
+                "description": "Unique identifier of the product to update"
+              }
+            },
+            "request_description": "Complete product data to replace the existing product.",
+            "responses": {
+              "200": {
+                "description": "Product successfully updated"
+              }
+            }
+          }
+        },
+        "confidence": 1.0
+      },
+      "prompt_tokens": 1154,
+      "completion_tokens": 530,
+      "total_tokens": 1684,
+      "cost_usd": 0.0,
+      "latency_ms": 10764,
+      "valid": true,
+      "errors": [],
+      "fallback_used": false,
+      "confidence": 1.0,
+      "metadata": {
+        "path": "/api/v2/products/{pk}/",
+        "framework": "django",
+        "router_model": "nvidia-fast",
+        "attempts": 1
+      }
+    },
+    {
+      "attempt": 1,
+      "stage": "endpoint",
+      "item_id": "cc4c2e534a2bdb0e",
+      "provider": "router",
+      "model": "poolside/laguna-xs-2.1",
+      "prompt_version": "2026-11-11.1",
+      "prompt_hash": "85ffe43448579fd3bd04",
+      "input_summary": {
+        "system_prompt": "You are a precise API specification editor. You receive a normalized endpoint extracted from source code. Return one JSON object and no prose. Never invent paths, methods, parameters, schemas or response codes. Only improve human-facing text: summaries, descriptions, parameter descriptions, request/response descriptions and tags. Preserve every structural field. If evidence is insufficient, keep text generic and lower confidence.",
+        "prompt": "{\"task\":\"Improve endpoint documentation text.\",\"response_shape\":{\"operations\":{\"<method>\":{\"summary\":\"short summary\",\"description\":\"1-3 sentences\",\"tags\":[\"tag\"],\"parameters\":{\"<name>\":{\"description\":\"text\"}},\"request_description\":\"text\",\"responses\":{\"<status>\":{\"description\":\"text\"}}}},\"confidence\":0.0},\"endpoint\":{\"endpoint_id\":\"cc4c2e534a2bdb0e\",\"framework\":\"django\",\"path\":\"/api/v2/reviews/{pk}/\",\"operations\":[{\"method\":\"delete\",\"operation_id\":\"delete_api_v2_reviews_pk\",\"summary\":\"ReviewViewSet.destroy\",\"tags\":[\"api\"],\"parameters\":[{\"name\":\"pk\",\"location\":\"path\",\"required\":true,\"type\":\"string\",\"schema_data\":{\"type\":\"string\"},\"metadata\":{}}],\"responses\":[{\"status\":\"204\",\"description\":\"No content\",\"many\":false,\"content_type\":\"application/json\",\"schema_data\":{},\"metadata\":{}}],\"security\":[],\"security_schemes\":{},\"deprecated\":false,\"source_refs\":[{\"path\":\"/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi/reviews/views.py\",\"symbol\":\"destroy\",\"metadata\":{}}],\"confidence\":{\"score\":1.0,\"source\":\"static\"},\"metadata\":{\"is_viewset\":true}},{\"method\":\"get\",\"operation_id\":\"get_api_v2_reviews_pk\",\"summary\":\"ReviewViewSet.retrieve\",\"tags\":[\"api\"],\"parameters\":[{\"name\":\"pk\",\"location\":\"path\",\"required\":true,\"type\":\"string\",\"schema_data\":{\"type\":\"string\"},\"metadata\":{}}],\"responses\":[{\"status\":\"200\",\"description\":\"Successful response\",\"model_ref\":\"ReviewSerializer\",\"many\":false,\"content_type\":\"application/json\",\"schema_data\":{},\"metadata\":{}}],\"security\""
+      },
+      "output_summary": {
+        "operations": {
+          "delete": {
+            "summary": "Delete a review",
+            "description": "Permanently deletes a review identified by its primary key. This action cannot be undone.",
+            "tags": [
+              "api"
+            ],
+            "parameters": {
+              "pk": {
+                "description": "Unique identifier of the review to delete"
+              }
+            },
+            "request_description": "No request body required for deletion.",
+            "responses": {
+              "204": {
+                "description": "Review successfully deleted"
+              }
+            }
+          },
+          "get": {
+            "summary": "Retrieve a review",
+            "description": "Returns detailed information about a specific review identified by its primary key.",
+            "tags": [
+              "api"
+            ],
+            "parameters": {
+              "pk": {
+                "description": "Unique identifier of the review to retrieve"
+              }
+            },
+            "request_description": "No request body required.",
+            "responses": {
+              "200": {
+                "description": "Review details retrieved successfully"
+              }
+            }
+          },
+          "patch": {
+            "summary": "Partially update a review",
+            "description": "Updates one or more fields of an existing review. Only provided fields will be modified.",
+            "tags": [
+              "api"
+            ],
+            "parameters": {
+              "pk": {
+                "description": "Unique identifier of the review to update"
+              }
+            },
+            "request_description": "Partial review data to update. Only specified fields will be modified.",
+            "responses": {
+              "200": {
+                "description": "Review updated successfully"
+              }
+            }
+          },
+          "put": {
+            "summary": "Update a review",
+            "description": "Replaces all fields of an existing review with the provided data. All fields must be included.",
+            "tags": [
+              "api"
+            ],
+            "parameters": {
+              "pk": {
+                "description": "Unique identifier of the review to update"
+              }
+            },
+            "request_description": "Complete review data to replace the existing review.",
+            "responses": {
+              "200": {
+                "description": "Review updated successfully"
+              }
+            }
+          }
+        },
+        "confidence": 1.0
+      },
+      "prompt_tokens": 1155,
+      "completion_tokens": 533,
+      "total_tokens": 1688,
+      "cost_usd": 0.0,
+      "latency_ms": 10175,
+      "valid": true,
+      "errors": [],
+      "fallback_used": false,
+      "confidence": 1.0,
+      "metadata": {
+        "path": "/api/v2/reviews/{pk}/",
+        "framework": "django",
+        "router_model": "nvidia-fast",
+        "attempts": 1
+      }
+    },
+    {
+      "attempt": 1,
+      "stage": "endpoint",
+      "item_id": "556ba9625a522533",
+      "provider": "router",
+      "model": "poolside/laguna-xs-2.1",
+      "prompt_version": "2026-11-11.1",
+      "prompt_hash": "e721defc11f6a340ddc1",
+      "input_summary": {
+        "system_prompt": "You are a precise API specification editor. You receive a normalized endpoint extracted from source code. Return one JSON object and no prose. Never invent paths, methods, parameters, schemas or response codes. Only improve human-facing text: summaries, descriptions, parameter descriptions, request/response descriptions and tags. Preserve every structural field. If evidence is insufficient, keep text generic and lower confidence.",
+        "prompt": "{\"task\":\"Improve endpoint documentation text.\",\"response_shape\":{\"operations\":{\"<method>\":{\"summary\":\"short summary\",\"description\":\"1-3 sentences\",\"tags\":[\"tag\"],\"parameters\":{\"<name>\":{\"description\":\"text\"}},\"request_description\":\"text\",\"responses\":{\"<status>\":{\"description\":\"text\"}}}},\"confidence\":0.0},\"endpoint\":{\"endpoint_id\":\"556ba9625a522533\",\"framework\":\"django\",\"path\":\"/api/v2/manufacturers/{pk}/\",\"operations\":[{\"method\":\"get\",\"operation_id\":\"get_api_v2_manufacturers_pk\",\"summary\":\"ManufacturerViewSet.retrieve\",\"tags\":[\"api\"],\"parameters\":[{\"name\":\"pk\",\"location\":\"path\",\"required\":true,\"type\":\"string\",\"schema_data\":{\"type\":\"string\"},\"metadata\":{}}],\"responses\":[{\"status\":\"200\",\"description\":\"Successful response\",\"model_ref\":\"ManufacturerSerializer\",\"many\":false,\"content_type\":\"application/json\",\"schema_data\":{},\"metadata\":{}}],\"security\":[],\"security_schemes\":{},\"deprecated\":false,\"source_refs\":[{\"path\":\"/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi/reviews/views.py\",\"symbol\":\"retrieve\",\"metadata\":{}}],\"confidence\":{\"score\":1.0,\"source\":\"static\"},\"metadata\":{\"is_viewset\":true,\"response_serializer\":\"ManufacturerSerializer\"}}],\"tags\":[\"api\"],\"source_refs\":[{\"path\":\"/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi/reviews/views.py\",\"symbol\":\"retrieve\",\"metadata\":{}}],\"confidence\":{\"score\":1.0,\"source\":\"static\"},\"metadata\":{}}}"
+      },
+      "output_summary": {
+        "operations": {
+          "get": {
+            "summary": "Retrieve a manufacturer by ID",
+            "description": "Returns the details of a specific manufacturer identified by its primary key. Use this endpoint to fetch information about a single manufacturer from the database.",
+            "tags": [
+              "manufacturers"
+            ],
+            "parameters": {
+              "pk": {
+                "description": "Unique identifier of the manufacturer to retrieve"
+              }
+            },
+            "request_description": "No request body required for this endpoint.",
+            "responses": {
+              "200": {
+                "description": "Manufacturer details successfully retrieved. Returns a JSON object containing the manufacturer's information including name, address, and other relevant details."
+              }
+            }
+          },
+          "confidence": 0.0
+        },
+        "endpoint_id": "556ba9625a522533",
+        "framework": "django",
+        "path": "/api/v2/manufacturers/{pk}/",
+        "tags": [
+          "manufacturers"
+        ],
+        "source_refs": [
+          {
+            "path": "/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi/reviews/views.py",
+            "symbol": "retrieve",
+            "metadata": {}
+          }
+        ],
+        "confidence": {
+          "score": 1.0,
+          "source": "static"
+        },
+        "metadata": {
+          "is_viewset": true,
+          "response_serializer": "ManufacturerSerializer"
+        }
+      },
+      "prompt_tokens": 445,
+      "completion_tokens": 231,
+      "total_tokens": 676,
+      "cost_usd": 0.0,
+      "latency_ms": 19072,
+      "valid": true,
+      "errors": [],
+      "fallback_used": false,
+      "confidence": null,
+      "metadata": {
+        "path": "/api/v2/manufacturers/{pk}/",
+        "framework": "django",
+        "router_model": "nvidia-fast",
+        "attempts": 1
+      }
+    },
+    {
+      "attempt": 1,
+      "stage": "component",
+      "item_id": "4c1b8e30b8cd89a3",
+      "provider": "router",
+      "model": "poolside/laguna-xs-2.1",
+      "prompt_version": "2026-11-11.1",
+      "prompt_hash": "4703b444d4cf7ce24510",
+      "input_summary": {
+        "system_prompt": "You are a precise API schema editor. You receive a normalized component extracted from source code. Return one JSON object and no prose. Never add or remove fields, change types, or invent constraints. Only improve descriptions and examples that are supported by the field names and source evidence. Preserve every structural field.",
+        "prompt": "{\"task\":\"Improve component and field documentation text.\",\"response_shape\":{\"description\":\"component description\",\"fields\":{\"<field>\":{\"description\":\"text\",\"example\":\"value\"}},\"confidence\":0.0},\"component\":{\"component_id\":\"4c1b8e30b8cd89a3\",\"name\":\"ManufacturerSerializer\",\"kind\":\"serializer\",\"source_ref\":{\"path\":\"/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi/reviews/serializers.py\",\"symbol\":\"ManufacturerSerializer\",\"metadata\":{}},\"parent_classes\":[\"{'name': 'serializers.ModelSerializer', 'path': None, 'code': None}\"],\"fields\":[{\"name\":\"id\",\"type\":\"integer\",\"read_only\":true,\"metadata\":{}},{\"name\":\"name\",\"type\":\"string\",\"max_length\":200,\"required\":true,\"metadata\":{}},{\"name\":\"country\",\"type\":\"string\",\"max_length\":50,\"required\":true,\"metadata\":{}}],\"dependencies\":[],\"supports_request\":true,\"supports_response\":true,\"confidence\":{\"score\":1.0,\"source\":\"static\"},\"metadata\":{\"name\":\"ManufacturerSerializer\",\"code\":\"class ManufacturerSerializer(serializers.ModelSerializer):\\n    \\\"\\\"\\\"TEST CASE: A simple serializer for a new model.\\\"\\\"\\\"\\n    class Meta:\\n        model = Manufacturer\\n        fields = ['id', 'name', 'country']\\n\",\"data_classes\":[{\"name\":\"Manufacturer\",\"path\":\"/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi/reviews/models.py\",\"code\":\"class Manufacturer(models.Model):\\n    \\\"\\\"\\\"\\n    TEST CASE: A simple model to be used as a direct ForeignKey target.\\n    Goal: Verify the tool can fetch the "
+      },
+      "output_summary": {
+        "description": "A serializer for the Manufacturer model that handles serialization and deserialization of manufacturer data. This serializer is used to convert Manufacturer model instances into JSON format for API responses and to validate incoming data when creating or updating manufacturers.",
+        "fields": {
+          "id": {
+            "description": "The unique identifier for the manufacturer. This field is automatically generated by the database and is read-only.",
+            "example": 1
+          },
+          "name": {
+            "description": "The name of the manufacturer. This field is required and cannot exceed 200 characters in length.",
+            "example": "Toyota"
+          },
+          "country": {
+            "description": "The country where the manufacturer is based. This field is required and cannot exceed 50 characters in length.",
+            "example": "Japan"
+          }
+        },
+        "confidence": 1.0
+      },
+      "prompt_tokens": 779,
+      "completion_tokens": 147,
+      "total_tokens": 926,
+      "cost_usd": 0.0,
+      "latency_ms": 1885,
+      "valid": true,
+      "errors": [],
+      "fallback_used": false,
+      "confidence": 1.0,
+      "metadata": {
+        "name": "ManufacturerSerializer",
+        "kind": "serializer",
+        "router_model": "nvidia-fast",
+        "attempts": 1
+      }
+    },
+    {
+      "attempt": 1,
+      "stage": "component",
+      "item_id": "25dc743a716cbc83",
+      "provider": "router",
+      "model": "poolside/laguna-xs-2.1",
+      "prompt_version": "2026-11-11.1",
+      "prompt_hash": "1379cd013eed52706e38",
+      "input_summary": {
+        "system_prompt": "You are a precise API schema editor. You receive a normalized component extracted from source code. Return one JSON object and no prose. Never add or remove fields, change types, or invent constraints. Only improve descriptions and examples that are supported by the field names and source evidence. Preserve every structural field.",
+        "prompt": "{\"task\":\"Improve component and field documentation text.\",\"response_shape\":{\"description\":\"component description\",\"fields\":{\"<field>\":{\"description\":\"text\",\"example\":\"value\"}},\"confidence\":0.0},\"component\":{\"component_id\":\"25dc743a716cbc83\",\"name\":\"ReviewSerializer\",\"kind\":\"serializer\",\"source_ref\":{\"path\":\"/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi/reviews/serializers.py\",\"symbol\":\"ReviewSerializer\",\"metadata\":{}},\"parent_classes\":[\"{'name': 'serializers.ModelSerializer', 'path': None, 'code': None}\"],\"fields\":[{\"name\":\"id\",\"type\":\"integer\",\"read_only\":true,\"metadata\":{}},{\"name\":\"content\",\"type\":\"string\",\"required\":true,\"metadata\":{}},{\"name\":\"rating\",\"type\":\"integer\",\"required\":true,\"metadata\":{}},{\"name\":\"created_at\",\"type\":\"string\",\"format\":\"date-time\",\"required\":false,\"read_only\":true,\"metadata\":{}}],\"dependencies\":[],\"supports_request\":true,\"supports_response\":true,\"confidence\":{\"score\":1.0,\"source\":\"static\"},\"metadata\":{\"name\":\"ReviewSerializer\",\"code\":\"class ReviewSerializer(serializers.ModelSerializer):\\n    class Meta:\\n        model = Review\\n        fields = ['id', 'content', 'rating', 'created_at']\\n\",\"data_classes\":[{\"name\":\"Review\",\"path\":\"/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi/reviews/models.py\",\"code\":\"class Review(models.Model):\\n    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')\\n    content = models.TextField()\\n    rating = "
+      },
+      "output_summary": {
+        "description": "Serializer for the Review model, handling validation and serialization of review data including content, rating, and timestamps.",
+        "fields": {
+          "id": {
+            "description": "Unique identifier for the review, automatically generated and read-only.",
+            "example": 1
+          },
+          "content": {
+            "description": "The textual content of the review written by the user.",
+            "example": "This product is amazing! Highly recommend it."
+          },
+          "rating": {
+            "description": "The rating given by the user, must be an integer between 1 and 5.",
+            "example": 5
+          },
+          "created_at": {
+            "description": "Timestamp indicating when the review was created, automatically set and read-only.",
+            "example": "2023-10-15T14:30:00Z"
+          }
+        },
+        "confidence": 1.0
+      },
+      "prompt_tokens": 1225,
+      "completion_tokens": 154,
+      "total_tokens": 1379,
+      "cost_usd": 0.0,
+      "latency_ms": 2853,
+      "valid": true,
+      "errors": [],
+      "fallback_used": false,
+      "confidence": 1.0,
+      "metadata": {
+        "name": "ReviewSerializer",
+        "kind": "serializer",
+        "router_model": "nvidia-fast",
+        "attempts": 1
+      }
+    },
+    {
+      "attempt": 1,
+      "stage": "component",
+      "item_id": "94b7af4171d7a387",
+      "provider": "router",
+      "model": "poolside/laguna-xs-2.1",
+      "prompt_version": "2026-11-11.1",
+      "prompt_hash": "6b11521b0ad95ac6af8d",
+      "input_summary": {
+        "system_prompt": "You are a precise API schema editor. You receive a normalized component extracted from source code. Return one JSON object and no prose. Never add or remove fields, change types, or invent constraints. Only improve descriptions and examples that are supported by the field names and source evidence. Preserve every structural field.",
+        "prompt": "{\"task\":\"Improve component and field documentation text.\",\"response_shape\":{\"description\":\"component description\",\"fields\":{\"<field>\":{\"description\":\"text\",\"example\":\"value\"}},\"confidence\":0.0},\"component\":{\"component_id\":\"94b7af4171d7a387\",\"name\":\"ProductSerializer\",\"kind\":\"serializer\",\"source_ref\":{\"path\":\"/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi/reviews/serializers.py\",\"symbol\":\"ProductSerializer\",\"metadata\":{}},\"parent_classes\":[\"{'name': 'serializers.ModelSerializer', 'path': None, 'code': None}\"],\"fields\":[{\"name\":\"id\",\"type\":\"integer\",\"read_only\":true,\"metadata\":{}},{\"name\":\"name\",\"type\":\"string\",\"max_length\":100,\"required\":true,\"metadata\":{}}],\"dependencies\":[],\"supports_request\":true,\"supports_response\":true,\"confidence\":{\"score\":1.0,\"source\":\"static\"},\"metadata\":{\"name\":\"ProductSerializer\",\"code\":\"class ProductSerializer(serializers.ModelSerializer):\\n    class Meta:\\n        model = Product\\n        fields = ['id', 'name']\\n\",\"data_classes\":[{\"name\":\"Product\",\"path\":\"/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi/reviews/models.py\",\"code\":\"class Product(models.Model):\\n    name = models.CharField(max_length=100)\\n    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')\\n    # +++ NEW FIELD FOR TESTING +++\\n    # Added to test a helper function used by a viewset\\n    status = models.CharField(max_length=20, default='available', choices=[('availa"
+      },
+      "output_summary": {
+        "description": "Serializer for the Product model, handling validation and conversion between Product instances and native Python datatypes.",
+        "fields": {
+          "id": {
+            "description": "Unique identifier for the product. This field is read-only and automatically assigned when a new product is created.",
+            "example": 1
+          },
+          "name": {
+            "description": "Name of the product. Required field with a maximum length of 100 characters.",
+            "example": "Wireless Headphones"
+          }
+        },
+        "confidence": 1.0
+      },
+      "prompt_tokens": 928,
+      "completion_tokens": 90,
+      "total_tokens": 1018,
+      "cost_usd": 0.0,
+      "latency_ms": 1412,
+      "valid": true,
+      "errors": [],
+      "fallback_used": false,
+      "confidence": 1.0,
+      "metadata": {
+        "name": "ProductSerializer",
+        "kind": "serializer",
+        "router_model": "nvidia-fast",
+        "attempts": 1
+      }
+    },
+    {
+      "attempt": 1,
+      "stage": "component",
+      "item_id": "8f0bed1c500d235a",
+      "provider": "router",
+      "model": "poolside/laguna-xs-2.1",
+      "prompt_version": "2026-11-11.1",
+      "prompt_hash": "4a9f174c1aa70df1aa2d",
+      "input_summary": {
+        "system_prompt": "You are a precise API schema editor. You receive a normalized component extracted from source code. Return one JSON object and no prose. Never add or remove fields, change types, or invent constraints. Only improve descriptions and examples that are supported by the field names and source evidence. Preserve every structural field.",
+        "prompt": "{\"task\":\"Improve component and field documentation text.\",\"response_shape\":{\"description\":\"component description\",\"fields\":{\"<field>\":{\"description\":\"text\",\"example\":\"value\"}},\"confidence\":0.0},\"component\":{\"component_id\":\"8f0bed1c500d235a\",\"name\":\"Supplier\",\"kind\":\"model\",\"source_ref\":{\"path\":\"/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi/reviews/serializers.py\",\"symbol\":\"Supplier\",\"metadata\":{}},\"parent_classes\":[],\"fields\":[{\"name\":\"name\",\"type\":\"string\",\"max_length\":150,\"required\":true,\"metadata\":{}},{\"name\":\"profile\",\"type\":\"integer\",\"required\":true,\"metadata\":{}}],\"dependencies\":[],\"supports_request\":false,\"supports_response\":true,\"confidence\":{\"score\":1.0,\"source\":\"static\"},\"metadata\":{\"name\":\"Supplier\",\"data_classes\":[]}}}"
+      },
+      "output_summary": {
+        "description": "Supplier model representing a supplier entity with their name and associated profile identifier.",
+        "fields": {
+          "name": {
+            "description": "The name of the supplier, limited to 150 characters.",
+            "example": "Tech Solutions Inc."
+          },
+          "profile": {
+            "description": "Foreign key reference to the supplier's profile.",
+            "example": 1
+          }
+        },
+        "confidence": 1.0
+      },
+      "prompt_tokens": 267,
+      "completion_tokens": 72,
+      "total_tokens": 339,
+      "cost_usd": 0.0,
+      "latency_ms": 1156,
+      "valid": true,
+      "errors": [],
+      "fallback_used": false,
+      "confidence": 1.0,
+      "metadata": {
+        "name": "Supplier",
+        "kind": "model",
+        "router_model": "nvidia-fast",
+        "attempts": 1
+      }
+    },
+    {
+      "attempt": 1,
+      "stage": "component",
+      "item_id": "ca193211c6821110",
+      "provider": "router",
+      "model": "poolside/laguna-xs-2.1",
+      "prompt_version": "2026-11-11.1",
+      "prompt_hash": "16f6dabe2c52458bf07a",
+      "input_summary": {
+        "system_prompt": "You are a precise API schema editor. You receive a normalized component extracted from source code. Return one JSON object and no prose. Never add or remove fields, change types, or invent constraints. Only improve descriptions and examples that are supported by the field names and source evidence. Preserve every structural field.",
+        "prompt": "{\"task\":\"Improve component and field documentation text.\",\"response_shape\":{\"description\":\"component description\",\"fields\":{\"<field>\":{\"description\":\"text\",\"example\":\"value\"}},\"confidence\":0.0},\"component\":{\"component_id\":\"ca193211c6821110\",\"name\":\"SupplierSerializer\",\"kind\":\"serializer\",\"source_ref\":{\"path\":\"/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi/reviews/serializers.py\",\"symbol\":\"SupplierSerializer\",\"metadata\":{}},\"parent_classes\":[\"{'name': 'serializers.ModelSerializer', 'path': None, 'code': None}\"],\"fields\":[{\"name\":\"id\",\"type\":\"integer\",\"read_only\":true,\"metadata\":{}},{\"name\":\"name\",\"type\":\"string\",\"max_length\":150,\"required\":true,\"metadata\":{}},{\"name\":\"profile\",\"type\":\"integer\",\"required\":true,\"metadata\":{}}],\"dependencies\":[],\"supports_request\":true,\"supports_response\":true,\"confidence\":{\"score\":1.0,\"source\":\"static\"},\"metadata\":{\"name\":\"SupplierSerializer\",\"code\":\"class SupplierSerializer(serializers.ModelSerializer):\\n    \\\"\\\"\\\"TEST CASE: A simple serializer for a model referenced via string.\\\"\\\"\\\"\\n    class Meta:\\n        model = Supplier\\n        fields = ['id', 'name', 'profile']\\n\",\"data_classes\":[{\"name\":\"Supplier\",\"path\":\"/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi/reviews/models.py\",\"code\":\"class Supplier(models.Model):\\n    \\\"\\\"\\\"\\n    TEST CASE: A model referenced by a string in another model's ForeignKey.\\n    Also has a OneToOne relationship.\\n    Goal: Verify the "
+      },
+      "output_summary": {
+        "description": "A Django REST Framework serializer for the Supplier model. This serializer handles the conversion of Supplier model instances to JSON format and validates incoming data for Supplier creation and updates. It includes fields for the supplier's identifier, name, and associated profile.",
+        "fields": {
+          "id": {
+            "description": "The unique identifier for the supplier. This field is automatically generated and managed by the database, and is read-only in API operations.",
+            "example": 1
+          },
+          "name": {
+            "description": "The name of the supplier. This is a required field with a maximum length of 150 characters.",
+            "example": "Acme Corporation"
+          },
+          "profile": {
+            "description": "The ID of the associated SupplierProfile instance. This field establishes a one-to-one relationship with the SupplierProfile model and is required for supplier creation.",
+            "example": 42
+          }
+        },
+        "confidence": 1.0
+      },
+      "prompt_tokens": 1032,
+      "completion_tokens": 169,
+      "total_tokens": 1201,
+      "cost_usd": 0.0,
+      "latency_ms": 5050,
+      "valid": true,
+      "errors": [],
+      "fallback_used": false,
+      "confidence": 1.0,
+      "metadata": {
+        "name": "SupplierSerializer",
+        "kind": "serializer",
+        "router_model": "nvidia-fast",
+        "attempts": 1
+      }
+    },
+    {
+      "attempt": 1,
+      "stage": "component",
+      "item_id": "68e078c4399caeb2",
+      "provider": "router",
+      "model": "poolside/laguna-xs-2.1",
+      "prompt_version": "2026-11-11.1",
+      "prompt_hash": "6b3a39d40378bf2d6252",
+      "input_summary": {
+        "system_prompt": "You are a precise API schema editor. You receive a normalized component extracted from source code. Return one JSON object and no prose. Never add or remove fields, change types, or invent constraints. Only improve descriptions and examples that are supported by the field names and source evidence. Preserve every structural field.",
+        "prompt": "{\"task\":\"Improve component and field documentation text.\",\"response_shape\":{\"description\":\"component description\",\"fields\":{\"<field>\":{\"description\":\"text\",\"example\":\"value\"}},\"confidence\":0.0},\"component\":{\"component_id\":\"68e078c4399caeb2\",\"name\":\"Category\",\"kind\":\"model\",\"source_ref\":{\"path\":\"/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi/reviews/serializers.py\",\"symbol\":\"Category\",\"metadata\":{}},\"parent_classes\":[],\"fields\":[{\"name\":\"name\",\"type\":\"string\",\"max_length\":100,\"required\":true,\"metadata\":{}}],\"dependencies\":[],\"supports_request\":false,\"supports_response\":true,\"confidence\":{\"score\":1.0,\"source\":\"static\"},\"metadata\":{\"name\":\"Category\",\"data_classes\":[]}}}"
+      },
+      "output_summary": {
+        "description": "Category model representing a classification or grouping for organizing reviews.",
+        "fields": {
+          "name": {
+            "description": "The name of the category used to classify reviews.",
+            "example": "Electronics"
+          }
+        },
+        "confidence": 1.0
+      },
+      "prompt_tokens": 251,
+      "completion_tokens": 72,
+      "total_tokens": 323,
+      "cost_usd": 0.0,
+      "latency_ms": 1148,
+      "valid": true,
+      "errors": [],
+      "fallback_used": false,
+      "confidence": 1.0,
+      "metadata": {
+        "name": "Category",
+        "kind": "model",
+        "router_model": "nvidia-fast",
+        "attempts": 1
+      }
+    },
+    {
+      "attempt": 1,
+      "stage": "component",
+      "item_id": "2fd7ceea1b9059ae",
+      "provider": "router",
+      "model": "poolside/laguna-xs-2.1",
+      "prompt_version": "2026-11-11.1",
+      "prompt_hash": "e8505233cdfeab9a360a",
+      "input_summary": {
+        "system_prompt": "You are a precise API schema editor. You receive a normalized component extracted from source code. Return one JSON object and no prose. Never add or remove fields, change types, or invent constraints. Only improve descriptions and examples that are supported by the field names and source evidence. Preserve every structural field.",
+        "prompt": "{\"task\":\"Improve component and field documentation text.\",\"response_shape\":{\"description\":\"component description\",\"fields\":{\"<field>\":{\"description\":\"text\",\"example\":\"value\"}},\"confidence\":0.0},\"component\":{\"component_id\":\"2fd7ceea1b9059ae\",\"name\":\"Manufacturer\",\"kind\":\"model\",\"source_ref\":{\"path\":\"/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi/reviews/serializers.py\",\"symbol\":\"Manufacturer\",\"metadata\":{}},\"parent_classes\":[],\"fields\":[{\"name\":\"name\",\"type\":\"string\",\"max_length\":200,\"required\":true,\"metadata\":{}},{\"name\":\"country\",\"type\":\"string\",\"max_length\":50,\"required\":true,\"metadata\":{}}],\"dependencies\":[],\"supports_request\":false,\"supports_response\":true,\"confidence\":{\"score\":1.0,\"source\":\"static\"},\"metadata\":{\"name\":\"Manufacturer\",\"data_classes\":[]}}}"
+      },
+      "output_summary": {
+        "description": "Manufacturer model representing manufacturer information for products or reviews.",
+        "fields": {
+          "name": {
+            "description": "The name of the manufacturer.",
+            "example": "Samsung"
+          },
+          "country": {
+            "description": "The country where the manufacturer is based.",
+            "example": "South Korea"
+          }
+        },
+        "confidence": 0.0
+      },
+      "prompt_tokens": 271,
+      "completion_tokens": 58,
+      "total_tokens": 329,
+      "cost_usd": 0.0,
+      "latency_ms": 1237,
+      "valid": true,
+      "errors": [],
+      "fallback_used": false,
+      "confidence": 0.0,
+      "metadata": {
+        "name": "Manufacturer",
+        "kind": "model",
+        "router_model": "nvidia-fast",
+        "attempts": 1
+      }
+    },
+    {
+      "attempt": 1,
+      "stage": "component",
+      "item_id": "e9ed612a6c7cc0c5",
+      "provider": "router",
+      "model": "poolside/laguna-xs-2.1",
+      "prompt_version": "2026-11-11.1",
+      "prompt_hash": "aca78eb58a5c02f1f804",
+      "input_summary": {
+        "system_prompt": "You are a precise API schema editor. You receive a normalized component extracted from source code. Return one JSON object and no prose. Never add or remove fields, change types, or invent constraints. Only improve descriptions and examples that are supported by the field names and source evidence. Preserve every structural field.",
+        "prompt": "{\"task\":\"Improve component and field documentation text.\",\"response_shape\":{\"description\":\"component description\",\"fields\":{\"<field>\":{\"description\":\"text\",\"example\":\"value\"}},\"confidence\":0.0},\"component\":{\"component_id\":\"e9ed612a6c7cc0c5\",\"name\":\"AdvancedProduct\",\"kind\":\"model\",\"source_ref\":{\"path\":\"/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi/reviews/serializers.py\",\"symbol\":\"AdvancedProduct\",\"metadata\":{}},\"parent_classes\":[],\"fields\":[{\"name\":\"sku\",\"type\":\"string\",\"max_length\":50,\"required\":true,\"metadata\":{}},{\"name\":\"name\",\"type\":\"string\",\"max_length\":200,\"required\":true,\"metadata\":{}},{\"name\":\"manufacturer\",\"type\":\"integer\",\"required\":false,\"metadata\":{}},{\"name\":\"supplier\",\"type\":\"integer\",\"required\":false,\"metadata\":{}},{\"name\":\"locations\",\"type\":\"array\",\"items\":{\"type\":\"integer\"},\"required\":true,\"metadata\":{}},{\"name\":\"categories\",\"type\":\"array\",\"items\":{\"type\":\"integer\"},\"required\":true,\"metadata\":{}}],\"dependencies\":[],\"supports_request\":false,\"supports_response\":true,\"confidence\":{\"score\":1.0,\"source\":\"static\"},\"metadata\":{\"name\":\"AdvancedProduct\",\"data_classes\":[]}}}"
+      },
+      "output_summary": {
+        "description": "AdvancedProduct model representing a product with detailed attributes including identification, categorization, and location information.",
+        "fields": {
+          "sku": {
+            "description": "Unique stock keeping unit identifier for the product, limited to 50 characters.",
+            "example": "SKU-12345"
+          },
+          "name": {
+            "description": "Product name or title, limited to 200 characters.",
+            "example": "Wireless Bluetooth Headphones"
+          },
+          "manufacturer": {
+            "description": "Identifier referencing the manufacturer entity.",
+            "example": 1
+          },
+          "supplier": {
+            "description": "Identifier referencing the supplier entity.",
+            "example": 2
+          },
+          "locations": {
+            "description": "Array of location identifiers where the product is stored or available.",
+            "example": [
+              1,
+              2,
+              3
+            ]
+          },
+          "categories": {
+            "description": "Array of category identifiers the product belongs to.",
+            "example": [
+              10,
+              20
+            ]
+          }
+        },
+        "confidence": 1.0
+      },
+      "prompt_tokens": 354,
+      "completion_tokens": 172,
+      "total_tokens": 526,
+      "cost_usd": 0.0,
+      "latency_ms": 3485,
+      "valid": true,
+      "errors": [],
+      "fallback_used": false,
+      "confidence": 1.0,
+      "metadata": {
+        "name": "AdvancedProduct",
+        "kind": "model",
+        "router_model": "nvidia-fast",
+        "attempts": 1
+      }
+    },
+    {
+      "attempt": 1,
+      "stage": "component",
+      "item_id": "23c41bc3fc657b1c",
+      "provider": "router",
+      "model": "poolside/laguna-xs-2.1",
+      "prompt_version": "2026-11-11.1",
+      "prompt_hash": "fc18ca94a5e590eeb3a4",
+      "input_summary": {
+        "system_prompt": "You are a precise API schema editor. You receive a normalized component extracted from source code. Return one JSON object and no prose. Never add or remove fields, change types, or invent constraints. Only improve descriptions and examples that are supported by the field names and source evidence. Preserve every structural field.",
+        "prompt": "{\"task\":\"Improve component and field documentation text.\",\"response_shape\":{\"description\":\"component description\",\"fields\":{\"<field>\":{\"description\":\"text\",\"example\":\"value\"}},\"confidence\":0.0},\"component\":{\"component_id\":\"23c41bc3fc657b1c\",\"name\":\"Review\",\"kind\":\"model\",\"source_ref\":{\"path\":\"/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi/reviews/serializers.py\",\"symbol\":\"Review\",\"metadata\":{}},\"parent_classes\":[],\"fields\":[{\"name\":\"product\",\"type\":\"integer\",\"required\":true,\"metadata\":{}},{\"name\":\"content\",\"type\":\"string\",\"required\":true,\"metadata\":{}},{\"name\":\"rating\",\"type\":\"integer\",\"required\":true,\"metadata\":{}},{\"name\":\"created_at\",\"type\":\"string\",\"format\":\"date-time\",\"required\":false,\"read_only\":true,\"metadata\":{}}],\"dependencies\":[],\"supports_request\":false,\"supports_response\":true,\"confidence\":{\"score\":1.0,\"source\":\"static\"},\"metadata\":{\"name\":\"Review\",\"data_classes\":[]}}}"
+      },
+      "output_summary": {
+        "description": "A review model representing user feedback for a product, including the product reference, review content, rating, and creation timestamp.",
+        "fields": {
+          "product": {
+            "description": "The unique identifier of the product being reviewed.",
+            "example": 123
+          },
+          "content": {
+            "description": "The textual content of the review written by the user.",
+            "example": "Excellent product with fast delivery and great quality!"
+          },
+          "rating": {
+            "description": "The numerical rating given by the user, typically on a scale of 1 to 5.",
+            "example": 5
+          },
+          "created_at": {
+            "description": "The timestamp when the review was created, in ISO 8601 format.",
+            "example": "2023-10-15T14:30:00Z"
+          }
+        },
+        "confidence": 1.0
+      },
+      "prompt_tokens": 303,
+      "completion_tokens": 227,
+      "total_tokens": 530,
+      "cost_usd": 0.0,
+      "latency_ms": 5733,
+      "valid": true,
+      "errors": [],
+      "fallback_used": false,
+      "confidence": 1.0,
+      "metadata": {
+        "name": "Review",
+        "kind": "model",
+        "router_model": "nvidia-fast",
+        "attempts": 1
+      }
+    },
+    {
+      "attempt": 1,
+      "stage": "component",
+      "item_id": "1e9740f4e9c04a52",
+      "provider": "router",
+      "model": "poolside/laguna-xs-2.1",
+      "prompt_version": "2026-11-11.1",
+      "prompt_hash": "af5feb3a6d020253b9a4",
+      "input_summary": {
+        "system_prompt": "You are a precise API schema editor. You receive a normalized component extracted from source code. Return one JSON object and no prose. Never add or remove fields, change types, or invent constraints. Only improve descriptions and examples that are supported by the field names and source evidence. Preserve every structural field.",
+        "prompt": "{\"task\":\"Improve component and field documentation text.\",\"response_shape\":{\"description\":\"component description\",\"fields\":{\"<field>\":{\"description\":\"text\",\"example\":\"value\"}},\"confidence\":0.0},\"component\":{\"component_id\":\"1e9740f4e9c04a52\",\"name\":\"Product\",\"kind\":\"model\",\"source_ref\":{\"path\":\"/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi/reviews/serializers.py\",\"symbol\":\"Product\",\"metadata\":{}},\"parent_classes\":[],\"fields\":[{\"name\":\"name\",\"type\":\"string\",\"max_length\":100,\"required\":true,\"metadata\":{}},{\"name\":\"category\",\"type\":\"integer\",\"required\":true,\"metadata\":{}},{\"name\":\"status\",\"type\":\"string\",\"max_length\":20,\"required\":false,\"metadata\":{}}],\"dependencies\":[],\"supports_request\":false,\"supports_response\":true,\"confidence\":{\"score\":1.0,\"source\":\"static\"},\"metadata\":{\"name\":\"Product\",\"data_classes\":[]}}}"
+      },
+      "output_summary": {
+        "description": "A product model representing an item available for sale or review in the system.",
+        "fields": {
+          "name": {
+            "description": "The name of the product as displayed to users.",
+            "example": "Wireless Bluetooth Headphones"
+          },
+          "category": {
+            "description": "The category identifier that this product belongs to, used for classification and filtering.",
+            "example": 5
+          },
+          "status": {
+            "description": "Current status of the product (e.g., 'active', 'inactive', 'discontinued').",
+            "example": "active"
+          }
+        },
+        "confidence": 1.0
+      },
+      "prompt_tokens": 291,
+      "completion_tokens": 103,
+      "total_tokens": 394,
+      "cost_usd": 0.0,
+      "latency_ms": 2972,
+      "valid": true,
+      "errors": [],
+      "fallback_used": false,
+      "confidence": 1.0,
+      "metadata": {
+        "name": "Product",
+        "kind": "model",
+        "router_model": "nvidia-fast",
+        "attempts": 1
+      }
+    },
+    {
+      "attempt": 1,
+      "stage": "component",
+      "item_id": "4d9c75ae28117dac",
+      "provider": "router",
+      "model": "poolside/laguna-xs-2.1",
+      "prompt_version": "2026-11-11.1",
+      "prompt_hash": "237d0253caf2dc4907b4",
+      "input_summary": {
+        "system_prompt": "You are a precise API schema editor. You receive a normalized component extracted from source code. Return one JSON object and no prose. Never add or remove fields, change types, or invent constraints. Only improve descriptions and examples that are supported by the field names and source evidence. Preserve every structural field.",
+        "prompt": "{\"task\":\"Improve component and field documentation text.\",\"response_shape\":{\"description\":\"component description\",\"fields\":{\"<field>\":{\"description\":\"text\",\"example\":\"value\"}},\"confidence\":0.0},\"component\":{\"component_id\":\"4d9c75ae28117dac\",\"name\":\"CategorySerializer\",\"kind\":\"serializer\",\"source_ref\":{\"path\":\"/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi/reviews/serializers.py\",\"symbol\":\"CategorySerializer\",\"metadata\":{}},\"parent_classes\":[\"{'name': 'serializers.ModelSerializer', 'path': None, 'code': None}\"],\"fields\":[{\"name\":\"id\",\"type\":\"integer\",\"read_only\":true,\"metadata\":{}},{\"name\":\"name\",\"type\":\"string\",\"max_length\":100,\"required\":true,\"metadata\":{}}],\"dependencies\":[],\"supports_request\":true,\"supports_response\":true,\"confidence\":{\"score\":1.0,\"source\":\"static\"},\"metadata\":{\"name\":\"CategorySerializer\",\"code\":\"class CategorySerializer(serializers.ModelSerializer):\\n    class Meta:\\n        model = Category\\n        fields = ['id', 'name']\\n\",\"data_classes\":[{\"name\":\"Category\",\"path\":\"/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi/reviews/models.py\",\"code\":\"class Category(models.Model):\\n    name = models.CharField(max_length=100)\\n\\n    def __str__(self):\\n        return self.name\\n\",\"type\":\"model\",\"parent_classes\":[{\"name\":\"models.Model\",\"path\":null,\"code\":null}],\"properties\":[\"name\"],\"methods\":{\"__str__\":{\"startLine\":11,\"endLine\":12,\"comment\":\"\",\"decorators\":[],\"context\":{\"signature\":\"__st"
+      },
+      "output_summary": {
+        "description": "Serializer for the Category model, used to convert Category instances to and from JSON format.",
+        "fields": {
+          "id": {
+            "description": "Unique identifier for the category. This field is automatically generated and read-only.",
+            "example": 1
+          },
+          "name": {
+            "description": "Name of the category. Required field with a maximum length of 100 characters.",
+            "example": "Electronics"
+          }
+        },
+        "confidence": 1.0
+      },
+      "prompt_tokens": 652,
+      "completion_tokens": 82,
+      "total_tokens": 734,
+      "cost_usd": 0.0,
+      "latency_ms": 9853,
+      "valid": true,
+      "errors": [],
+      "fallback_used": false,
+      "confidence": 1.0,
+      "metadata": {
+        "name": "CategorySerializer",
+        "kind": "serializer",
+        "router_model": "nvidia-fast",
+        "attempts": 1
+      }
+    },
+    {
+      "attempt": 1,
+      "stage": "component",
+      "item_id": "d7702418c6b54ae8",
+      "provider": "router",
+      "model": "poolside/laguna-xs-2.1",
+      "prompt_version": "2026-11-11.1",
+      "prompt_hash": "afae4dbf36803d4ef37e",
+      "input_summary": {
+        "system_prompt": "You are a precise API schema editor. You receive a normalized component extracted from source code. Return one JSON object and no prose. Never add or remove fields, change types, or invent constraints. Only improve descriptions and examples that are supported by the field names and source evidence. Preserve every structural field.",
+        "prompt": "{\"task\":\"Improve component and field documentation text.\",\"response_shape\":{\"description\":\"component description\",\"fields\":{\"<field>\":{\"description\":\"text\",\"example\":\"value\"}},\"confidence\":0.0},\"component\":{\"component_id\":\"d7702418c6b54ae8\",\"name\":\"AdvancedProductSerializer\",\"kind\":\"serializer\",\"source_ref\":{\"path\":\"/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/reviewapi/reviews/serializers.py\",\"symbol\":\"AdvancedProductSerializer\",\"metadata\":{}},\"parent_classes\":[\"{'name': 'serializers.ModelSerializer', 'path': None, 'code': None}\"],\"fields\":[{\"name\":\"sku\",\"type\":\"string\",\"max_length\":50,\"required\":true,\"metadata\":{}},{\"name\":\"name\",\"type\":\"string\",\"max_length\":200,\"required\":true,\"metadata\":{}},{\"name\":\"manufacturer\",\"type\":\"integer\",\"required\":false,\"metadata\":{}},{\"name\":\"supplier_details\",\"type\":\"string\",\"read_only\":true,\"metadata\":{}},{\"name\":\"location_count\",\"type\":\"object\",\"read_only\":true,\"metadata\":{}},{\"name\":\"locations\",\"type\":\"array\",\"items\":{\"type\":\"integer\"},\"required\":true,\"metadata\":{}}],\"dependencies\":[],\"supports_request\":true,\"supports_response\":true,\"confidence\":{\"score\":1.0,\"source\":\"static\"},\"metadata\":{\"name\":\"AdvancedProductSerializer\",\"code\":\"class AdvancedProductSerializer(serializers.ModelSerializer):\\n    \\\"\\\"\\\"\\n    TEST CASE: A complex serializer for testing multiple issues.\\n    - References another serializer by string.\\n    - Uses a SerializerMethodField that depends on another model.\\n    \\\"\\\"\\\"\\n    # TEST CASE"
+      },
+      "output_summary": {
+        "description": "A complex serializer for AdvancedProduct that demonstrates multiple relationship types and field transformations. This serializer handles product data including SKU, name, manufacturer, supplier details, location count, and locations. It uses a SerializerMethodField to dynamically calculate location counts and a CharField with source mapping to display supplier information.",
+        "fields": {
+          "sku": {
+            "description": "Unique stock keeping unit identifier for the product. Must be unique across all products in the system.",
+            "example": "PROD-00123"
+          },
+          "name": {
+            "description": "The full name or title of the product as displayed to customers.",
+            "example": "Wireless Bluetooth Headphones Pro Series"
+          },
+          "manufacturer": {
+            "description": "Foreign key reference to the Manufacturer model that produces this product. Nullable if manufacturer information is unavailable.",
+            "example": 42
+          },
+          "supplier_details": {
+            "description": "Read-only field that displays the supplier's name by traversing the supplier relationship. Populated from the related Supplier model's name attribute.",
+            "example": "Tech Distributors Inc."
+          },
+          "location_count": {
+            "description": "Read-only computed field representing the total number of locations where this product is available. Calculated dynamically via the get_location_count method.",
+            "example": 5
+          },
+          "locations": {
+            "description": "Array of location IDs where this product is stocked. Each ID corresponds to a ProductLocation record in the database.",
+            "example": [
+              1,
+              3,
+              7,
+              12,
+              15
+            ]
+          }
+        },
+        "confidence": 1.0
+      },
+      "prompt_tokens": 2721,
+      "completion_tokens": 285,
+      "total_tokens": 3006,
+      "cost_usd": 0.0,
+      "latency_ms": 15824,
+      "valid": true,
+      "errors": [],
+      "fallback_used": false,
+      "confidence": 1.0,
+      "metadata": {
+        "name": "AdvancedProductSerializer",
+        "kind": "serializer",
+        "router_model": "nvidia-fast",
+        "attempts": 1
+      }
+    }
+  ],
+  "findings": [
+    {
+      "code": "operation_missing_text",
+      "message": "POST /api/v2/advanced-products/ has no description.",
+      "severity": "warning",
+      "stage": "quality",
+      "item_id": "post_api_v2_advanced_products",
+      "source_ref": null,
+      "metadata": {
+        "path": "/api/v2/advanced-products/",
+        "method": "post",
+        "field": "description"
+      }
+    },
+    {
+      "code": "parameter_missing_description",
+      "message": "DELETE /api/v2/advanced-products/{pk}/ parameter 'pk' has no description.",
+      "severity": "info",
+      "stage": "quality",
+      "item_id": "delete_api_v2_advanced_products_pk",
+      "source_ref": null,
+      "metadata": {
+        "path": "/api/v2/advanced-products/{pk}/",
+        "method": "delete",
+        "parameter": "pk"
+      }
+    },
+    {
+      "code": "parameter_missing_description",
+      "message": "GET /api/v2/advanced-products/{pk}/ parameter 'pk' has no description.",
+      "severity": "info",
+      "stage": "quality",
+      "item_id": "get_api_v2_advanced_products_pk",
+      "source_ref": null,
+      "metadata": {
+        "path": "/api/v2/advanced-products/{pk}/",
+        "method": "get",
+        "parameter": "pk"
+      }
+    },
+    {
+      "code": "parameter_missing_description",
+      "message": "PATCH /api/v2/advanced-products/{pk}/ parameter 'pk' has no description.",
+      "severity": "info",
+      "stage": "quality",
+      "item_id": "patch_api_v2_advanced_products_pk",
+      "source_ref": null,
+      "metadata": {
+        "path": "/api/v2/advanced-products/{pk}/",
+        "method": "patch",
+        "parameter": "pk"
+      }
+    },
+    {
+      "code": "parameter_missing_description",
+      "message": "PUT /api/v2/advanced-products/{pk}/ parameter 'pk' has no description.",
+      "severity": "info",
+      "stage": "quality",
+      "item_id": "put_api_v2_advanced_products_pk",
+      "source_ref": null,
+      "metadata": {
+        "path": "/api/v2/advanced-products/{pk}/",
+        "method": "put",
+        "parameter": "pk"
+      }
+    },
+    {
+      "code": "parameter_missing_description",
+      "message": "GET /api/v2/advanced-products/{pk}/get_competitors/ parameter 'pk' has no description.",
+      "severity": "info",
+      "stage": "quality",
+      "item_id": "get_api_v2_advanced_products_pk_get_competitors",
+      "source_ref": null,
+      "metadata": {
+        "path": "/api/v2/advanced-products/{pk}/get_competitors/",
+        "method": "get",
+        "parameter": "pk"
+      }
+    },
+    {
+      "code": "parameter_missing_description",
+      "message": "DELETE /api/v2/categories/{pk}/ parameter 'pk' has no description.",
+      "severity": "info",
+      "stage": "quality",
+      "item_id": "delete_api_v2_categories_pk",
+      "source_ref": null,
+      "metadata": {
+        "path": "/api/v2/categories/{pk}/",
+        "method": "delete",
+        "parameter": "pk"
+      }
+    },
+    {
+      "code": "parameter_missing_description",
+      "message": "GET /api/v2/categories/{pk}/ parameter 'pk' has no description.",
+      "severity": "info",
+      "stage": "quality",
+      "item_id": "get_api_v2_categories_pk",
+      "source_ref": null,
+      "metadata": {
+        "path": "/api/v2/categories/{pk}/",
+        "method": "get",
+        "parameter": "pk"
+      }
+    },
+    {
+      "code": "parameter_missing_description",
+      "message": "PATCH /api/v2/categories/{pk}/ parameter 'pk' has no description.",
+      "severity": "info",
+      "stage": "quality",
+      "item_id": "patch_api_v2_categories_pk",
+      "source_ref": null,
+      "metadata": {
+        "path": "/api/v2/categories/{pk}/",
+        "method": "patch",
+        "parameter": "pk"
+      }
+    },
+    {
+      "code": "parameter_missing_description",
+      "message": "PUT /api/v2/categories/{pk}/ parameter 'pk' has no description.",
+      "severity": "info",
+      "stage": "quality",
+      "item_id": "put_api_v2_categories_pk",
+      "source_ref": null,
+      "metadata": {
+        "path": "/api/v2/categories/{pk}/",
+        "method": "put",
+        "parameter": "pk"
+      }
+    },
+    {
+      "code": "parameter_missing_description",
+      "message": "GET /api/v2/categories/{pk}/list_products/ parameter 'pk' has no description.",
+      "severity": "info",
+      "stage": "quality",
+      "item_id": "get_api_v2_categories_pk_list_products",
+      "source_ref": null,
+      "metadata": {
+        "path": "/api/v2/categories/{pk}/list_products/",
+        "method": "get",
+        "parameter": "pk"
+      }
+    },
+    {
+      "code": "parameter_missing_description",
+      "message": "GET /api/v2/manufacturers/{pk}/ parameter 'pk' has no description.",
+      "severity": "info",
+      "stage": "quality",
+      "item_id": "get_api_v2_manufacturers_pk",
+      "source_ref": null,
+      "metadata": {
+        "path": "/api/v2/manufacturers/{pk}/",
+        "method": "get",
+        "parameter": "pk"
+      }
+    },
+    {
+      "code": "parameter_missing_description",
+      "message": "DELETE /api/v2/products/{pk}/ parameter 'pk' has no description.",
+      "severity": "info",
+      "stage": "quality",
+      "item_id": "delete_api_v2_products_pk",
+      "source_ref": null,
+      "metadata": {
+        "path": "/api/v2/products/{pk}/",
+        "method": "delete",
+        "parameter": "pk"
+      }
+    },
+    {
+      "code": "parameter_missing_description",
+      "message": "GET /api/v2/products/{pk}/ parameter 'pk' has no description.",
+      "severity": "info",
+      "stage": "quality",
+      "item_id": "get_api_v2_products_pk",
+      "source_ref": null,
+      "metadata": {
+        "path": "/api/v2/products/{pk}/",
+        "method": "get",
+        "parameter": "pk"
+      }
+    },
+    {
+      "code": "parameter_missing_description",
+      "message": "PATCH /api/v2/products/{pk}/ parameter 'pk' has no description.",
+      "severity": "info",
+      "stage": "quality",
+      "item_id": "patch_api_v2_products_pk",
+      "source_ref": null,
+      "metadata": {
+        "path": "/api/v2/products/{pk}/",
+        "method": "patch",
+        "parameter": "pk"
+      }
+    },
+    {
+      "code": "parameter_missing_description",
+      "message": "PUT /api/v2/products/{pk}/ parameter 'pk' has no description.",
+      "severity": "info",
+      "stage": "quality",
+      "item_id": "put_api_v2_products_pk",
+      "source_ref": null,
+      "metadata": {
+        "path": "/api/v2/products/{pk}/",
+        "method": "put",
+        "parameter": "pk"
+      }
+    },
+    {
+      "code": "parameter_missing_description",
+      "message": "DELETE /api/v2/reviews/{pk}/ parameter 'pk' has no description.",
+      "severity": "info",
+      "stage": "quality",
+      "item_id": "delete_api_v2_reviews_pk",
+      "source_ref": null,
+      "metadata": {
+        "path": "/api/v2/reviews/{pk}/",
+        "method": "delete",
+        "parameter": "pk"
+      }
+    },
+    {
+      "code": "parameter_missing_description",
+      "message": "GET /api/v2/reviews/{pk}/ parameter 'pk' has no description.",
+      "severity": "info",
+      "stage": "quality",
+      "item_id": "get_api_v2_reviews_pk",
+      "source_ref": null,
+      "metadata": {
+        "path": "/api/v2/reviews/{pk}/",
+        "method": "get",
+        "parameter": "pk"
+      }
+    },
+    {
+      "code": "parameter_missing_description",
+      "message": "PATCH /api/v2/reviews/{pk}/ parameter 'pk' has no description.",
+      "severity": "info",
+      "stage": "quality",
+      "item_id": "patch_api_v2_reviews_pk",
+      "source_ref": null,
+      "metadata": {
+        "path": "/api/v2/reviews/{pk}/",
+        "method": "patch",
+        "parameter": "pk"
+      }
+    },
+    {
+      "code": "parameter_missing_description",
+      "message": "PUT /api/v2/reviews/{pk}/ parameter 'pk' has no description.",
+      "severity": "info",
+      "stage": "quality",
+      "item_id": "put_api_v2_reviews_pk",
+      "source_ref": null,
+      "metadata": {
+        "path": "/api/v2/reviews/{pk}/",
+        "method": "put",
+        "parameter": "pk"
+      }
+    },
+    {
+      "code": "parameter_missing_description",
+      "message": "POST /api/v2/reviews/{pk}/submit_comment/ parameter 'pk' has no description.",
+      "severity": "info",
+      "stage": "quality",
+      "item_id": "post_api_v2_reviews_pk_submit_comment",
+      "source_ref": null,
+      "metadata": {
+        "path": "/api/v2/reviews/{pk}/submit_comment/",
+        "method": "post",
+        "parameter": "pk"
+      }
+    }
+  ],
+  "redacted": true,
+  "error": null,
+  "metadata": {
+    "openapi_version": "3.0.3",
+    "quality_score": 0.873,
+    "failed_items": [],
+    "endpoint_count": 16,
+    "component_count": 12
+  }
+}

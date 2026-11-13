@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import pytest
@@ -77,3 +78,30 @@ async def test_tool_errors_are_structured(isolated_settings) -> None:
     result = await tools.extract_endpoints("not-a-valid-id")
     assert result["ok"] is False
     assert "error" in result
+
+
+@pytest.mark.asyncio
+async def test_agent_artifact_tools(tmp_path: Path) -> None:
+    from pyopenapi.server import tools
+
+    (tmp_path / "agent_trace.json").write_text(
+        json.dumps(
+            {
+                "status": "completed",
+                "findings": [{"stage": "quality", "code": "x", "message": "m", "severity": "info"}],
+                "metadata": {"quality_score": 0.9},
+            }
+        ),
+        encoding="utf-8",
+    )
+    (tmp_path / "agent_progress.jsonl").write_text(
+        json.dumps({"type": "run_start", "framework": "flask"}) + "\n"
+        + json.dumps({"type": "run_done", "quality_score": 0.9}) + "\n",
+        encoding="utf-8",
+    )
+    trace = await tools.get_generation_trace(str(tmp_path))
+    assert trace["ok"] and trace["trace"]["status"] == "completed"
+    quality = await tools.get_quality_report(str(tmp_path))
+    assert quality["ok"] and quality["quality_score"] == 0.9
+    progress = await tools.get_generation_progress(str(tmp_path))
+    assert progress["ok"] and progress["state"]["status"] == "completed"

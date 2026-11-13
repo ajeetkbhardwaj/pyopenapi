@@ -1,0 +1,32 @@
+{"ts": "2026-11-12T18:01:17+00:00", "type": "run_start", "analysis_id": "7474deb909d27913", "project_path": "/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/flaskapi", "framework": "flask", "provider": "router", "model": null, "openapi_version": "3.0.3"}
+{"ts": "2026-11-12T18:01:17+00:00", "type": "stage_start", "stage": "detector", "item_count": 1}
+{"ts": "2026-11-12T18:01:18+00:00", "type": "stage_end", "stage": "detector", "success": 1, "failure": 0, "duration_ms": 1117}
+{"ts": "2026-11-12T18:01:18+00:00", "type": "stage_start", "stage": "endpoint", "item_count": 5}
+{"ts": "2026-11-12T18:01:18+00:00", "type": "item_start", "kind": "endpoint", "id": "9f507a324108514f", "label": "GET, POST /api/items"}
+{"ts": "2026-11-12T18:01:18+00:00", "type": "item_start", "kind": "endpoint", "id": "096102955c3ae9dc", "label": "DELETE, GET, PUT /api/items/{item_id}"}
+{"ts": "2026-11-12T18:01:18+00:00", "type": "item_start", "kind": "endpoint", "id": "dcec033cfb2b41e3", "label": "GET /api/users/{user_id}"}
+{"ts": "2026-11-12T18:01:18+00:00", "type": "item_start", "kind": "endpoint", "id": "bec3f53f6c937f5d", "label": "GET /api/users/{user_id}/orders"}
+{"ts": "2026-11-12T18:01:18+00:00", "type": "item_start", "kind": "endpoint", "id": "e2842e6d6edce8c0", "label": "GET /health"}
+{"ts": "2026-11-12T18:01:20+00:00", "type": "item_done", "kind": "endpoint", "id": "e2842e6d6edce8c0", "label": "GET /health", "confidence": 0.9}
+{"ts": "2026-11-12T18:01:20+00:00", "type": "item_done", "kind": "endpoint", "id": "bec3f53f6c937f5d", "label": "GET /api/users/{user_id}/orders", "confidence": 0.0}
+{"ts": "2026-11-12T18:01:22+00:00", "type": "item_done", "kind": "endpoint", "id": "dcec033cfb2b41e3", "label": "GET /api/users/{user_id}", "confidence": 0.0}
+{"ts": "2026-11-12T18:01:24+00:00", "type": "item_done", "kind": "endpoint", "id": "096102955c3ae9dc", "label": "DELETE, GET, PUT /api/items/{item_id}", "confidence": 0.8}
+{"ts": "2026-11-12T18:01:25+00:00", "type": "item_done", "kind": "endpoint", "id": "9f507a324108514f", "label": "GET, POST /api/items", "confidence": 0.8}
+{"ts": "2026-11-12T18:01:25+00:00", "type": "stage_end", "stage": "endpoint", "success": 5, "failure": 0, "duration_ms": 7065}
+{"ts": "2026-11-12T18:01:25+00:00", "type": "stage_start", "stage": "component", "item_count": 4}
+{"ts": "2026-11-12T18:01:25+00:00", "type": "item_start", "kind": "component", "id": "f7e2a2890091ee45", "label": "ItemStatus (enum)"}
+{"ts": "2026-11-12T18:01:25+00:00", "type": "item_start", "kind": "component", "id": "8b186eb6cf918aa9", "label": "ItemCreate (pydantic_model)"}
+{"ts": "2026-11-12T18:01:25+00:00", "type": "item_start", "kind": "component", "id": "d92fd2b36fc15c21", "label": "User (pydantic_model)"}
+{"ts": "2026-11-12T18:01:25+00:00", "type": "item_start", "kind": "component", "id": "7ad701307124cda3", "label": "Order (pydantic_model)"}
+{"ts": "2026-11-12T18:01:26+00:00", "type": "item_done", "kind": "component", "id": "d92fd2b36fc15c21", "label": "User (pydantic_model)", "confidence": 1.0}
+{"ts": "2026-11-12T18:01:27+00:00", "type": "item_done", "kind": "component", "id": "f7e2a2890091ee45", "label": "ItemStatus (enum)", "confidence": 1.0}
+{"ts": "2026-11-12T18:01:28+00:00", "type": "item_done", "kind": "component", "id": "7ad701307124cda3", "label": "Order (pydantic_model)", "confidence": 1.0}
+{"ts": "2026-11-12T18:01:29+00:00", "type": "item_done", "kind": "component", "id": "8b186eb6cf918aa9", "label": "ItemCreate (pydantic_model)", "confidence": 1.0}
+{"ts": "2026-11-12T18:01:29+00:00", "type": "stage_end", "stage": "component", "success": 4, "failure": 0, "duration_ms": 4096}
+{"ts": "2026-11-12T18:01:29+00:00", "type": "stage_start", "stage": "assembly", "item_count": 1}
+{"ts": "2026-11-12T18:01:29+00:00", "type": "stage_end", "stage": "assembly", "success": 1, "failure": 0, "duration_ms": 0}
+{"ts": "2026-11-12T18:01:29+00:00", "type": "stage_start", "stage": "validation", "item_count": 1}
+{"ts": "2026-11-12T18:01:29+00:00", "type": "stage_end", "stage": "validation", "success": 1, "failure": 0, "duration_ms": 0}
+{"ts": "2026-11-12T18:01:29+00:00", "type": "stage_start", "stage": "quality", "item_count": 1}
+{"ts": "2026-11-12T18:01:29+00:00", "type": "stage_end", "stage": "quality", "success": 1, "failure": 0, "duration_ms": 0}
+{"ts": "2026-11-12T18:01:29+00:00", "type": "run_done", "spec_path": "/Users/ajeetkumar/Developer/GitHubUnOfficial/knowl-apidocs/pyopenapi/example/flaskapi/output-agent/openapi.yml", "quality_score": 0.891, "duration_ms": 12293, "usage": {"prompt_tokens": 4117, "completion_tokens": 1789, "total_tokens": 5906, "requests": 10, "budget": 0, "budget_exceeded": false}}

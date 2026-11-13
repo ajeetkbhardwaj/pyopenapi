@@ -137,7 +137,7 @@ class _Renderer:
         if operation.get("deprecated"):
             meta.append("**Deprecated:** yes")
         if meta:
-            lines += meta + [""]
+            lines += [*meta, ""]
 
         lines += self._render_parameters(operation)
         lines += self._render_request_body(operation)
@@ -250,7 +250,7 @@ class _Renderer:
 
         table = self.schema_table(schema)
         if table:
-            lines += ["## Properties", ""] + table + [""]
+            lines += ["## Properties", "", *table, ""]
         else:
             lines += ["_No properties declared._", ""]
 

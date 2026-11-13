@@ -1,0 +1,22 @@
+openapi: 3.0.0
+info: {title: Nested Test, version: 1.0}
+paths:
+  /user/profile:
+    get:
+      responses:
+        '200':
+          description: A nested user profile
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  userId: { type: integer }
+                  profile:
+                    type: object
+                    properties: {}
+                  tags:
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: string

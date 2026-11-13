@@ -1,0 +1,1021 @@
+openapi: 3.0.3
+info:
+  title: Review API
+  version: 0.1.0
+  description: A Django-based API for managing products, categories, manufacturers,
+    reviews, and suppliers. Provides CRUD operations for core entities and specialized
+    endpoints for product insights and review interactions.
+paths:
+  /admin:
+    get:
+      operationId: get_admin
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+      summary: Admin dashboard
+      description: Renders the Django admin interface for managing application data.
+        Requires authentication and appropriate permissions to access administrative
+        functions.
+      tags:
+      - admin
+  /api/v2/advanced-products/:
+    get:
+      operationId: get_api_v2_advanced_products
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AdvancedProductSerializer'
+      summary: List all advanced products
+      description: Returns a paginated list of advanced products available in the
+        system. Use this endpoint to retrieve product information including details,
+        specifications, and metadata for all advanced products.
+      tags:
+      - api
+    post:
+      operationId: post_api_v2_advanced_products
+      responses:
+        '201':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdvancedProductSerializer'
+      summary: AdvancedProductViewSet.create
+      tags:
+      - api
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdvancedProductSerializer'
+  /api/v2/advanced-products/special_offers/:
+    get:
+      operationId: get_api_v2_advanced_products_special_offers
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdvancedProductSerializer'
+      summary: Retrieve special offers for advanced products
+      description: Returns a list of special offers available for advanced products.
+        This endpoint provides access to promotional offers and discounts on premium
+        product offerings.
+      tags:
+      - api
+  /api/v2/advanced-products/{pk}/:
+    delete:
+      operationId: delete_api_v2_advanced_products_pk
+      responses:
+        '204':
+          description: No content
+      summary: Delete an advanced product
+      description: Removes the specified advanced product from the system. This action
+        is irreversible and will permanently delete the product.
+      tags:
+      - api
+      parameters:
+      - name: pk
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      operationId: get_api_v2_advanced_products_pk
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdvancedProductSerializer'
+      summary: Retrieve an advanced product
+      description: Returns detailed information about a specific advanced product
+        identified by its unique identifier.
+      tags:
+      - api
+      parameters:
+      - name: pk
+        in: path
+        required: true
+        schema:
+          type: string
+    patch:
+      operationId: patch_api_v2_advanced_products_pk
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdvancedProductSerializer'
+      summary: Partially update an advanced product
+      description: Updates one or more fields of the specified advanced product. Only
+        the fields provided in the request will be modified.
+      tags:
+      - api
+      parameters:
+      - name: pk
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdvancedProductSerializer'
+        description: JSON object containing the fields to update. Only provided fields
+          will be modified.
+    put:
+      operationId: put_api_v2_advanced_products_pk
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdvancedProductSerializer'
+      summary: Update an advanced product
+      description: Replaces all fields of the specified advanced product with the
+        provided data. All fields must be included in the request.
+      tags:
+      - api
+      parameters:
+      - name: pk
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdvancedProductSerializer'
+        description: JSON object containing all fields of the advanced product to
+          replace the existing data.
+  /api/v2/advanced-products/{pk}/get_competitors/:
+    get:
+      operationId: get_api_v2_advanced_products_pk_get_competitors
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdvancedProductSerializer'
+      summary: Retrieve competitors for an advanced product
+      description: Returns a list of competitors associated with the specified advanced
+        product. This endpoint provides competitive intelligence data for products
+        in the advanced category.
+      tags:
+      - api
+      parameters:
+      - name: pk
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v2/categories/:
+    get:
+      operationId: get_api_v2_categories
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CategorySerializer'
+      summary: List all categories
+      description: Returns a paginated list of all available categories in the system.
+      tags:
+      - api
+    post:
+      operationId: post_api_v2_categories
+      responses:
+        '201':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategorySerializer'
+      summary: Create a new category
+      description: Creates a new category using the provided data. Returns the created
+        category object on success.
+      tags:
+      - api
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategorySerializer'
+        description: Category data to create a new category.
+  /api/v2/categories/{pk}/:
+    delete:
+      operationId: delete_api_v2_categories_pk
+      responses:
+        '204':
+          description: No content
+      summary: Delete a category
+      description: Removes a category from the system. The category must exist and
+        will be permanently deleted.
+      tags:
+      - api
+      parameters:
+      - name: pk
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      operationId: get_api_v2_categories_pk
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategorySerializer'
+      summary: Retrieve a category
+      description: Returns detailed information about a specific category identified
+        by its unique identifier.
+      tags:
+      - api
+      parameters:
+      - name: pk
+        in: path
+        required: true
+        schema:
+          type: string
+    patch:
+      operationId: patch_api_v2_categories_pk
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategorySerializer'
+      summary: Update a category partially
+      description: Updates specific fields of a category using partial data. Only
+        provided fields will be modified.
+      tags:
+      - api
+      parameters:
+      - name: pk
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategorySerializer'
+        description: Partial category data to update. Only the fields included will
+          be modified.
+    put:
+      operationId: put_api_v2_categories_pk
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategorySerializer'
+      summary: Update a category completely
+      description: Replaces the entire category with new data. All fields must be
+        provided.
+      tags:
+      - api
+      parameters:
+      - name: pk
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategorySerializer'
+        description: Complete category data to replace the existing category.
+  /api/v2/categories/{pk}/list_products/:
+    get:
+      operationId: get_api_v2_categories_pk_list_products
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategorySerializer'
+      summary: List products in a category
+      description: Returns a list of products belonging to the specified category.
+        Use this endpoint to retrieve all products associated with a particular category
+        by its unique identifier.
+      tags:
+      - api
+      parameters:
+      - name: pk
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v2/manufacturers/:
+    get:
+      operationId: get_api_v2_manufacturers
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ManufacturerSerializer'
+      summary: List all manufacturers
+      description: Returns a paginated list of manufacturers with their details. Use
+        this endpoint to retrieve all available manufacturers in the system.
+      tags:
+      - manufacturers
+  /api/v2/manufacturers/{pk}/:
+    get:
+      operationId: get_api_v2_manufacturers_pk
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManufacturerSerializer'
+      summary: Retrieve a manufacturer by ID
+      description: Returns the details of a specific manufacturer identified by its
+        primary key. Use this endpoint to fetch information about a single manufacturer
+        from the database.
+      tags:
+      - manufacturers
+      parameters:
+      - name: pk
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v2/products/:
+    get:
+      operationId: get_api_v2_products
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductSerializer'
+      summary: List all products
+      description: Returns a paginated list of products available in the system. Use
+        this endpoint to retrieve product information including details such as name,
+        description, price, and other relevant attributes.
+      tags:
+      - api
+      - products
+    post:
+      operationId: post_api_v2_products
+      responses:
+        '201':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductSerializer'
+      summary: Create a new product
+      description: Creates a new product in the system. The request body should contain
+        all required product details. Returns the created product with its assigned
+        identifier.
+      tags:
+      - api
+      - products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductSerializer'
+        description: A JSON object containing the product data to create. Required
+          fields include the product name and other attributes defined in the ProductSerializer.
+  /api/v2/products/top_products/:
+    get:
+      operationId: get_api_v2_products_top_products
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductSerializer'
+      summary: Retrieve top products
+      description: Returns a list of the most popular or featured products in the
+        catalog. This endpoint provides a quick way to showcase trending items without
+        requiring complex filtering or search parameters.
+      tags:
+      - api
+  /api/v2/products/{pk}/:
+    delete:
+      operationId: delete_api_v2_products_pk
+      responses:
+        '204':
+          description: No content
+      summary: Delete a product
+      description: Removes a product from the system. Returns 204 No Content on successful
+        deletion.
+      tags:
+      - api
+      parameters:
+      - name: pk
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      operationId: get_api_v2_products_pk
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductSerializer'
+      summary: Retrieve a product
+      description: Returns detailed information about a specific product identified
+        by its unique identifier.
+      tags:
+      - api
+      parameters:
+      - name: pk
+        in: path
+        required: true
+        schema:
+          type: string
+    patch:
+      operationId: patch_api_v2_products_pk
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductSerializer'
+      summary: Partially update a product
+      description: Updates one or more fields of an existing product. Only provided
+        fields will be modified.
+      tags:
+      - api
+      parameters:
+      - name: pk
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductSerializer'
+        description: Partial product data to update. Only specified fields will be
+          modified.
+    put:
+      operationId: put_api_v2_products_pk
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductSerializer'
+      summary: Update a product
+      description: Replaces all fields of an existing product with the provided data.
+      tags:
+      - api
+      parameters:
+      - name: pk
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductSerializer'
+        description: Complete product data to replace the existing product.
+  /api/v2/reviews/:
+    get:
+      operationId: get_api_v2_reviews
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ReviewSerializer'
+      summary: List all reviews
+      description: Returns a paginated list of all reviews in the system. Supports
+        filtering and ordering by standard Django REST Framework conventions.
+      tags:
+      - reviews
+    post:
+      operationId: post_api_v2_reviews
+      responses:
+        '201':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewSerializer'
+      summary: Create a new review
+      description: Creates a new review entry. Requires valid review data in the request
+        body. Returns the created review object on success.
+      tags:
+      - reviews
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReviewSerializer'
+        description: Review data object containing all required fields for creating
+          a new review
+  /api/v2/reviews/{pk}/:
+    delete:
+      operationId: delete_api_v2_reviews_pk
+      responses:
+        '204':
+          description: No content
+      summary: Delete a review
+      description: Permanently deletes a review identified by its primary key. This
+        action cannot be undone.
+      tags:
+      - api
+      parameters:
+      - name: pk
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      operationId: get_api_v2_reviews_pk
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewSerializer'
+      summary: Retrieve a review
+      description: Returns detailed information about a specific review identified
+        by its primary key.
+      tags:
+      - api
+      parameters:
+      - name: pk
+        in: path
+        required: true
+        schema:
+          type: string
+    patch:
+      operationId: patch_api_v2_reviews_pk
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewSerializer'
+      summary: Partially update a review
+      description: Updates one or more fields of an existing review. Only provided
+        fields will be modified.
+      tags:
+      - api
+      parameters:
+      - name: pk
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReviewSerializer'
+        description: Partial review data to update. Only specified fields will be
+          modified.
+    put:
+      operationId: put_api_v2_reviews_pk
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewSerializer'
+      summary: Update a review
+      description: Replaces all fields of an existing review with the provided data.
+        All fields must be included.
+      tags:
+      - api
+      parameters:
+      - name: pk
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReviewSerializer'
+        description: Complete review data to replace the existing review.
+  /api/v2/reviews/{pk}/submit_comment/:
+    post:
+      operationId: post_api_v2_reviews_pk_submit_comment
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewSerializer'
+      summary: Submit a comment on a review
+      description: Adds a new comment to the specified review. Returns the updated
+        review object including the newly added comment.
+      tags:
+      - reviews
+      - comments
+      parameters:
+      - name: pk
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReviewSerializer'
+        description: JSON object containing the comment data to be submitted to the
+          review.
+components:
+  schemas:
+    SupplierSerializer:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+          description: The unique identifier for the supplier. This field is automatically
+            generated and managed by the database, and is read-only in API operations.
+          example: 1
+        name:
+          type: string
+          maxLength: 150
+          description: The name of the supplier. This is a required field with a maximum
+            length of 150 characters.
+          example: Acme Corporation
+        profile:
+          type: integer
+          description: The ID of the associated SupplierProfile instance. This field
+            establishes a one-to-one relationship with the SupplierProfile model and
+            is required for supplier creation.
+          example: 42
+      required:
+      - name
+      - profile
+      description: A Django REST Framework serializer for the Supplier model. This
+        serializer handles the conversion of Supplier model instances to JSON format
+        and validates incoming data for Supplier creation and updates. It includes
+        fields for the supplier's identifier, name, and associated profile.
+    ReviewSerializer:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+          description: Unique identifier for the review, automatically generated and
+            read-only.
+          example: 1
+        content:
+          type: string
+          description: The textual content of the review written by the user.
+          example: This product is amazing! Highly recommend it.
+        rating:
+          type: integer
+          description: The rating given by the user, must be an integer between 1
+            and 5.
+          example: 5
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+          description: Timestamp indicating when the review was created, automatically
+            set and read-only.
+          example: '2023-10-15T14:30:00Z'
+      required:
+      - content
+      - rating
+      description: Serializer for the Review model, handling validation and serialization
+        of review data including content, rating, and timestamps.
+    CategorySerializer:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+          description: Unique identifier for the category. This field is automatically
+            generated and read-only.
+          example: 1
+        name:
+          type: string
+          maxLength: 100
+          description: Name of the category. Required field with a maximum length
+            of 100 characters.
+          example: Electronics
+      required:
+      - name
+      description: Serializer for the Category model, used to convert Category instances
+        to and from JSON format.
+    ManufacturerSerializer:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+          description: The unique identifier for the manufacturer. This field is automatically
+            generated by the database and is read-only.
+          example: 1
+        name:
+          type: string
+          maxLength: 200
+          description: The name of the manufacturer. This field is required and cannot
+            exceed 200 characters in length.
+          example: Toyota
+        country:
+          type: string
+          maxLength: 50
+          description: The country where the manufacturer is based. This field is
+            required and cannot exceed 50 characters in length.
+          example: Japan
+      required:
+      - name
+      - country
+      description: A serializer for the Manufacturer model that handles serialization
+        and deserialization of manufacturer data. This serializer is used to convert
+        Manufacturer model instances into JSON format for API responses and to validate
+        incoming data when creating or updating manufacturers.
+    AdvancedProductSerializer:
+      type: object
+      properties:
+        sku:
+          type: string
+          maxLength: 50
+          description: Unique stock keeping unit identifier for the product. Must
+            be unique across all products in the system.
+          example: PROD-00123
+        name:
+          type: string
+          maxLength: 200
+          description: The full name or title of the product as displayed to customers.
+          example: Wireless Bluetooth Headphones Pro Series
+        manufacturer:
+          type: integer
+          description: Foreign key reference to the Manufacturer model that produces
+            this product. Nullable if manufacturer information is unavailable.
+          example: 42
+        supplier_details:
+          type: string
+          readOnly: true
+          description: Read-only field that displays the supplier's name by traversing
+            the supplier relationship. Populated from the related Supplier model's
+            name attribute.
+          example: Tech Distributors Inc.
+        location_count:
+          type: object
+          readOnly: true
+          description: Read-only computed field representing the total number of locations
+            where this product is available. Calculated dynamically via the get_location_count
+            method.
+          example: 5
+        locations:
+          type: array
+          items:
+            type: integer
+          description: Array of location IDs where this product is stocked. Each ID
+            corresponds to a ProductLocation record in the database.
+          example:
+          - 1
+          - 3
+          - 7
+          - 12
+          - 15
+      required:
+      - sku
+      - name
+      - locations
+      description: A complex serializer for AdvancedProduct that demonstrates multiple
+        relationship types and field transformations. This serializer handles product
+        data including SKU, name, manufacturer, supplier details, location count,
+        and locations. It uses a SerializerMethodField to dynamically calculate location
+        counts and a CharField with source mapping to display supplier information.
+    ProductSerializer:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+          description: Unique identifier for the product. This field is read-only
+            and automatically assigned when a new product is created.
+          example: 1
+        name:
+          type: string
+          maxLength: 100
+          description: Name of the product. Required field with a maximum length of
+            100 characters.
+          example: Wireless Headphones
+      required:
+      - name
+      description: Serializer for the Product model, handling validation and conversion
+        between Product instances and native Python datatypes.
+    Supplier:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 150
+          description: The name of the supplier, limited to 150 characters.
+          example: Tech Solutions Inc.
+        profile:
+          type: integer
+          description: Foreign key reference to the supplier's profile.
+          example: 1
+      required:
+      - name
+      - profile
+      description: Supplier model representing a supplier entity with their name and
+        associated profile identifier.
+    Review:
+      type: object
+      properties:
+        product:
+          type: integer
+          description: The unique identifier of the product being reviewed.
+          example: 123
+        content:
+          type: string
+          description: The textual content of the review written by the user.
+          example: Excellent product with fast delivery and great quality!
+        rating:
+          type: integer
+          description: The numerical rating given by the user, typically on a scale
+            of 1 to 5.
+          example: 5
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+          description: The timestamp when the review was created, in ISO 8601 format.
+          example: '2023-10-15T14:30:00Z'
+      required:
+      - product
+      - content
+      - rating
+      description: A review model representing user feedback for a product, including
+        the product reference, review content, rating, and creation timestamp.
+    Category:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 100
+          description: The name of the category used to classify reviews.
+          example: Electronics
+      required:
+      - name
+      description: Category model representing a classification or grouping for organizing
+        reviews.
+    Manufacturer:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+          description: The name of the manufacturer.
+          example: Samsung
+        country:
+          type: string
+          maxLength: 50
+          description: The country where the manufacturer is based.
+          example: South Korea
+      required:
+      - name
+      - country
+      description: Manufacturer model representing manufacturer information for products
+        or reviews.
+    AdvancedProduct:
+      type: object
+      properties:
+        sku:
+          type: string
+          maxLength: 50
+          description: Unique stock keeping unit identifier for the product, limited
+            to 50 characters.
+          example: SKU-12345
+        name:
+          type: string
+          maxLength: 200
+          description: Product name or title, limited to 200 characters.
+          example: Wireless Bluetooth Headphones
+        manufacturer:
+          type: integer
+          description: Identifier referencing the manufacturer entity.
+          example: 1
+        supplier:
+          type: integer
+          description: Identifier referencing the supplier entity.
+          example: 2
+        locations:
+          type: array
+          items:
+            type: integer
+          description: Array of location identifiers where the product is stored or
+            available.
+          example:
+          - 1
+          - 2
+          - 3
+        categories:
+          type: array
+          items:
+            type: integer
+          description: Array of category identifiers the product belongs to.
+          example:
+          - 10
+          - 20
+      required:
+      - sku
+      - name
+      - locations
+      - categories
+      description: AdvancedProduct model representing a product with detailed attributes
+        including identification, categorization, and location information.
+    Product:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 100
+          description: The name of the product as displayed to users.
+          example: Wireless Bluetooth Headphones
+        category:
+          type: integer
+          description: The category identifier that this product belongs to, used
+            for classification and filtering.
+          example: 5
+        status:
+          type: string
+          maxLength: 20
+          description: Current status of the product (e.g., 'active', 'inactive',
+            'discontinued').
+          example: active
+      required:
+      - name
+      - category
+      description: A product model representing an item available for sale or review
+        in the system.
+tags:
+- name: admin
+- name: api

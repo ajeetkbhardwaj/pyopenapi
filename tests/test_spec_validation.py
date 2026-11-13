@@ -1,10 +1,14 @@
 from __future__ import annotations
 
+import importlib.util
 from pathlib import Path
+
+import pytest
 
 from pyopenapi.core.analysis import AnalysisManager
 from pyopenapi.core.spec import build_openapi_from_analysis, write_spec
 from pyopenapi.core.validation import validate_spec
+from pyopenapi.errors import SpecValidationError
 
 
 def test_analysis_cache_and_static_spec(django_project: Path, isolated_settings) -> None:
@@ -68,3 +72,16 @@ def test_validation_reports_missing_path_parameter(tmp_path: Path) -> None:
     report = validate_spec(spec)
     assert report.valid is False
     assert any("item_id" in issue.message for issue in report.issues)
+
+
+def test_strict_validation_reports_or_requires_optional_dependency() -> None:
+    document = {
+        "openapi": "3.0.3",
+        "info": {"title": "Strict", "version": "1"},
+        "paths": {"/health": {"get": {"responses": {"200": {"description": "ok"}}}}},
+    }
+    if importlib.util.find_spec("openapi_spec_validator") is None:
+        with pytest.raises(SpecValidationError):
+            validate_spec(document, strict=True)
+    else:
+        assert validate_spec(document, strict=True).valid is True

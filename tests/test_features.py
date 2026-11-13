@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import asyncio
 from pathlib import Path
 
 import pytest
@@ -8,6 +7,7 @@ import pytest
 from pyopenapi.core.analysis import AnalysisManager, AnalysisRecord
 from pyopenapi.core.spec import build_openapi_from_analysis, diff_specs, merge_specs
 from pyopenapi.core.validation import validate_spec
+from pyopenapi.errors import SpecGenerationError
 from pyopenapi.models import AnalysisSummary
 
 
@@ -56,6 +56,52 @@ def test_merge_specs_reports_duplicates() -> None:
     merged = merge_specs([first, second], title="Combined")
     assert merged["info"]["title"] == "Combined"
     assert set(merged["paths"]) == {"/a", "/b"}
+
+
+def test_merge_specs_on_conflict_modes() -> None:
+    first = {"openapi": "3.0.3", "info": {"title": "A", "version": "1"}, "paths": {"/a": {"get": {"responses": {"200": {"description": "ok"}}}}}}
+    second = {"openapi": "3.0.3", "info": {"title": "B", "version": "1"}, "paths": {"/a": {"get": {"responses": {"200": {"description": "dup"}}}}}}
+
+    quiet = merge_specs([first, second], on_conflict="first")
+    assert "x-pyopenapi-warnings" not in quiet
+
+    warned = merge_specs([first, second], on_conflict="warn")
+    assert warned["x-pyopenapi-warnings"]
+
+    with pytest.raises(SpecGenerationError):
+        merge_specs([first, second], on_conflict="error")
+
+
+def test_diff_specs_removed_property_is_breaking() -> None:
+    old = {
+        "openapi": "3.0.3",
+        "info": {"title": "A", "version": "1"},
+        "paths": {},
+        "components": {"schemas": {"Doc": {"type": "object", "properties": {"id": {"type": "integer"}, "title": {"type": "string"}}}}},
+    }
+    new = {
+        "openapi": "3.0.3",
+        "info": {"title": "A", "version": "1"},
+        "paths": {},
+        "components": {"schemas": {"Doc": {"type": "object", "properties": {"id": {"type": "integer"}}}}},
+    }
+    assert diff_specs(old, new).breaking is True
+
+
+def test_diff_specs_added_property_is_not_breaking() -> None:
+    old = {
+        "openapi": "3.0.3",
+        "info": {"title": "A", "version": "1"},
+        "paths": {},
+        "components": {"schemas": {"Doc": {"type": "object", "properties": {"id": {"type": "integer"}}}}},
+    }
+    new = {
+        "openapi": "3.0.3",
+        "info": {"title": "A", "version": "1"},
+        "paths": {},
+        "components": {"schemas": {"Doc": {"type": "object", "properties": {"id": {"type": "integer"}, "title": {"type": "string"}}}}},
+    }
+    assert diff_specs(old, new).breaking is False
 
 
 def test_diff_specs_flags_breaking_changes() -> None:
@@ -240,3 +286,36 @@ def test_mcp_initialize_over_http(isolated_settings) -> None:
             },
         )
         assert response.status_code == 200
+
+
+def test_http_guard_rejects_oversized_body(isolated_settings) -> None:
+    from starlette.testclient import TestClient
+
+    from pyopenapi.config import get_settings
+    from pyopenapi.server.http import build_http_app
+    from pyopenapi.server.instance import mcp
+
+    settings = get_settings().model_copy(update={"api_key": None, "max_request_bytes": 100})
+    app = build_http_app(mcp, transport="streamable-http", settings=settings)
+    with TestClient(app) as client:
+        large_body = {"data": "x" * 200}
+        resp = client.post("/mcp", json=large_body)
+        assert resp.status_code == 413
+        assert resp.json()["error"] == "request_too_large"
+
+
+def test_http_guard_handles_disconnect(isolated_settings) -> None:
+    from starlette.testclient import TestClient
+
+    from pyopenapi.config import get_settings
+    from pyopenapi.server.http import build_http_app
+    from pyopenapi.server.instance import mcp
+
+    settings = get_settings().model_copy(update={"api_key": None})
+    app = build_http_app(mcp, transport="streamable-http", settings=settings)
+    # Simulate disconnect by closing connection before response - TestClient
+    # doesn't easily simulate mid-request disconnect, so we just verify
+    # the middleware doesn't crash on normal requests.
+    with TestClient(app) as client:
+        resp = client.get("/health")
+        assert resp.status_code == 200

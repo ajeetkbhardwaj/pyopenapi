@@ -38,7 +38,6 @@ _SKIP_DIRS = {
 }
 
 _SUPPORTED = {"django": True, "flask": True, "fastapi": True}
-_PREVIEW = {"flask", "fastapi"}
 
 
 @dataclass(frozen=True)

@@ -1,0 +1,23 @@
+openapi: 3.0.0
+info: {title: Nested Ideal, version: 1.0}
+paths:
+  /user/profile:
+    get:
+      responses:
+        '200':
+          description: A nested user profile
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  userId: { type: integer }
+                  profile:
+                    type: object
+                    required: [avatar_url]
+                    properties:
+                      avatar_url: { type: string, format: uri }
+                  tags:  # <--- THIS MUST BE INDENTED LIKE THIS
+                    type: array
+                    items:
+                      type: string
